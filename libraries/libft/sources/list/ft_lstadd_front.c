@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/06 14:10:33 by Nathanael        ###   ########.fr       */
+/*   Created: 2021/09/08 09:34:56 by nervin            #+#    #+#             */
+/*   Updated: 2022/06/06 14:08:58 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include "imported/libft.h"
-
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
-# include <string.h>
-# include <fcntl.h>
-# include <dirent.h>
-# include <sys/wait.h>
-# include <limits.h>
-# include <errno.h>
-# include <signal.h>
-
-
-#endif
+/*
+NAME
+	ft_lstadd_front
+PARAMETERS
+	1.	The address of a pointer to the first link of a list.
+	2.	The address of a pointer to the element to be added to the list.
+DESCRIPTION
+	Adds the element 'new' at the beginning of the list.
+RETURN VALUES
+	None.
+*/
+void	ft_lstadd_front(t_list **lst, t_list *new)
+{
+	if (!new || !lst)
+		return ;
+	new->next = *lst;
+	*lst = new;
+}

@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/06 14:10:33 by Nathanael        ###   ########.fr       */
+/*   Created: 2021/09/08 09:24:50 by nervin            #+#    #+#             */
+/*   Updated: 2022/06/06 14:08:59 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include "imported/libft.h"
-
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
-# include <string.h>
-# include <fcntl.h>
-# include <dirent.h>
-# include <sys/wait.h>
-# include <limits.h>
-# include <errno.h>
-# include <signal.h>
-
-
-#endif
+/*
+ft_isascii checks if the input, c is an unsigned 7 bit character that fits into
+the ASCII character set.
+Returns 1 if the character can be represented by an ASCII value.
+Returns 0 if the character can not be represented in ASCII.
+*/
+int	ft_isascii(int c)
+{
+	if (c >= 0 && c <= 127)
+		return (1);
+	return (0);
+}

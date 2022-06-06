@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/06 14:10:33 by Nathanael        ###   ########.fr       */
+/*   Created: 2021/09/08 09:23:47 by nervin            #+#    #+#             */
+/*   Updated: 2022/06/06 14:09:01 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include "imported/libft.h"
-
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
-# include <string.h>
-# include <fcntl.h>
-# include <dirent.h>
-# include <sys/wait.h>
-# include <limits.h>
-# include <errno.h>
-# include <signal.h>
-
-
-#endif
+/*
+ft_isalnum takes an integer c, checks if it is between 1..9 or a..z or A..Z
+Returns 1 if true, Returns 0 otherwise.
+*/
+int	ft_isalnum(int c)
+{
+	if (c < 0)
+		return (0);
+	return (ft_isalpha(c) || ft_isdigit(c));
+}

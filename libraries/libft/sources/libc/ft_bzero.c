@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/06 14:10:33 by Nathanael        ###   ########.fr       */
+/*   Created: 2021/09/08 11:53:43 by nervin            #+#    #+#             */
+/*   Updated: 2022/06/06 14:09:00 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include "imported/libft.h"
-
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
-# include <string.h>
-# include <fcntl.h>
-# include <dirent.h>
-# include <sys/wait.h>
-# include <limits.h>
-# include <errno.h>
-# include <signal.h>
-
-
-#endif
+/*
+NAME
+	ft_bzero - zero a byte string
+PARAMETERS
+	1.	The memory area to be written over.
+	2.	The amount of memory to be overwritten.
+DESCRIPTION
+	Erases the data in the n bytes of memory starting at the location pointed to
+	by s, by writing zeros (bytes containing '\0') to that area.
+RETURN VALUES
+	None.
+*/
+void	ft_bzero(void *s, size_t l)
+{
+	ft_memset(s, 0, l);
+}

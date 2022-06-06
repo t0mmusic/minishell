@@ -1,0 +1,40 @@
+########################################
+####		Specific Excludes 		####
+########################################
+
+# Hidden files/folders
+.vscode/
+.DS_Store
+philo.code-workspace
+
+# Temporary directories
+objects/
+build/
+sources_old/
+headers/imported
+
+########################################
+####	Generic Excludes (Github)	####
+########################################
+
+# Object files
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+
+# Libraries
+*.lib
+*.a
+
+# Shared objects (inc. Windows DLLs)
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.out
+
+# Debug files
+*.dSYM/

@@ -6,13 +6,13 @@
 /*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 15:17:29 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/05/30 16:27:33 by Nathanael        ###   ########.fr       */
+/*   Updated: 2022/06/06 14:11:14 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int c, char **av)
+int	main(void)
 {
 	return (0);
 }
