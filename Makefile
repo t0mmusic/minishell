@@ -6,7 +6,7 @@
 #    By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 16:30:35 by Nathanael         #+#    #+#              #
-#    Updated: 2022/06/06 17:00:39 by jbrown           ###   ########.fr        #
+#    Updated: 2022/06/06 17:20:37 by jbrown           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -120,4 +120,3 @@ git: #Pushes to vogsphere repo
 	@read COMMIT; \
 	git commit -m "$$COMMIT"; \
 	git push;
-	make jordan
