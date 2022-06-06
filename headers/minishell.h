@@ -6,7 +6,7 @@
 /*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/06 14:43:19 by Nathanael        ###   ########.fr       */
+/*   Updated: 2022/06/06 15:07:31 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,8 @@ typedef struct s_prog
 	char	*cwd;
 	char	*root;
 }	t_prog;
+
+void	check_args(int argcount, char **argvect);
+void	print_env(void);
 
 #endif
