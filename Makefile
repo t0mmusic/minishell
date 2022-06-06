@@ -6,7 +6,7 @@
 #    By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 16:30:35 by Nathanael         #+#    #+#              #
-#    Updated: 2022/06/06 16:06:00 by jbrown           ###   ########.fr        #
+#    Updated: 2022/06/06 16:39:34 by jbrown           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -103,13 +103,17 @@ re: fclean all
 	@clear
 	@printf "Cleaned and remade all files!\n"
 
-jordan:
-	git remote set-url origin https://github.com/t0mmusic/minishell.git
-	git remote -v
+jordan: #Pushes to Jordan's Github repo
+	@git remote set-url origin https://github.com/t0mmusic/minishell.git
+	@clear
+	@git add .
+	@echo "commit msg" 
+	@read COMMIT; \
+	git commit -m "$$COMMIT"; \
+	git push;
 
-git:
-	git remote set-url origin git@vogsphere.42adel.org.au:vogsphere/intra-uuid-91f3746f-03fa-49f0-a4d0-414e65deb8a5-4152683-nervin
-	git remote -v
+git: #Pushes to vogsphere repo
+	@git remote set-url origin git@vogsphere.42adel.org.au:vogsphere/intra-uuid-91f3746f-03fa-49f0-a4d0-414e65deb8a5-4152683-nervin
 	@clear
 	@git add .
 	@echo "commit msg" 

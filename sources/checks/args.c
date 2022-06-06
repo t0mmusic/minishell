@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
+/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 14:50:34 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/06 15:01:00 by Nathanael        ###   ########.fr       */
+/*   Updated: 2022/06/06 16:39:55 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,4 +18,3 @@ void	check_args(int argcount, char **argvect)
 	(void)argvect;
 	// do stuff with checking for pipes and other things
 }
-

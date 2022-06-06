@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
+/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/06 15:07:31 by Nathanael        ###   ########.fr       */
+/*   Updated: 2022/06/06 16:49:54 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ typedef struct s_prog
 	char	*path;
 	char	*cwd;
 	char	*root;
+	char	**paths;
+	char	**commands;
 }	t_prog;
 
 void	check_args(int argcount, char **argvect);
