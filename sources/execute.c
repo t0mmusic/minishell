@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:40:21 by jbrown            #+#    #+#             */
-/*   Updated: 2022/06/16 13:24:55 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/16 17:06:34 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,10 @@ int	command_valid(t_prog *prog)
 	'commands' array in 'prog'. It will then check if the command is
 	valid, and will execute it if it is, or print an error if it is not.	*/
 
-void	out_process(char *str, t_prog prog, char *argv[], char *envp[])
+void	out_process(char *str, t_prog prog)
 {
 	int	pid;
 
-	(void)argv;
 	prog.commands = ft_split(str, ' ');
 	prog.path = prog.commands[0];
 	if (command_valid(&prog))
@@ -65,10 +64,10 @@ void	out_process(char *str, t_prog prog, char *argv[], char *envp[])
 		pid = fork();
 		if (!pid)
 		{
-			execve(prog.path, prog.commands, envp);
+			execve(prog.path, prog.commands, prog.envp);
 		}
 		waitpid(pid, 0, 0);
 	}
 	else
-		printf("Command not found!\n");
+		ft_printf_fd("minishell: %s command not found!\n", 1, prog.path);
 }

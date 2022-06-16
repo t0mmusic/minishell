@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/16 12:46:51 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/16 17:06:22 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 # include "imported/libft.h"
+# include "imported/ft_printf_fd.h"
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -34,6 +35,7 @@
 **/
 typedef struct s_prog
 {
+	char	**envp;
 	char	*path;
 	char	*cwd;
 	char	*root;
@@ -45,6 +47,6 @@ void	check_args(int argcount, char **argvect, char *envp[]);
 void	print_env(void);
 
 /*	Run processes	*/
-void	out_process(char *str, t_prog prog, char *argv[], char *envp[]);
+void	out_process(char *str, t_prog prog);
 
 #endif

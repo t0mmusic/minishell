@@ -6,7 +6,7 @@
 #    By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 16:30:35 by Nathanael         #+#    #+#              #
-#    Updated: 2022/06/06 17:20:37 by jbrown           ###   ########.fr        #
+#    Updated: 2022/06/16 15:04:56 by jbrown           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -113,10 +113,12 @@ jordan: #Pushes to Jordan's Github repo
 	git push;
 
 git: #Pushes to vogsphere repo
-	@git remote set-url origin git@vogsphere.42adel.org.au:vogsphere/intra-uuid-91f3746f-03fa-49f0-a4d0-414e65deb8a5-4152683-nervin
+	@git remote set-url origin https://github.com/t0mmusic/minishell.git
 	@clear
 	@git add .
 	@echo "commit msg" 
 	@read COMMIT; \
 	git commit -m "$$COMMIT"; \
+	git push;
+	@git remote set-url origin git@vogsphere.42adel.org.au:vogsphere/intra-uuid-91f3746f-03fa-49f0-a4d0-414e65deb8a5-4152683-nervin
 	git push;
