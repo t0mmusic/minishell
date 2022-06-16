@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:40:21 by jbrown            #+#    #+#             */
-/*   Updated: 2022/06/06 16:53:14 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/16 13:24:55 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,22 @@ int	command_valid(t_prog *prog)
 	'commands' array in 'prog'. It will then check if the command is
 	valid, and will execute it if it is, or print an error if it is not.	*/
 
-void	out_process(t_prog prog, char *envp[], char *argv[], int fd)
+void	out_process(char *str, t_prog prog, char *argv[], char *envp[])
 {
-	//get command list from readline, entered by user
+	int	pid;
+
+	(void)argv;
+	prog.commands = ft_split(str, ' ');
 	prog.path = prog.commands[0];
 	if (command_valid(&prog))
 	{
-		execve(prog.path, prog.commands, envp);
+		pid = fork();
+		if (!pid)
+		{
+			execve(prog.path, prog.commands, envp);
+		}
+		waitpid(pid, 0, 0);
 	}
-	//print an error telling user the command was not valid.
+	else
+		printf("Command not found!\n");
 }

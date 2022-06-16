@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/06 16:49:54 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/16 12:46:51 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ typedef struct s_prog
 	char	**commands;
 }	t_prog;
 
-void	check_args(int argcount, char **argvect);
+void	check_args(int argcount, char **argvect, char *envp[]);
 void	print_env(void);
+
+/*	Run processes	*/
+void	out_process(char *str, t_prog prog, char *argv[], char *envp[]);
 
 #endif
