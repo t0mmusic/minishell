@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 14:12:06 by jbrown            #+#    #+#             */
-/*   Updated: 2022/06/16 16:53:07 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/17 12:03:52 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	ft_printf_fd(char *str, ...)
 		}
 		if (str[i] && str[i] != '%')
 		{
-			ft_putchar_fd(str[i], 1);
+			ft_putchar_fd(str[i], fd);
 			i++;
 			count++;
 		}

@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 15:17:29 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/16 17:39:56 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/17 12:27:34 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char	*get_prompt(void)
 
 	prompt = ft_strjoin("@minishell ", getcwd(cwd, sizeof(cwd)));
 	tmp = prompt;
-	prompt = ft_strjoin(tmp, " >>> ");
+	prompt = ft_strjoin(tmp, " $ ");
 	free (tmp);
 	tmp = prompt;
 	prompt = ft_strjoin(getenv("HOME") + 7, tmp);
