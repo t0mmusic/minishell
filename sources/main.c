@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 15:17:29 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/17 12:27:34 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/17 15:09:33 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ bool	change_directory(char *str)
 	if (access(to, F_OK) < 0)
 		ft_printf_fd("cd: Ain't no %s directory!\n", 1, path);
 	else
+	{
 		chdir(to);
+	}
 	return (true);
 }
 
@@ -83,32 +85,41 @@ char	*get_prompt(void)
 	return (prompt);
 }
 
+void	int_handler(int sig)
+{
+	sig = 3 * 4;
+	sig++;
+	printf("Lol, no.\n");
+	return ;
+}
+
 int	main(int ac, char *argv[], char *envp[])
 {
 	char	*str;
 	char	*prompt;
+	int		pid;
 	t_prog	prog;
 
 	check_args(ac, argv, envp);
 //	print_env();
 	prog.envp = envp;
 	prog.paths = ft_split(getenv("PATH"), ':');
+	signal(SIGINT, int_handler);
 	while (1)
 	{
 		prompt = get_prompt();
 		str = readline(prompt);
 		add_history(str);
-		//add a check to see if pipes and stuff are in the input
-		if (inbuilt_check(str))
+		if (!inbuilt_check(str))
 		{
-			free(str);
-			str = NULL;
+			pid = fork();
+			if (!pid)
+			{
+				check_pipes(str, prog);
+			}
+			waitpid(pid, 0, 0);
 		}
-		if (str)
-		{
-			out_process(str, prog);
-			free(str);
-		}
+		free(str);
 		free(prompt);
 	}
 	return (0);

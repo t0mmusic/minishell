@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/16 17:06:22 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/17 14:47:24 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,7 @@ void	print_env(void);
 
 /*	Run processes	*/
 void	out_process(char *str, t_prog prog);
+bool	inbuilt_check(char *str);
+void	check_pipes(char *str, t_prog prog);
 
 #endif
