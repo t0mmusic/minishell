@@ -6,12 +6,14 @@
 /*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/17 13:21:13 by Nathanael        ###   ########.fr       */
+/*   Updated: 2022/06/17 14:49:12 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
+# define BUFFER	10;
 
 # include "imported/libft.h"
 # include "ft_printf_fd.h"
@@ -48,5 +50,12 @@ void	print_env(void);
 
 /*	Run processes	*/
 void	out_process(char *str, t_prog prog);
+
+/*	Standard input/output redirection	*/
+void	std_sort(char *path, char **commands);
+void	std_output(char *path);
+void	std_output_append(char *path);
+void	std_input(char *path);
+void	std_input_delim(char *path);
 
 #endif
