@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/17 15:55:55 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/17 19:49:01 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,13 @@ void	print_env(void);
 void	out_process(char *str, t_prog prog);
 bool	inbuilt_check(char *str);
 void	check_pipes(char *str, t_prog prog);
+
+/*	Inbuilt function recretations	*/
+bool	inbuilt_check(char *str);
+bool	inbuilt_subprocess(char *str);
+bool	builtin_env(void);
+bool	builtin_pwd(void);
+bool	change_directory(char *str);
 
 /*	Standard input/output redirection	*/
 void	std_sort(char *path, char **commands);

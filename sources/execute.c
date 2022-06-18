@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:40:21 by jbrown            #+#    #+#             */
-/*   Updated: 2022/06/17 15:25:53 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/17 20:41:35 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,6 @@ char	*join_path(char *path, char *command)
 	return (ret);
 }
 
-int	local_app(t_prog *prog)
-{
-	if (!access(prog->path, 0))
-	{
-		return (1);
-	}
-	return (0);
-}
-
 /*	Checks the command entered by the user against all of the possible
 	paths. If it finds one that matches, it will set the path in the
 	prog structure and return 1. Otherwise, returns 0.	*/
@@ -43,7 +34,7 @@ int	command_valid(t_prog *prog)
 	char	*tmp;
 	int		i;
 
-	if (local_app(prog))
+	if (!access(prog->path, 0))
 		return (1);
 	i = 0;
 	while (prog->paths[i])
@@ -66,6 +57,8 @@ int	command_valid(t_prog *prog)
 
 void	out_process(char *str, t_prog prog)
 {
+	if (inbuilt_subprocess(str))
+		exit(0);
 	prog.commands = ft_split(str, ' ');
 	prog.path = prog.commands[0];
 	if (command_valid(&prog))
