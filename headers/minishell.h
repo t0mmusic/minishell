@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/17 19:49:01 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/19 17:06:07 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ void	check_pipes(char *str, t_prog prog);
 
 /*	Inbuilt function recretations	*/
 bool	inbuilt_check(char *str);
-bool	inbuilt_subprocess(char *str);
-bool	builtin_env(void);
+bool	inbuilt_subprocess(char *str, t_prog prog);
+bool	builtin_env(t_prog prog);
 bool	builtin_pwd(void);
 bool	change_directory(char *str);
 
@@ -66,5 +66,8 @@ void	std_output(char *path);
 void	std_output_append(char *path);
 void	std_input(char *path);
 void	std_input_delim(char *path);
+
+/*	Utilities	*/
+int 	ft_isspace(int c);
 
 #endif

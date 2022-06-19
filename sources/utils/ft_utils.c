@@ -1,32 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_info.c                                       :+:      :+:    :+:   */
+/*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/17 19:06:45 by jbrown            #+#    #+#             */
-/*   Updated: 2022/06/19 17:06:23 by jbrown           ###   ########.fr       */
+/*   Created: 2022/06/19 14:57:22 by jbrown            #+#    #+#             */
+/*   Updated: 2022/06/19 15:00:31 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool	builtin_pwd(void)
+int ft_isspace(int c)
 {
-	ft_printf_fd("%s\n", 1, getenv("PWD"));
-	return (true);
-}
-
-/*	Prints the environment variables of the system.	Doesn't like pwd for some
-	reason.	*/
-
-bool	builtin_env(t_prog prog)
-{
-	while (*prog.envp)
-	{
-		printf("%s\n", *prog.envp);
-		prog.envp++;
-	}
-	return (true);
+	if (c == '\f' || c =='\n' || c == '\r' || c =='\t' || c == '\v' || c == ' ')
+		return (1);
+	return (0);
 }

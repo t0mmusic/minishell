@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 19:42:57 by jbrown            #+#    #+#             */
-/*   Updated: 2022/06/17 19:50:37 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/19 17:02:35 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ bool	inbuilt_check(char *str)
 	return (false);
 }
 
-bool	inbuilt_subprocess(char *str)
+/*	These functions work with pipes and redirects, so they are run in a
+	sub process.	*/
+
+bool	inbuilt_subprocess(char *str, t_prog prog)
 {
 	// if ("echo")
 	// 	;
@@ -37,6 +40,6 @@ bool	inbuilt_subprocess(char *str)
 	// if ("unset")
 	// 	;
 	if (!ft_strcmp("env", str))
-		return(builtin_env());
+		return(builtin_env(prog));
 	return (false);
 }
