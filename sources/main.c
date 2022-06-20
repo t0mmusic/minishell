@@ -6,7 +6,7 @@
 /*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 15:17:29 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/20 11:16:12 by Nathanael        ###   ########.fr       */
+/*   Updated: 2022/06/20 11:23:08 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ int	main(int ac, char *av[], char *envp[])
 		prompt = get_prompt();
 		str = readline(prompt);
 		add_history(str);
+		std_sort(prompt, str);
 		if (!inbuilt_check(str))
 		{
-			std_sort(prog.path, str);
 			pid = fork();
 			if (!pid)
 			{
