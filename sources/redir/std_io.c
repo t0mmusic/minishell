@@ -6,7 +6,7 @@
 /*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 14:45:52 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/20 11:06:13 by Nathanael        ###   ########.fr       */
+/*   Updated: 2022/06/20 11:15:11 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@ static char	*get_file(char *commands)
 	int	i;
 
 	i = 0;
-	while (commands[++i] != '\0')
+	while (commands[i] != '\0')
+	{
 		printf("%c", commands[i]);
+		i++;
+	}
 	printf("\n");
 	return (&commands[i]);
 }

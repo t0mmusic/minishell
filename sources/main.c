@@ -6,7 +6,7 @@
 /*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 15:17:29 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/20 10:52:14 by Nathanael        ###   ########.fr       */
+/*   Updated: 2022/06/20 11:16:12 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*get_prompt(void)
 	char	*tmp;
 	char	buffer[512];
 
-	prompt = ft_strjoin("@\x1b[32mminishell\x1b[0m "
+	prompt = ft_strjoin("@\x1b[32mminishell\x1b[0m " \
 		, getcwd(buffer, sizeof(buffer)));
 	tmp = prompt;
 	prompt = ft_strjoin(tmp, " $ ");
@@ -42,14 +42,15 @@ void	int_handler(int sig)
 	return ;
 }
 
-int	main(int ac, char *argv[], char *envp[])
+int	main(int ac, char *av[], char *envp[])
 {
 	char	*str;
 	char	*prompt;
 	int		pid;
 	t_prog	prog;
 
-	check_args(ac, argv, envp);
+	(void)ac;
+	(void)av;
 	prog.envp = envp;
 	prog.paths = ft_split(getenv("PATH"), ':');
 	signal(SIGINT, int_handler);
