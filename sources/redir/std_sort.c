@@ -6,7 +6,7 @@
 /*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 14:24:41 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/20 11:23:21 by Nathanael        ###   ########.fr       */
+/*   Updated: 2022/06/20 11:50:25 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ void	std_sort(char *prompt, char *commands)
 	{
 		if (commands[index] == '>')
 		{
-			std_output(prompt, &commands[index]);
+			std_output(prompt, &commands[index++]);
 		}
 		else if (commands[index] == '>' && commands[index + 1] == '>')
-			std_output_append(prompt);
+			std_output_append(prompt, &commands[index++]);
 		else if (commands[index] == '<')
-			std_input(prompt);
+			std_input(prompt, &commands[index++]);
 		else if (commands[index] == '<' && commands[index + 1] == '<')
-			std_input_delim(prompt);
+			std_input_delim(prompt, &commands[index++]);
 		index++;
 	}
 	printf("\n");
