@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 19:41:41 by jbrown            #+#    #+#             */
-/*   Updated: 2022/06/19 15:01:33 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/20 09:29:22 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char	*relative_path(char *target_dir)
 
 	path = getcwd(buffer, sizeof(buffer));
 	ft_strlcat(path, "/", ft_strlen(path) + 2);
-	ft_strlcat(path, target_dir,  ft_strlen(path) + ft_strlen(target_dir) + 1);
+	ft_strlcat(path, target_dir, ft_strlen(path) + ft_strlen(target_dir) + 1);
 	return (path);
 }
 

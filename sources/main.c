@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 15:17:29 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/19 15:15:00 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/20 09:17:42 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ char	*get_prompt(void)
 	char	*tmp;
 	char	buffer[512];
 
-	prompt = ft_strjoin("@\x1b[32mminishell\x1b[0m "
-		, getcwd(buffer, sizeof(buffer)));
+	prompt = ft_strjoin("@\x1b[32mminishell\x1b[0m ",
+			getcwd(buffer, sizeof(buffer)));
 	tmp = prompt;
 	prompt = ft_strjoin(tmp, " $ ");
 	free (tmp);

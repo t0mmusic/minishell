@@ -6,25 +6,35 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 15:47:38 by jbrown            #+#    #+#             */
-/*   Updated: 2022/06/16 16:35:16 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/20 10:14:46 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-/*
-void	echo(char *str)
+
+static char	*find_next_word(char *str)
 {
-	int		fd;
+	while (*str && !ft_isspace(*str))
+		str++;
+	while (*str && ft_isspace(*str))
+		str++;
+	return (str);
+}
+
+bool	builtin_echo(char *str)
+{
 	bool	newline;
 
 	newline = true;
-	if (no_args)
-		fd = 1;
-	else
-		fd = open(str, O_RDONLY);
-	if (str contains "-n")
+	if (ft_strnstr(str, "-n", 7))
+	{
 		newline = false;
-	print message
-	if newline
-		print "\n"
-}*/
+	}
+	str = find_next_word(str);
+	if (!newline)
+		str = find_next_word(str);
+	ft_printf_fd("%s", 1, str);
+	if (newline)
+		ft_printf_fd("\n", 1);
+	return (true);
+}

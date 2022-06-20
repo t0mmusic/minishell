@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/19 17:06:07 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/20 10:08:44 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ bool	inbuilt_subprocess(char *str, t_prog prog);
 bool	builtin_env(t_prog prog);
 bool	builtin_pwd(void);
 bool	change_directory(char *str);
+bool	builtin_echo(char *str);
 
 /*	Standard input/output redirection	*/
 void	std_sort(char *path, char **commands);
@@ -68,6 +69,6 @@ void	std_input(char *path);
 void	std_input_delim(char *path);
 
 /*	Utilities	*/
-int 	ft_isspace(int c);
+int		ft_isspace(int c);
 
 #endif

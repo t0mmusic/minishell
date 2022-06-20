@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 19:42:57 by jbrown            #+#    #+#             */
-/*   Updated: 2022/06/19 17:02:35 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/20 10:09:01 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,15 @@ bool	inbuilt_check(char *str)
 
 bool	inbuilt_subprocess(char *str, t_prog prog)
 {
-	// if ("echo")
-	// 	;
+	if (!ft_strnstr("echo", str, ft_strlen(str)))
+		return (builtin_echo(str));
 	if (!ft_strcmp("pwd", str))
-		return(builtin_pwd());
+		return (builtin_pwd());
 	// if ("export")
 	// 	;
 	// if ("unset")
 	// 	;
 	if (!ft_strcmp("env", str))
-		return(builtin_env(prog));
+		return (builtin_env(prog));
 	return (false);
 }
