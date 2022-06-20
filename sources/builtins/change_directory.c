@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 19:41:41 by jbrown            #+#    #+#             */
-/*   Updated: 2022/06/20 09:29:22 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/20 16:44:36 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@
 static char	*relative_path(char *target_dir)
 {
 	char	*path;
+	char	*tmp;
 	char	buffer[512];
 
-	path = getcwd(buffer, sizeof(buffer));
-	ft_strlcat(path, "/", ft_strlen(path) + 2);
-	ft_strlcat(path, target_dir, ft_strlen(path) + ft_strlen(target_dir) + 1);
+	path = ft_strjoin(getcwd(buffer, sizeof(buffer)), "/");
+	tmp = path;
+	path = ft_strjoin(path, target_dir);
+	free (tmp);
 	return (path);
 }
 
@@ -30,23 +32,27 @@ static char	*relative_path(char *target_dir)
 	adjacent directory, or an absolute path. It then checks if that directory is
 	valid or if the user can access it before attempting to redirect.	*/
 
-bool	change_directory(char *str)
+bool	change_directory(t_prog prog)
 {
 	char	*path;
 	char	*target_dir;
 
-	target_dir = str + 2;
-	while (ft_isspace(*target_dir))
-		target_dir++;
-	if (!(*target_dir))
-		path = "/";
-	else if (*target_dir == '/')
-		path = target_dir;
+	target_dir = prog.user_inputs[1];
+	if (!target_dir)
+	{
+		chdir("/");
+		return (true);
+	}
+	else if (target_dir[0] == '/')
+		path = ft_strdup(target_dir);
 	else
 		path = relative_path(target_dir);
 	if (access(path, F_OK) < 0)
 		ft_printf_fd("cd: Ain't no %s directory!\n", 1, target_dir);
 	else
+	{
 		chdir(path);
+		free (path);
+	}
 	return (true);
 }

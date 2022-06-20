@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:40:21 by jbrown            #+#    #+#             */
-/*   Updated: 2022/06/19 17:11:04 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/20 17:09:20 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,10 @@ bool	command_valid(t_prog *prog)
 	'commands' array in 'prog'. It will then check if the command is
 	valid, and will execute it if it is, or print an error if it is not.	*/
 
-void	out_process(char *str, t_prog prog)
+void	out_process(t_prog prog)
 {
-	if (inbuilt_subprocess(str, prog))
+	if (inbuilt_subprocess(prog))
 		exit(0);
-	prog.commands = ft_split(str, ' ');
 	prog.path = prog.commands[0];
 	if (command_valid(&prog))
 	{

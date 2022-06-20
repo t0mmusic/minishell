@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 15:17:29 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/20 09:17:42 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/20 17:07:00 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,39 +34,34 @@ char	*get_prompt(void)
 	return (prompt);
 }
 
-void	int_handler(int sig)
-{
-	sig = 3 * 4;
-	sig++;
-	printf("Lol, no.\n");
-	return ;
-}
-
-int	main(int ac, char *argv[], char *envp[])
+int	main(int ac, char *av[], char *envp[])
 {
 	char	*str;
 	char	*prompt;
 	int		pid;
 	t_prog	prog;
 
-	check_args(ac, argv, envp);
+	(void)ac;
+	(void)av;
 	prog.envp = envp;
 	prog.paths = ft_split(getenv("PATH"), ':');
-	signal(SIGINT, int_handler);
 	while (1)
 	{
 		prompt = get_prompt();
 		str = readline(prompt);
 		add_history(str);
-		if (!inbuilt_check(str))
+		prog.user_inputs = split_agrs(str);
+//		std_sort(prompt, str);
+		if (!inbuilt_check(prog))
 		{
 			pid = fork();
 			if (!pid)
 			{
-				check_pipes(str, prog);
+				check_pipes(prog);
 			}
 			waitpid(pid, 0, 0);
 		}
+		free_inputs(prog.user_inputs);
 		free(str);
 		free(prompt);
 	}

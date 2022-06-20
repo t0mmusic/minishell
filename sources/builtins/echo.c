@@ -6,34 +6,32 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 15:47:38 by jbrown            #+#    #+#             */
-/*   Updated: 2022/06/20 10:14:46 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/20 16:26:04 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*find_next_word(char *str)
-{
-	while (*str && !ft_isspace(*str))
-		str++;
-	while (*str && ft_isspace(*str))
-		str++;
-	return (str);
-}
-
-bool	builtin_echo(char *str)
+bool	builtin_echo(t_prog prog)
 {
 	bool	newline;
+	char	**print;
 
 	newline = true;
-	if (ft_strnstr(str, "-n", 7))
+	if (prog.commands[1] && !ft_strcmp(prog.commands[1], "-n"))
 	{
 		newline = false;
+		prog.commands++;
 	}
-	str = find_next_word(str);
-	if (!newline)
-		str = find_next_word(str);
-	ft_printf_fd("%s", 1, str);
+	prog.commands++;
+	print = prog.commands;
+	while (*print)
+	{
+		ft_printf_fd("%s", 1, *print);
+		print++;
+		if (*print)
+			ft_printf_fd(" ", 1);
+	}
 	if (newline)
 		ft_printf_fd("\n", 1);
 	return (true);

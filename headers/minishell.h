@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/20 10:08:44 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/20 17:09:31 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,32 +43,36 @@ typedef struct s_prog
 	char	*root;
 	char	**paths;
 	char	**commands;
+	char	**user_inputs;
 }	t_prog;
 
 void	check_args(int argcount, char **argvect, char *envp[]);
 void	print_env(void);
 
 /*	Run processes	*/
-void	out_process(char *str, t_prog prog);
-bool	inbuilt_check(char *str);
-void	check_pipes(char *str, t_prog prog);
+void	out_process(t_prog prog);
+void	check_pipes(t_prog prog);
 
 /*	Inbuilt function recretations	*/
-bool	inbuilt_check(char *str);
-bool	inbuilt_subprocess(char *str, t_prog prog);
+bool	inbuilt_check(t_prog prog);
+bool	inbuilt_subprocess(t_prog prog);
 bool	builtin_env(t_prog prog);
 bool	builtin_pwd(void);
-bool	change_directory(char *str);
-bool	builtin_echo(char *str);
+bool	change_directory(t_prog prog);
+bool	builtin_echo(t_prog prog);
 
 /*	Standard input/output redirection	*/
-void	std_sort(char *path, char **commands);
-void	std_output(char *path);
-void	std_output_append(char *path);
-void	std_input(char *path);
-void	std_input_delim(char *path);
+void	std_sort(char *path, char *commands);
+void	std_output(char *path, char *commands);
+void	std_output_append(char *path, char *commands);
+void	std_input(char *path, char *commands);
+void	std_input_delim(char *path, char *commands);
 
 /*	Utilities	*/
 int		ft_isspace(int c);
+char	**split_agrs(char *str);
+
+/*	Malloc/free	*/
+void	free_inputs(char **inputs);
 
 #endif
