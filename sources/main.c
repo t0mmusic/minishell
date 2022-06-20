@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 15:17:29 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/19 15:15:00 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/20 10:52:14 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	main(int ac, char *argv[], char *envp[])
 		add_history(str);
 		if (!inbuilt_check(str))
 		{
+			std_sort(prog.path, str);
 			pid = fork();
 			if (!pid)
 			{

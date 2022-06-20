@@ -3,25 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   std_io.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 14:45:52 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/17 15:57:03 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/20 11:06:13 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static char	*get_file(char *commands)
+{
+	int	i;
+
+	i = 0;
+	while (commands[++i] != '\0')
+		printf("%c", commands[i]);
+	printf("\n");
+	return (&commands[i]);
+}
+
 /**
  * @brief	Redirects input using the '>' character
  * @param	path	The path to input and then output the file to
 **/
-void	std_output(char *path)
+void	std_output(char *path, char *commands)
 {
+	char	*file;
+
 	//	Using the path
 	//	find the current location and output to the given file
 	//	at the given path
-	(void)path;
+	file = get_file(commands);
+	printf("%c\n", *path);
 }
 
 /**
