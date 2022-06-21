@@ -12,19 +12,19 @@
 
 #include "minishell.h"
 
-bool	builtin_echo(t_prog prog)
+bool	builtin_echo(void)
 {
 	bool	newline;
 	char	**print;
 
 	newline = true;
-	if (prog.commands[1] && !ft_strcmp(prog.commands[1], "-n"))
+	if (g_program.commands[1] && !ft_strcmp(g_program.commands[1], "-n"))
 	{
 		newline = false;
-		prog.commands++;
+		g_program.commands++;
 	}
-	prog.commands++;
-	print = prog.commands;
+	g_program.commands++;
+	print = g_program.commands;
 	while (*print)
 	{
 		ft_printf_fd("%s", 1, *print);

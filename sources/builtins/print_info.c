@@ -21,12 +21,12 @@ bool	builtin_pwd(void)
 /*	Prints the environment variables of the system.	Doesn't like pwd for some
 	reason.	*/
 
-bool	builtin_env(t_prog prog)
+bool	builtin_env(void)
 {
-	while (*prog.envp)
+	while (*g_program.envp)
 	{
-		printf("%s\n", *prog.envp);
-		prog.envp++;
+		printf("%s\n", *g_program.envp);
+		g_program.envp++;
 	}
 	return (true);
 }

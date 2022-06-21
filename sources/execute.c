@@ -29,20 +29,20 @@ char	*join_path(char *path, char *command)
 	paths. If it finds one that matches, it will set the path in the
 	prog structure and return 1. Otherwise, returns 0.	*/
 
-bool	command_valid(t_prog *prog)
+bool	command_valid(void)
 {
 	char	*tmp;
 	int		i;
 
-	if (!access(prog->path, 0))
+	if (!access(g_program.path, 0))
 		return (true);
 	i = 0;
-	while (prog->paths[i])
+	while (g_program.paths[i])
 	{
-		tmp = join_path(prog->paths[i], prog->path);
+		tmp = join_path(g_program.paths[i], g_program.path);
 		if (!access(tmp, 0))
 		{
-			prog->path = tmp;
+			g_program.path = tmp;
 			return (true);
 		}
 		free (tmp);
@@ -55,15 +55,15 @@ bool	command_valid(t_prog *prog)
 	'commands' array in 'prog'. It will then check if the command is
 	valid, and will execute it if it is, or print an error if it is not.	*/
 
-void	out_process(t_prog prog)
+void	out_process(void)
 {
-	if (inbuilt_subprocess(prog))
+	if (inbuilt_subprocess())
 		exit(0);
-	prog.path = prog.commands[0];
-	if (command_valid(&prog))
+	g_program.path = g_program.commands[0];
+	if (command_valid())
 	{
-		execve(prog.path, prog.commands, prog.envp);
+		execve(g_program.path, g_program.commands, g_program.envp);
 	}
-	ft_printf_fd("minishell: %s command not found!\n", 1, prog.path);
+	ft_printf_fd("minishell: %s command not found!\n", 1, g_program.path);
 	exit (1);
 }

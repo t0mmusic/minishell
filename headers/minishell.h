@@ -35,6 +35,7 @@
 /**
  * @brief	Global environment
 **/
+
 typedef struct s_prog
 {
 	char	**envp;
@@ -46,20 +47,23 @@ typedef struct s_prog
 	char	**user_inputs;
 }	t_prog;
 
+/*	Declaration of global variable	*/
+t_prog g_program;
+
 void	check_args(int argcount, char **argvect, char *envp[]);
 void	print_env(void);
 
 /*	Run processes	*/
-void	out_process(t_prog prog);
-void	check_pipes(t_prog prog);
+void	out_process(void);
+void	check_pipes(void);
 
 /*	Inbuilt function recretations	*/
-bool	inbuilt_check(t_prog prog);
-bool	inbuilt_subprocess(t_prog prog);
-bool	builtin_env(t_prog prog);
+bool	inbuilt_check(void);
+bool	inbuilt_subprocess(void);
+bool	builtin_env(void);
 bool	builtin_pwd(void);
-bool	change_directory(t_prog prog);
-bool	builtin_echo(t_prog prog);
+bool	change_directory(void);
+bool	builtin_echo(void);
 
 /*	Standard input/output redirection	*/
 void	std_sort(char *path, char *commands);

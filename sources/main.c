@@ -39,29 +39,28 @@ int	main(int ac, char *av[], char *envp[])
 	char	*str;
 	char	*prompt;
 	int		pid;
-	t_prog	prog;
 
 	(void)ac;
 	(void)av;
-	prog.envp = envp;
-	prog.paths = ft_split(getenv("PATH"), ':');
+	g_program.envp = envp;
+	g_program.paths = ft_split(getenv("PATH"), ':');
 	while (1)
 	{
 		prompt = get_prompt();
 		str = readline(prompt);
 		add_history(str);
-		prog.user_inputs = split_agrs(str);
+		g_program.user_inputs = split_agrs(str);
 //		std_sort(prompt, str);
-		if (!inbuilt_check(prog))
+		if (!inbuilt_check())
 		{
 			pid = fork();
 			if (!pid)
 			{
-				check_pipes(prog);
+				check_pipes();
 			}
 			waitpid(pid, 0, 0);
 		}
-		free_inputs(prog.user_inputs);
+		free_inputs(g_program.user_inputs);
 		free(str);
 		free(prompt);
 	}

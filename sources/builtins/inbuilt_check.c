@@ -18,14 +18,14 @@
 	must be the main process to properly exit the program. If the user has
 	entered an exit value, that will be used for exit.	*/
 
-bool	inbuilt_check(t_prog prog)
+bool	inbuilt_check(void)
 {
-	if (!ft_strcmp("cd", prog.user_inputs[0]))
-		return (change_directory(prog));
-	if (!ft_strcmp("exit", prog.user_inputs[0]))
+	if (!ft_strcmp("cd", g_program.user_inputs[0]))
+		return (change_directory());
+	if (!ft_strcmp("exit", g_program.user_inputs[0]))
 	{
-		if (prog.user_inputs[1])
-			exit (ft_atoi(prog.user_inputs[1]));
+		if (g_program.user_inputs[1])
+			exit (ft_atoi(g_program.user_inputs[1]));
 		exit (0);
 	}
 	return (false);
@@ -34,17 +34,17 @@ bool	inbuilt_check(t_prog prog)
 /*	These functions work with pipes and redirects, so they are run in a
 	sub process.	*/
 
-bool	inbuilt_subprocess(t_prog prog)
+bool	inbuilt_subprocess(void)
 {
-	if (!ft_strcmp("echo", prog.commands[0]))
-		return (builtin_echo(prog));
-	if (!ft_strcmp("pwd", prog.commands[0]))
+	if (!ft_strcmp("echo", g_program.commands[0]))
+		return (builtin_echo());
+	if (!ft_strcmp("pwd", g_program.commands[0]))
 		return (builtin_pwd());
 	// if ("export")
 	// 	;
 	// if ("unset")
 	// 	;
-	if (!ft_strcmp("env", prog.commands[0]))
-		return (builtin_env(prog));
+	if (!ft_strcmp("env", g_program.commands[0]))
+		return (builtin_env());
 	return (false);
 }

@@ -32,12 +32,12 @@ static char	*relative_path(char *target_dir)
 	adjacent directory, or an absolute path. It then checks if that directory is
 	valid or if the user can access it before attempting to redirect.	*/
 
-bool	change_directory(t_prog prog)
+bool	change_directory(void)
 {
 	char	*path;
 	char	*target_dir;
 
-	target_dir = prog.user_inputs[1];
+	target_dir = g_program.user_inputs[1];
 	if (!target_dir)
 	{
 		chdir("/");
