@@ -12,6 +12,8 @@
 
 #include "minishell.h"
 
+extern t_prog	g_program;
+
 /*	Creates a pipeline for the input and output of each command. The input
 	is the originally specified input file (by default standard input) and the
 	output is the originally specified output file (by default standard output).

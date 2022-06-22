@@ -12,6 +12,8 @@
 
 #include "minishell.h"
 
+extern t_prog	g_program;
+
 /*	These functions must run in the main process. cd will only affect the
 	process it is currently changing, meaning only that process will move to a
 	different directory. exit will only exit the process it is used on, which

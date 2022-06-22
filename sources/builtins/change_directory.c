@@ -12,6 +12,16 @@
 
 #include "minishell.h"
 
+extern t_prog	g_program;
+
+static bool	root_directory(void)
+{
+	chdir("/");
+	free(g_program.prompt);
+	g_program.prompt = get_prompt();
+	return (true);
+}
+
 /*	Takes the location of the current working directory and appends the input
 	path to it.	*/
 
@@ -39,10 +49,7 @@ bool	change_directory(void)
 
 	target_dir = g_program.user_inputs[1];
 	if (!target_dir)
-	{
-		chdir("/");
-		return (true);
-	}
+		return (root_directory());
 	else if (target_dir[0] == '/')
 		path = ft_strdup(target_dir);
 	else
@@ -54,5 +61,7 @@ bool	change_directory(void)
 		chdir(path);
 		free (path);
 	}
+	free(g_program.prompt);
+	g_program.prompt = get_prompt();
 	return (true);
 }

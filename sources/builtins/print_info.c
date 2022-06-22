@@ -12,6 +12,8 @@
 
 #include "minishell.h"
 
+extern t_prog	g_program;
+
 bool	builtin_pwd(void)
 {
 	ft_printf_fd("%s\n", 1, getenv("PWD"));

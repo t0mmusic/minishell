@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/16 15:47:38 by jbrown            #+#    #+#             */
-/*   Updated: 2022/06/20 16:26:04 by jbrown           ###   ########.fr       */
+/*   Created: 2022/06/17 19:42:57 by jbrown            #+#    #+#             */
+/*   Updated: 2022/06/20 16:46:41 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,14 @@
 
 extern t_prog	g_program;
 
-bool	builtin_echo(void)
+void	init_global(void)
 {
-	bool	newline;
-	char	**print;
-
-	newline = true;
-	if (g_program.commands[1] && !ft_strcmp(g_program.commands[1], "-n"))
-	{
-		newline = false;
-		g_program.commands++;
-	}
-	g_program.commands++;
-	print = g_program.commands;
-	while (*print)
-	{
-		ft_printf_fd("%s", 1, *print);
-		print++;
-		if (*print)
-			ft_printf_fd(" ", 1);
-	}
-	if (newline)
-		ft_printf_fd("\n", 1);
-	return (true);
+	g_program.envp = NULL;
+	g_program.paths = ft_split(getenv("PATH"), ':');
+	g_program.prompt = get_prompt();
+	g_program.path = NULL;
+	g_program.commands = NULL;
+	g_program.cwd = NULL;
+	g_program.root = NULL;
+	g_program.user_inputs = NULL;
 }

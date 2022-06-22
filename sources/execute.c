@@ -12,6 +12,8 @@
 
 #include "minishell.h"
 
+extern t_prog	g_program;
+
 /*	Joins a path to a command, separated by '/'.	*/
 
 char	*join_path(char *path, char *command)

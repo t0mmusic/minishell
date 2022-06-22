@@ -12,6 +12,8 @@
 
 #include "minishell.h"
 
+extern t_prog	g_program;
+
 /*	Gives the user name and current directory for the prompt. This is updated
 	each time the user enters a command.	NOTE: consider making the prompt
 	part of the global variable so that it only updates when the current
@@ -37,20 +39,20 @@ char	*get_prompt(void)
 int	main(int ac, char *av[], char *envp[])
 {
 	char	*str;
-	char	*prompt;
 	int		pid;
 
 	(void)ac;
 	(void)av;
+	init_global();
 	g_program.envp = envp;
-	g_program.paths = ft_split(getenv("PATH"), ':');
 	while (1)
 	{
-		prompt = get_prompt();
-		str = readline(prompt);
+		str = NULL;
+		str = readline(g_program.prompt);
+		if (!ft_strcmp("", str))
+			continue ;
 		add_history(str);
 		g_program.user_inputs = split_agrs(str);
-//		std_sort(prompt, str);
 		if (!inbuilt_check())
 		{
 			pid = fork();
@@ -62,7 +64,6 @@ int	main(int ac, char *av[], char *envp[])
 		}
 		free_inputs(g_program.user_inputs);
 		free(str);
-		free(prompt);
 	}
 	return (0);
 }

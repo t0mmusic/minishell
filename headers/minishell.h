@@ -40,6 +40,7 @@ typedef struct s_prog
 {
 	char	**envp;
 	char	*path;
+	char	*prompt;
 	char	*cwd;
 	char	*root;
 	char	**paths;
@@ -48,7 +49,7 @@ typedef struct s_prog
 }	t_prog;
 
 /*	Declaration of global variable	*/
-t_prog g_program;
+t_prog	g_program;
 
 void	check_args(int argcount, char **argvect, char *envp[]);
 void	print_env(void);
@@ -73,10 +74,14 @@ void	std_input(char *path, char *commands);
 void	std_input_delim(char *path, char *commands);
 
 /*	Utilities	*/
+char	*get_prompt(void);
 int		ft_isspace(int c);
 char	**split_agrs(char *str);
 
 /*	Malloc/free	*/
 void	free_inputs(char **inputs);
+
+/*	Initialisation	*/
+void	init_global(void);
 
 #endif
