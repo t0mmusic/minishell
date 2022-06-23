@@ -6,13 +6,16 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 09:21:16 by jbrown            #+#    #+#             */
-/*   Updated: 2022/06/23 12:33:51 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/23 14:40:05 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 extern t_prog	g_program;
+
+/*	Need to add a function that expands environment variables. I am still not
+	sure how to do this...	*/
 
 /*	Checks a string from a ' or a " to see if it has a match. Returns true
 	if it does, false if it doesn't.	*/

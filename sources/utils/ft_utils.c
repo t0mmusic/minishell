@@ -6,11 +6,27 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:57:22 by jbrown            #+#    #+#             */
-/*   Updated: 2022/06/23 09:47:27 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/23 14:35:58 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*	Checks if the user has entered a blank prompt.	*/
+
+bool	check_blank(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isspace(str[i]))
+			return (false);
+		i++;
+	}
+	return (true);
+}
 
 /*	Gives the user name and current directory for the prompt. This is updated
 	each time the user enters a command.	NOTE: consider making the prompt
@@ -30,6 +46,9 @@ char	*get_prompt(void)
 	free (tmp);
 	tmp = prompt;
 	prompt = ft_strjoin(getenv("HOME") + 7, tmp);
+	free(tmp);
+	tmp = prompt;
+	prompt = ft_strdup(prompt);
 	free(tmp);
 	return (prompt);
 }

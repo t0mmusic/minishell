@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/23 12:33:43 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/23 15:56:07 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_prog
 /*	Declaration of global variable	*/
 t_prog	g_program;
 
+void	program_loop(int loop);
 void	check_args(int argcount, char **argvect, char *envp[]);
 void	print_env(void);
 
@@ -67,17 +68,21 @@ bool	change_directory(void);
 bool	builtin_echo(void);
 
 /*	Standard input/output redirection	*/
-void	std_sort(char *path, char *commands);
-void	std_output(char *path, char *commands);
+void	std_sort(char *path, char **commands);
+void	std_output(char *path, char commands);
 void	std_output_append(char *path, char *commands);
-void	std_input(char *path, char *commands);
+void	std_input(char *path, char commands);
 void	std_input_delim(char *path, char *commands);
+
+/*	Signal Handling	*/
+void	ctrl_c_handler(int sig);
 
 /*	Utilities	*/
 char	*get_prompt(void);
 int		ft_isspace(int c);
 char	*ft_get_cwd(void);
 void	split_agrs(char *str);
+bool	check_blank(char *str);
 
 /*	Malloc/free	*/
 void	free_inputs(char **inputs);
