@@ -6,90 +6,44 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:57:22 by jbrown            #+#    #+#             */
-/*   Updated: 2022/06/20 15:07:36 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/23 09:47:27 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*ft_cpystr(char *str, int *current)
+/*	Gives the user name and current directory for the prompt. This is updated
+	each time the user enters a command.	NOTE: consider making the prompt
+	part of the global variable so that it only updates when the current
+	directory updates.	*/
+
+char	*get_prompt(void)
 {
-	char	end;
-	char	*ret;
-	int		i;
-
-	i = *current;
-	if (str[i] == '\'' || str[i] == '\"')
-	{
-		end = str[i];
-		i++;
-		while (str[i] && str[i] != end)
-			i++;
-		i++;
-	}
-	else
-	{
-		while (str[i] && !ft_isspace(str[i]))
-		{
-			i++;
-		}
-	}
-	ret = ft_substr(str, *current, i - *current);
-	*current = i;
-	return (ret);
-}
-
-/*	Counts the total number of inputs added by the user. This includes the ones
-	that are between quotes.	*/
-
-static int	argcount(char *str)
-{
-	int		i;
-	int		count;
+	char	*prompt;
 	char	*tmp;
+	char	buffer[512];
 
-	i = 0;
-	count = 0;
-	while (str[i])
-	{
-		while (str[i] && ft_isspace(str[i]))
-			i++;
-		if (str[i] && !ft_isspace(str[i]))
-		{
-			tmp = ft_cpystr(str, &i);
-			free (tmp);
-			count++;
-		}
-	}
-	return (count);
+	prompt = ft_strjoin("@\x1b[32mminishell\x1b[0m ",
+			getcwd(buffer, sizeof(buffer)));
+	tmp = prompt;
+	prompt = ft_strjoin(tmp, " $ ");
+	free (tmp);
+	tmp = prompt;
+	prompt = ft_strjoin(getenv("HOME") + 7, tmp);
+	free(tmp);
+	return (prompt);
 }
 
-/*	Splits all of the user inputs into separate strings based mostly on spaces,
-	but also based on whether they are in quotes.	*/
+/*	Returns the current working directory. Doesn't work at all.	*/
 
-char	**split_agrs(char *str)
+char	*ft_get_cwd(void)
 {
-	int		i;
-	int		count;
-	char	**args;
+	char	buffer[512];
 
-	count = argcount(str);
-	args = malloc(sizeof(*args) * (count + 1));
-	count = 0;
-	i = 0;
-	while (str[i])
-	{
-		while (str[i] && ft_isspace(str[i]))
-			i++;
-		if (str[i] && !ft_isspace(str[i]))
-		{
-			args[count] = ft_cpystr(str, &i);
-			count++;
-		}
-	}
-	args[count] = NULL;
-	return (args);
+	return (getcwd(buffer, sizeof(buffer)));
 }
+
+/*	Determines if the input character is a space.	*/
 
 int	ft_isspace(int c)
 {

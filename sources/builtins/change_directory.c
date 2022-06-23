@@ -6,13 +6,15 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 19:41:41 by jbrown            #+#    #+#             */
-/*   Updated: 2022/06/20 16:44:36 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/23 09:46:33 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 extern t_prog	g_program;
+
+/*	Changes the directory to root if the user does not enter any arguments.	*/
 
 static bool	root_directory(void)
 {

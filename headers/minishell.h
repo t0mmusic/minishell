@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/20 17:09:31 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/23 12:33:43 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,12 @@ void	std_input_delim(char *path, char *commands);
 /*	Utilities	*/
 char	*get_prompt(void);
 int		ft_isspace(int c);
-char	**split_agrs(char *str);
+char	*ft_get_cwd(void);
+void	split_agrs(char *str);
 
 /*	Malloc/free	*/
 void	free_inputs(char **inputs);
+void	freelist(t_list *list);
 
 /*	Initialisation	*/
 void	init_global(void);
