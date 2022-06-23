@@ -6,54 +6,60 @@
 /*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 14:45:52 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/23 13:02:54 by Nathanael        ###   ########.fr       */
+/*   Updated: 2022/06/23 15:58:36 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/**
- * @brief	Redirects input using the '>' character
- * @param	path	The path to input and then output the file to
-**/
-void	std_output(char *path, char commands)
+/*
+Output Redirection
+e.g:	echo "test" > output.txt
+$> vim output.txt
+	1	test
+*/
+void	std_output(char *path, char *file)
 {
-	printf("Path: %s\n", path);
-	printf("command: %c\n", commands);
+	// Output to file using path
+	printf("Path:%s\n > \nFile: %s\n", path, file);
 }
 
-/**
- * @brief	Handles the >> redirection using the path and append to an existing
- * file
- * @param	path	The path to redirect to
-**/
-void	std_output_append(char *path, char *commands)
+/*
+Output Append Mode
+e.g:	echo "testing123" >> output.txt (contains test on line 1)
+$> vim output.txt
+	1	test
+	2	testing123
+*/
+void	std_output_append(char *path, char *file)
 {
-	(void)path;
-	(void)commands;
-	printf(">> has yet to be implemented\n");
+	printf("Path:%s\n >> \nFile: %s\n", path, file);
 }
 
-/**
- * @brief	Handles input redirection to the indicated path
- * <
- * @param	path	The path to input from and read the file at the end
-**/
-void	std_input(char *path, char commands)
+/*
+Input Redirection
+e.g:
+$>	vim	output.txt
+	1	test
+	2	testing123	
+$>	wc -l < output.txt
+	2
+*/
+void	std_input(char *path, char *file)
 {
-	(void)path;
-	(void)commands;
-	printf("< has yet to be implemented\n");
+	printf("File:%s\n < \nPath: %s\n", path, file);
 }
 
-/**
- * @brief	Handles input redirection using delimiter
- * <<
- * @param	path	The path the input from and read from
-**/
-void	std_input_delim(char *path, char *commands)
+/*
+Input Redirection Using Delimiter
+e.g:
+$>	vim	output.txt
+	1	test
+	2	testing123	
+$>	wc -l < output.txt
+	2
+*/
+void	std_input_delim(char *path, char *file)
 {
-	(void)path;
-	(void)commands;
-	printf("<< has yet to be implemented\n");
+	printf("File:%s\n << \nPath: %s\n", path, file);
 }

@@ -6,7 +6,7 @@
 /*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/23 13:06:00 by Nathanael        ###   ########.fr       */
+/*   Updated: 2022/06/23 15:49:23 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,11 @@ bool	builtin_echo(void);
 
 /*	Standard input/output redirection	*/
 void	std_sort(char *path, char **commands);
-void	std_output(char *path, char commands);
-void	std_output_append(char *path, char *commands);
-void	std_input(char *path, char commands);
-void	std_input_delim(char *path, char *commands);
+
+void	std_output(char *path, char *file);
+void	std_output_append(char *path, char *file);
+void	std_input(char *path, char *file);
+void	std_input_delim(char *path, char *file);
 
 /*	Utilities	*/
 char	*get_prompt(void);
