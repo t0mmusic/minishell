@@ -6,31 +6,35 @@
 /*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 14:24:41 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/20 11:50:25 by Nathanael        ###   ########.fr       */
+/*   Updated: 2022/06/23 13:06:17 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	std_sort(char *prompt, char *commands)
+void	std_sort(char *path, char **commands)
 {
-	int		index;
+	int		i;
 
-	index = 0;
-	ft_putstr_fd(prompt, 0);
-	while (commands[index] != '\0')
+	i = 0;
+	while (commands[i])
 	{
-		if (commands[index] == '>')
+		if (ft_strcmp(commands[i], ">") == 0)
 		{
-			std_output(prompt, &commands[index++]);
+			std_output(path, *commands[i]);
 		}
-		else if (commands[index] == '>' && commands[index + 1] == '>')
-			std_output_append(prompt, &commands[index++]);
-		else if (commands[index] == '<')
-			std_input(prompt, &commands[index++]);
-		else if (commands[index] == '<' && commands[index + 1] == '<')
-			std_input_delim(prompt, &commands[index++]);
-		index++;
+		else if (ft_strcmp(commands[i], ">>") == 0)
+		{
+			std_output_append(path, *commands);
+		}
+		else if (ft_strcmp(commands[i], "<") == 0)
+		{
+			std_input(path, *commands[i]);
+		}
+		else if (ft_strcmp(commands[i], "<<") == 0)
+		{
+			std_input_delim(path, *commands);
+		}
+		i++;
 	}
-	printf("\n");
 }

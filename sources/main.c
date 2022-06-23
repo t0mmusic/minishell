@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 15:17:29 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/20 17:07:00 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/23 13:05:12 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	main(int ac, char *av[], char *envp[])
 			continue ;
 		add_history(str);
 		g_program.user_inputs = split_agrs(str);
+		std_sort(getenv("PWD"), g_program.user_inputs);
 		if (!inbuilt_check())
 		{
 			pid = fork();
