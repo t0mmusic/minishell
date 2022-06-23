@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 15:17:29 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/23 15:55:46 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/23 16:58:15 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ extern t_prog	g_program;
 void	program_loop(int loop)
 {
 	char	*str;
-	int		pid;
 
 	str = NULL;
+	g_program.pid = 0;
 	str = readline(g_program.prompt);
 	if (check_blank(str))
 		program_loop(1);
@@ -28,12 +28,12 @@ void	program_loop(int loop)
 	std_sort(getenv("PWD"), g_program.user_inputs);
 	if (!inbuilt_check())
 	{
-		pid = fork();
-		if (!pid)
+		g_program.pid = fork();
+		if (!g_program.pid)
 		{
 			check_pipes();
 		}
-		waitpid(pid, 0, 0);
+		waitpid(g_program.pid, 0, 0);
 	}
 	free(str);
 	if (loop)

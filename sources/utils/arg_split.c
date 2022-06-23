@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 09:21:16 by jbrown            #+#    #+#             */
-/*   Updated: 2022/06/23 14:40:05 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/23 17:19:29 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,35 @@ extern t_prog	g_program;
 
 /*	Need to add a function that expands environment variables. I am still not
 	sure how to do this...	*/
+
+static char	*env_expand(char *str)
+{
+	int		i;
+	int		j;
+	char	*tmp;
+	char	*env;
+	char	*ret;
+
+	i = 0;
+	j = 0;
+	while (str[i])
+	{
+		if (str[i] == '$')
+		{
+			tmp = ft_substr(str, 0, i);
+			j = i;
+			while (str[j] && !ft_issapce(str[j]))
+			{
+				j++;
+			}
+			env = ft_substr(str, i, j - i);
+			ret = ft_strjoin(tmp, getenv(env));
+			free (tmp);
+			free (env);
+		}
+		i++;
+	}
+}
 
 /*	Checks a string from a ' or a " to see if it has a match. Returns true
 	if it does, false if it doesn't.	*/

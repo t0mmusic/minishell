@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/23 15:56:07 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/23 16:20:34 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_prog
 	char	**paths;
 	char	**commands;
 	char	**user_inputs;
+	int		pid;
 }	t_prog;
 
 /*	Declaration of global variable	*/
@@ -69,10 +70,11 @@ bool	builtin_echo(void);
 
 /*	Standard input/output redirection	*/
 void	std_sort(char *path, char **commands);
-void	std_output(char *path, char commands);
-void	std_output_append(char *path, char *commands);
-void	std_input(char *path, char commands);
-void	std_input_delim(char *path, char *commands);
+
+void	std_output(char *path, char *file);
+void	std_output_append(char *path, char *file);
+void	std_input(char *path, char *file);
+void	std_input_delim(char *path, char *file);
 
 /*	Signal Handling	*/
 void	ctrl_c_handler(int sig);
