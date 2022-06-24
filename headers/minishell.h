@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/24 12:17:29 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/24 16:47:27 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,14 @@ typedef struct s_prog
 	char	**paths;
 	char	**commands;
 	char	**user_inputs;
+	int		exit_status;
 	int		pid;
 }	t_prog;
 
 /*	Declaration of global variable	*/
 t_prog	g_program;
 
-void	program_loop(int loop);
+void	program_loop(void);
 void	check_args(int argcount, char **argvect, char *envp[]);
 void	print_env(void);
 
@@ -77,7 +78,7 @@ void	std_input(char *path, char *file);
 void	std_input_delim(char *path, char *file);
 
 /*	Signal Handling	*/
-void	ctrl_c_handler(int sig);
+void	ctrl_handler(int sig);
 
 /*	Utilities	*/
 char	*get_prompt(void);

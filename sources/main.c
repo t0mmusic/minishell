@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 15:17:29 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/23 16:58:15 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/24 16:47:12 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,33 @@
 
 extern t_prog	g_program;
 
-void	program_loop(int loop)
+/*	Loop for the program to continuously call readline. */
+
+void	program_loop(void)
 {
 	char	*str;
 
-	str = NULL;
-	g_program.pid = 0;
-	str = readline(g_program.prompt);
-	if (check_blank(str))
-		program_loop(1);
-	add_history(str);
-	split_agrs(str);
-	std_sort(getenv("PWD"), g_program.user_inputs);
-	if (!inbuilt_check())
+	while (1)
 	{
-		g_program.pid = fork();
-		if (!g_program.pid)
+		g_program.pid = 0;
+		str = NULL;
+		str = readline(g_program.prompt);
+		if (check_blank(str))
+			continue ;
+		add_history(str);
+		split_agrs(str);
+		free(str);
+		std_sort(getenv("PWD"), g_program.user_inputs);
+		if (!inbuilt_check())
 		{
-			check_pipes();
+			g_program.pid = fork();
+			if (!g_program.pid)
+			{
+				check_pipes();
+			}
+			waitpid(g_program.pid, &g_program.exit_status, 0);
 		}
-		waitpid(g_program.pid, 0, 0);
 	}
-	free(str);
-	if (loop)
-		program_loop(1);
 }
 
 int	main(int ac, char *av[], char *envp[])
@@ -46,7 +49,8 @@ int	main(int ac, char *av[], char *envp[])
 	(void)av;
 	init_global();
 	g_program.envp = envp;
-	signal(SIGINT, ctrl_c_handler);
-	program_loop(1);
+	signal(SIGINT, ctrl_handler);
+	signal(SIGQUIT, ctrl_handler);
+	program_loop();
 	return (0);
 }

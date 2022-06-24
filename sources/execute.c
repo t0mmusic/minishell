@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:40:21 by jbrown            #+#    #+#             */
-/*   Updated: 2022/06/23 10:17:44 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/24 17:30:41 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,10 @@ bool	command_valid(void)
 	return (false);
 }
 
-/*	The user enters a command (with arguments). This is saved into the
-	'commands' array in 'prog'. It will then check if the command is
-	valid, and will execute it if it is, or print an error if it is not.	*/
+/*	The user enters a command (with arguments). If the command is one
+	of the recreated builtins, the command will be executed internally.
+	Otherwise, the function checks if this is a shell command. If it is,
+	it is executed appropriately. Otherwise, an error message is diplayed	*/
 
 void	out_process(void)
 {
@@ -66,6 +67,6 @@ void	out_process(void)
 	{
 		execve(g_program.path, g_program.commands, g_program.envp);
 	}
-	ft_printf_fd("minishell: %s command not found!\n", 1, g_program.path);
+	ft_printf_fd("minishell: %s ain't no command!\n", 1, g_program.path);
 	exit (127);
 }

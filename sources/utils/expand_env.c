@@ -6,11 +6,13 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 12:13:09 by jbrown            #+#    #+#             */
-/*   Updated: 2022/06/24 12:19:48 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/24 17:30:05 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern t_prog	g_program;
 
 /*	Takes all of the strings in a list and combines them into a single char
 	array.	*/
@@ -45,6 +47,10 @@ char	*get_env(char *str, int *i, int *j)
 	while (str[*i] && (!ft_isspace(str[*i]) && str[*i] != '$'))
 	{
 		*i = *i + 1;
+	}
+	if (str[*j + 1] == '?' && *j + 2 == *i)
+	{
+		return (ft_itoa(g_program.exit_status));
 	}
 	*i = *i - 1;
 	tmp = ft_substr(str, *j + 1, *i - *j);

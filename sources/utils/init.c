@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 19:42:57 by jbrown            #+#    #+#             */
-/*   Updated: 2022/06/24 12:33:53 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/24 15:41:09 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,5 @@ void	init_global(void)
 	g_program.cwd = NULL;
 	g_program.root = NULL;
 	g_program.user_inputs = NULL;
+	g_program.exit_status = 0;
 }
