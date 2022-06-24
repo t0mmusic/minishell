@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/23 16:20:34 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/24 12:17:29 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,12 @@ int		ft_isspace(int c);
 char	*ft_get_cwd(void);
 void	split_agrs(char *str);
 bool	check_blank(char *str);
+char	*expand_string(char *str);
 
 /*	Malloc/free	*/
 void	free_inputs(char **inputs);
 void	freelist(t_list *list);
+void	freelist_malloc(t_list *list);
 
 /*	Initialisation	*/
 void	init_global(void);
