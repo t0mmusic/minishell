@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 12:13:09 by jbrown            #+#    #+#             */
-/*   Updated: 2022/06/24 17:30:05 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/27 17:22:46 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ char	*join_list(t_list *lst)
 }
 
 /*	Takes a piece of a string and extracts an environment variable. If there
-	is no matching variable, it returns an empty string.	*/
+	is no matching variable, it returns an empty string. Needs to be updated
+	to use internal environment list.	*/
 
 char	*get_env(char *str, int *i, int *j)
 {

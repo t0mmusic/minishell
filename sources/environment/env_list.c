@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 09:22:12 by jbrown            #+#    #+#             */
-/*   Updated: 2022/06/27 13:14:06 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/27 17:28:35 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 extern t_prog	g_program;
 
-/*	Finds the matching list element selected for removal, then removes it.
-	WIP*/
+/*	Finds the matching list element selected for removal, then removes it.	*/
 
 void	remove_env(char *str)
 {
@@ -26,9 +25,9 @@ void	remove_env(char *str)
 	lst = g_program.env;
 	prev = NULL;
 	current = lst->content;
-	while (lst->next)
+	while (lst)
 	{
-		if (ft_strcmp(str, current->var))
+		if (!ft_strcmp(str, current->var))
 		{
 			if (prev)
 				prev->next = lst->next;
@@ -48,7 +47,7 @@ void	remove_env(char *str)
 
 void	edit_env(t_env *new, char *str, int split, bool silent)
 {
-	new->full = str;
+	new->full = ft_strdup(str);
 	new->var = ft_substr(str, 0, split);
 	new->content = ft_substr(str, split + 1, ft_strlen(&str[split]));
 	new->silent = silent;
@@ -57,15 +56,15 @@ void	edit_env(t_env *new, char *str, int split, bool silent)
 /*	Checks if the entered variable is new. If it is, it will save the value of
 	the full string (variable and content), the seperate variable and content,
 	and the boolean value indicating whether this is an environment variable
-	or just a regular one. WIP.	*/
+	or just a regular one.	*/
 
-void	add_env(t_list **head, char *str, bool silent)
+void	add_env(char *str, bool silent)
 {
 	t_env	*new;
 	t_list	*lst;
 	int		split;
 
-	lst = *head;
+	lst = g_program.env;
 	split = 0;
 	while (str[split] && str[split] != '=')
 		split++;
@@ -81,20 +80,16 @@ void	add_env(t_list **head, char *str, bool silent)
 	}
 	new = malloc(sizeof(new) * 3);
 	edit_env(new, str, split, silent);
-	ft_lstadd_back(head, ft_lstnew(new));
+	ft_lstadd_back(&g_program.env, ft_lstnew(new));
 }
 
 /*	Initialises the list containing all of the environment variables.	*/
 
 void	env_init(char **env)
 {
-	t_list	*env_list;
-
-	env_list = NULL;
 	while (*env)
 	{
-		add_env(&env_list, *env, false);
+		add_env(*env, false);
 		env++;
 	}
-	g_program.env = env_list;
 }

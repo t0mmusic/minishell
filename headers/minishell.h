@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/27 12:39:40 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/27 16:35:45 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	ctrl_handler(int sig);
 
 /*	Environment	*/
 void	env_init(char **env);
-void	add_env(t_list **head, char *str, bool silent);
+void	add_env(char *str, bool silent);
 void	remove_env(char *str);
 
 /*	Utilities	*/

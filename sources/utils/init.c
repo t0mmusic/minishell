@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 19:42:57 by jbrown            #+#    #+#             */
-/*   Updated: 2022/06/27 11:14:35 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/27 16:52:44 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ extern t_prog	g_program;
 
 void	init_global(void)
 {
+	g_program.env = NULL;
 	g_program.envp = NULL;
 	g_program.paths = ft_split(getenv("PATH"), ':');
 	g_program.prompt = get_prompt();

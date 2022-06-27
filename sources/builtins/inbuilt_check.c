@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 19:42:57 by jbrown            #+#    #+#             */
-/*   Updated: 2022/06/27 12:10:37 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/27 16:57:59 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ bool	inbuilt_check(void)
 {
 	if (!ft_strcmp("cd", g_program.user_inputs[0]))
 		return (change_directory());
+	if (!ft_strcmp("export", g_program.user_inputs[0]))
+		return (builtin_export());
+	if (!ft_strcmp("unset", g_program.user_inputs[0]))
+		return (builtin_unset());
 	if (!ft_strcmp("exit", g_program.user_inputs[0]))
 	{
 		if (g_program.user_inputs[1])
@@ -44,9 +48,5 @@ bool	inbuilt_subprocess(void)
 		return (builtin_pwd());
 	if (!ft_strcmp("env", g_program.commands[0]))
 		return (builtin_env());
-	if (!ft_strcmp("export", g_program.commands[0]))
-		return (builtin_export());
-	if (!ft_strcmp("unset", g_program.commands[0]))
-		return (builtin_unset());
 	return (false);
 }
