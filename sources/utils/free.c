@@ -6,11 +6,20 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:11:29 by jbrown            #+#    #+#             */
-/*   Updated: 2022/06/24 12:17:14 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/27 11:58:01 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*	Frees an environment structure.	*/
+
+void	free_env(t_env *env)
+{
+	free(env->var);
+	free(env->content);
+	free(env);
+}
 
 /*	Frees the array of user inputs.	*/
 

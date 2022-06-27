@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 19:42:57 by jbrown            #+#    #+#             */
-/*   Updated: 2022/06/24 12:33:28 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/27 12:10:37 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,7 @@ bool	inbuilt_check(void)
 }
 
 /*	These functions work with pipes and redirects, so they are run in a
-	sub process. need to add:
-	// if ("export")
-	// 	;
-	// if ("unset")
-	// 	;	*/
+	sub process. need to add:*/
 
 bool	inbuilt_subprocess(void)
 {
@@ -48,5 +44,9 @@ bool	inbuilt_subprocess(void)
 		return (builtin_pwd());
 	if (!ft_strcmp("env", g_program.commands[0]))
 		return (builtin_env());
+	if (!ft_strcmp("export", g_program.commands[0]))
+		return (builtin_export());
+	if (!ft_strcmp("unset", g_program.commands[0]))
+		return (builtin_unset());
 	return (false);
 }

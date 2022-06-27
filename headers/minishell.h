@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/24 16:47:27 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/06/27 12:39:40 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,17 @@
 # include <errno.h>
 # include <signal.h>
 
+/*	structure used for storing environment variables. Can also be used for
+	regular shell variables if 'silent' is true.	*/
+
+typedef struct s_env
+{
+	char	*full;
+	char	*var;
+	char	*content;
+	bool	silent;
+}	t_env;
+
 /**
  * @brief	Global environment
 **/
@@ -48,6 +59,7 @@ typedef struct s_prog
 	char	**user_inputs;
 	int		exit_status;
 	int		pid;
+	t_list	*env;
 }	t_prog;
 
 /*	Declaration of global variable	*/
@@ -68,6 +80,8 @@ bool	builtin_env(void);
 bool	builtin_pwd(void);
 bool	change_directory(void);
 bool	builtin_echo(void);
+bool	builtin_export(void);
+bool	builtin_unset(void);
 
 /*	Standard input/output redirection	*/
 void	std_sort(char *path, char **commands);
@@ -79,6 +93,11 @@ void	std_input_delim(char *path, char *file);
 
 /*	Signal Handling	*/
 void	ctrl_handler(int sig);
+
+/*	Environment	*/
+void	env_init(char **env);
+void	add_env(t_list **head, char *str, bool silent);
+void	remove_env(char *str);
 
 /*	Utilities	*/
 char	*get_prompt(void);
@@ -92,6 +111,7 @@ char	*expand_string(char *str);
 void	free_inputs(char **inputs);
 void	freelist(t_list *list);
 void	freelist_malloc(t_list *list);
+void	free_env(t_env *env);
 
 /*	Initialisation	*/
 void	init_global(void);
