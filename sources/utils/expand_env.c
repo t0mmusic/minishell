@@ -6,13 +6,33 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 12:13:09 by jbrown            #+#    #+#             */
-/*   Updated: 2022/06/27 17:22:46 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/01 09:18:40 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 extern t_prog	g_program;
+
+/*	Finds the matching environment variable from the list in the global variable.
+	If there is no match, it returns an empty string instead.	*/
+char	*ft_getenv(char *var)
+{
+	t_env	*env;
+	t_list	*lst;
+
+	lst = g_program.env;
+	while (lst)
+	{
+		env = lst->content;
+		if (!ft_strcmp(env->var, var))
+		{
+			return (ft_strdup(env->content));
+		}
+		lst = lst->next;
+	}
+	return (ft_strdup(""));
+}
 
 /*	Takes all of the strings in a list and combines them into a single char
 	array.	*/
@@ -55,10 +75,7 @@ char	*get_env(char *str, int *i, int *j)
 	}
 	*i = *i - 1;
 	tmp = ft_substr(str, *j + 1, *i - *j);
-	if (!getenv(tmp))
-		env = ft_strdup("");
-	else
-		env = ft_strdup(getenv(tmp));
+	env = ft_strdup(ft_getenv(tmp));
 	free (tmp);
 	return (env);
 }
