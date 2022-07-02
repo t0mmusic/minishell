@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 12:46:25 by jbrown            #+#    #+#             */
-/*   Updated: 2022/06/27 11:16:24 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/02 16:28:19 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	execute_commands(void)
 	}
 	if (!ft_strcmp("|", *g_program.user_inputs))
 		g_program.user_inputs++;
-	free (g_program.commands);
+	ft_tryfree(g_program.commands);
 	check_pipes();
 }
 

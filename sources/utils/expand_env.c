@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 12:13:09 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/01 09:51:12 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/02 16:28:46 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ extern t_prog	g_program;
 
 /*	Finds the matching environment variable from the list in the global variable.
 	If there is no match, it returns an empty string instead.	*/
+
 char	*ft_getenv(char *var)
 {
 	t_env	*env;
@@ -48,7 +49,7 @@ char	*join_list(t_list *lst)
 	while (lst->next)
 	{
 		ret = ft_strjoin(tmp, lst->next->content);
-		free (tmp);
+		ft_tryfree(tmp);
 		tmp = ret;
 		lst = lst->next;
 	}
@@ -76,7 +77,7 @@ char	*get_env(char *str, int *i, int *j)
 	*i = *i - 1;
 	tmp = ft_substr(str, *j + 1, *i - *j);
 	env = ft_strdup(ft_getenv(tmp));
-	free (tmp);
+	ft_tryfree(tmp);
 	return (env);
 }
 
@@ -93,7 +94,7 @@ char	*lst_to_str(char *str, t_list *lst)
 	{
 		tmp = str;
 		str = join_list(lst);
-		free (tmp);
+		ft_tryfree(tmp);
 	}
 	freelist_malloc(head);
 	return (str);

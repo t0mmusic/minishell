@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 09:22:12 by jbrown            #+#    #+#             */
-/*   Updated: 2022/06/27 17:28:35 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/02 16:29:00 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	remove_env(char *str)
 			else
 				g_program.env = g_program.env->next;
 			free_env(current);
-			free(lst);
+			ft_tryfree(lst);
 			return ;
 		}
 		prev = lst;

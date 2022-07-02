@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:40:21 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/01 09:59:52 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/02 16:30:52 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*join_path(char *path, char *command)
 
 	tmp = ft_strjoin(path, "/");
 	ret = ft_strjoin(tmp, command);
-	free (tmp);
+	ft_tryfree(tmp);
 	return (ret);
 }
 
@@ -47,7 +47,7 @@ bool	command_valid(void)
 			g_program.path = tmp;
 			return (true);
 		}
-		free (tmp);
+		ft_tryfree(tmp);
 		i++;
 	}
 	return (false);

@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 15:17:29 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/27 17:06:21 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/02 16:47:54 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	program_loop(void)
 			continue ;
 		add_history(str);
 		split_agrs(str);
-		free(str);
-		// std_sort(getenv("PWD"), g_program.user_inputs);
+		ft_tryfree(str);
+		std_sort(getenv("PWD"), g_program.user_inputs);
 		if (!inbuilt_check())
 		{
 			g_program.pid = fork();

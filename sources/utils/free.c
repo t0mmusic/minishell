@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:11:29 by jbrown            #+#    #+#             */
-/*   Updated: 2022/06/27 11:58:01 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/02 16:29:46 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 
 void	free_env(t_env *env)
 {
-	free(env->var);
-	free(env->content);
-	free(env);
+	ft_tryfree(env->var);
+	ft_tryfree(env->content);
+	ft_tryfree(env);
 }
 
 /*	Frees the array of user inputs.	*/
@@ -32,10 +32,10 @@ void	free_inputs(char **inputs)
 	i = 0;
 	while (inputs[i])
 	{
-		free (inputs[i]);
+		ft_tryfree(inputs[i]);
 		i++;
 	}
-	free (inputs);
+	ft_tryfree(inputs);
 }
 
 /*	Frees a list. Only frees the list elements, not the content.	*/
@@ -48,7 +48,7 @@ void	freelist(t_list *list)
 	{
 		current = list;
 		list = list->next;
-		free (current);
+		ft_tryfree(current);
 	}
 }
 
@@ -61,9 +61,9 @@ void	freelist_malloc(t_list *list)
 
 	while (list)
 	{
-		free (list->content);
+		ft_tryfree(list->content);
 		current = list;
 		list = list->next;
-		free (current);
+		ft_tryfree(current);
 	}
 }

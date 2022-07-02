@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 19:41:41 by jbrown            #+#    #+#             */
-/*   Updated: 2022/06/23 09:46:33 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/02 16:43:30 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,33 @@
 
 extern t_prog	g_program;
 
+/*	Updates the PWD and OLDPWD environment variables on a directory change. */
+
+static void	update_pwd(char *path)
+{
+	char	*old_pwd;
+	char	*new_pwd;
+	char	*var;
+	char	buffer[512];
+
+	chdir(path);
+	var = ft_getenv("PWD");
+	old_pwd = ft_strjoin("OLDPWD=", var);
+	add_env(old_pwd, false);
+	ft_tryfree(var);
+	ft_tryfree(old_pwd);
+	new_pwd = ft_strjoin("PWD=", getcwd(buffer, sizeof(buffer)));
+	add_env(new_pwd, false);
+	ft_tryfree(new_pwd);
+	ft_tryfree(g_program.prompt);
+	g_program.prompt = get_prompt();
+}
+
 /*	Changes the directory to root if the user does not enter any arguments.	*/
 
 static bool	root_directory(void)
 {
-	chdir("/");
-	free(g_program.prompt);
-	g_program.prompt = get_prompt();
+	update_pwd("/");
 	return (true);
 }
 
@@ -36,7 +56,7 @@ static char	*relative_path(char *target_dir)
 	path = ft_strjoin(getcwd(buffer, sizeof(buffer)), "/");
 	tmp = path;
 	path = ft_strjoin(path, target_dir);
-	free (tmp);
+	ft_tryfree(tmp);
 	return (path);
 }
 
@@ -57,13 +77,12 @@ bool	change_directory(void)
 	else
 		path = relative_path(target_dir);
 	if (access(path, F_OK) < 0)
-		ft_printf_fd("cd: Ain't no %s directory!\n", 1, target_dir);
-	else
 	{
-		chdir(path);
-		free (path);
+		ft_printf_fd("cd: Ain't no %s directory!\n", 1, target_dir);
+		g_program.exit_status = 1;
 	}
-	free(g_program.prompt);
-	g_program.prompt = get_prompt();
+	else
+		update_pwd(path);
+	ft_tryfree(path);
 	return (true);
 }

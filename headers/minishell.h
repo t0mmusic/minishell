@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/27 16:35:45 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/02 16:19:29 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void	ctrl_handler(int sig);
 void	env_init(char **env);
 void	add_env(char *str, bool silent);
 void	remove_env(char *str);
+char	*ft_getenv(char *var);
 
 /*	Utilities	*/
 char	*get_prompt(void);
@@ -106,6 +107,7 @@ char	*ft_get_cwd(void);
 void	split_agrs(char *str);
 bool	check_blank(char *str);
 char	*expand_string(char *str);
+int		ft_tryfree(void *ptr);
 
 /*	Malloc/free	*/
 void	free_inputs(char **inputs);
