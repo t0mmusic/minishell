@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/27 16:35:45 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/01 13:32:33 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # include <limits.h>
 # include <errno.h>
 # include <signal.h>
+# include <sys/stat.h>
 
 /*	structure used for storing environment variables. Can also be used for
 	regular shell variables if 'silent' is true.	*/
@@ -85,11 +86,11 @@ bool	builtin_unset(void);
 
 /*	Standard input/output redirection	*/
 void	std_sort(char *path, char **commands);
-
-void	std_output(char *path, char *file);
-void	std_output_append(char *path, char *file);
-void	std_input(char *path, char *file);
-void	std_input_delim(char *path, char *file);
+int		check_file_access(char *file);
+int		std_output(char *path, char *file);
+int		std_output_append(char *path, char *file);
+int		std_input(char *path, char *file);
+int		std_input_delim(char *path, char *file);
 
 /*	Signal Handling	*/
 void	ctrl_handler(int sig);
@@ -106,6 +107,7 @@ char	*ft_get_cwd(void);
 void	split_agrs(char *str);
 bool	check_blank(char *str);
 char	*expand_string(char *str);
+int		log_err(char *input, char *message, int ret);
 
 /*	Malloc/free	*/
 void	free_inputs(char **inputs);

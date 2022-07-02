@@ -6,7 +6,7 @@
 /*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 14:45:52 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/06/23 15:58:36 by Nathanael        ###   ########.fr       */
+/*   Updated: 2022/07/02 17:58:37 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,19 @@ e.g:	echo "test" > output.txt
 $> vim output.txt
 	1	test
 */
-void	std_output(char *path, char *file)
+int	std_output(char *path, char *file)
 {
-	// Output to file using path
-	printf("Path:%s\n > \nFile: %s\n", path, file);
+	int	fd;
+
+	(void)path;
+	fd = open(file, O_CREAT | O_TRUNC | O_RDONLY | O_WRONLY, 0664);
+	if (fd < 0)
+	{
+		return (check_file_access(file));
+	}
+	// dup2(fd, STDOUT_FILENO);
+	close(fd);
+	return (0);
 }
 
 /*
@@ -31,9 +40,19 @@ $> vim output.txt
 	1	test
 	2	testing123
 */
-void	std_output_append(char *path, char *file)
+int	std_output_append(char *path, char *file)
 {
-	printf("Path:%s\n >> \nFile: %s\n", path, file);
+	int	fd;
+
+	(void)path;
+	fd = open(file, O_CREAT | O_RDONLY | O_WRONLY | O_APPEND, 0644);
+	if (fd < 0)
+	{
+		return (check_file_access(file));
+	}
+	// dup2(fd, STDOUT_FILENO);
+	close(fd);
+	return (0);
 }
 
 /*
@@ -45,9 +64,10 @@ $>	vim	output.txt
 $>	wc -l < output.txt
 	2
 */
-void	std_input(char *path, char *file)
+int	std_input(char *path, char *file)
 {
 	printf("File:%s\n < \nPath: %s\n", path, file);
+	return (0);
 }
 
 /*
@@ -59,7 +79,15 @@ $>	vim	output.txt
 $>	wc -l < output.txt
 	2
 */
-void	std_input_delim(char *path, char *file)
+int	std_input_delim(char *path, char *file)
 {
-	printf("File:%s\n << \nPath: %s\n", path, file);
+	int	fd;
+
+	(void)path;
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
+		return (check_file_access(file));
+	// dup2(fd, STDIN_FILENO);
+	close(fd);
+	return (0);
 }
