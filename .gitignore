@@ -3,6 +3,7 @@
 ########################################
 
 # Hidden files/folders
+.temp/
 .vscode/
 .DS_Store
 philo.code-workspace
