@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 12:46:25 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/02 16:28:19 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/03 15:09:52 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 extern t_prog	g_program;
 
-/*	Creates a pipeline for the input and output of each command. The input
-	is the originally specified input file (by default standard input) and the
-	output is the originally specified output file (by default standard output).
-	Once all the commands have been excecuted, the final command will be output
-	appropriately.	*/
+/**
+ * @brief	Creates a pipeline for the input and output of each command.
+ * The input is the originally specified input file (by default standard input)
+ * and the output is the originally specified output file (by default standard
+ * output). Once all the commands have been excecuted, the final command will be
+ * output appropriately.
+**/
 
 void	pipe_split(void)
 {
@@ -41,9 +43,11 @@ void	pipe_split(void)
 	}
 }
 
-/*	Sets the current list of arguments for a command to be executed.
-	The list is delimited by a pipe entered by the user, or by the
-	end of the input argument list.	*/
+/**
+ * @brief	Sets the current list of arguments for a command to be executed.
+ * The list is delimited by a pipe entered by the user, or by the end of the
+ * input argument list.
+**/
 
 void	set_commands(void)
 {
@@ -72,8 +76,10 @@ void	set_commands(void)
 	}
 }
 
-/*	Sets the list of commands for the current pipe, then sends it
-	to be executed. It then moves to the next list of commands.	*/
+/**
+ * @brief	Sets the list of commands for the current pipe, then sends it
+ * to be executed. It then moves to the next list of commands.
+**/
 
 void	execute_commands(void)
 {
@@ -89,9 +95,11 @@ void	execute_commands(void)
 	check_pipes();
 }
 
-/*	Checks if there are any pipes in the list of user inputs. If
-	there are, it will set the first list of arguments to be
-	exeecuted. Otherwise, it will excecute the full list.	*/
+/**
+ * @brief	Checks if there are any pipes in the list of user inputs. If there
+ * are, it will set the first list of arguments to be executed. Otherwise,
+ * it will excecute the full list.
+**/
 
 void	check_pipes(void)
 {

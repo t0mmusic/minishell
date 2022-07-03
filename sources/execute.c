@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:40:21 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/02 16:30:52 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/03 14:52:48 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,12 @@
 
 extern t_prog	g_program;
 
-/*	Joins a path to a command, separated by '/'.	*/
+/**
+ * @brief	Joins a path to a command, separated by '/'.
+ * @param	path: The path of the directory where programs are stored
+ * @param	command: The name of the command executable
+ * @returns	ret: The combined path and commans, separated by '/'
+**/
 
 char	*join_path(char *path, char *command)
 {
@@ -27,9 +32,13 @@ char	*join_path(char *path, char *command)
 	return (ret);
 }
 
-/*	Checks the command entered by the user against all of the possible
+/**
+ * @brief	Checks the command entered by the user against all of the possible
 	paths. If it finds one that matches, it will set the path in the
-	prog structure and return 1. Otherwise, returns 0.	*/
+	prog structure and return 1. Otherwise, returns 0.
+ * @returns	boolean true if command exists, false if not
+ * ! Occasionally fails on MacOS, reason unkown.
+**/
 
 bool	command_valid(void)
 {
@@ -53,10 +62,12 @@ bool	command_valid(void)
 	return (false);
 }
 
-/*	The user enters a command (with arguments). If the command is one
+/**
+ * @brief	The user enters a command (with arguments). If the command is one
 	of the recreated builtins, the command will be executed internally.
 	Otherwise, the function checks if this is a shell command. If it is,
-	it is executed appropriately. Otherwise, an error message is diplayed	*/
+	it is executed appropriately. Otherwise, an error message is diplayed
+**/
 
 void	out_process(void)
 {

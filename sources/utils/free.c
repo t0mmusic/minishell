@@ -6,13 +6,16 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:11:29 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/02 16:29:46 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/03 15:15:43 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*	Frees an environment structure.	*/
+/**
+ * @brief	Frees an environment structure, including all allocated pointers.
+ * ! Need to evaluate what has to be freed here.
+**/
 
 void	free_env(t_env *env)
 {
@@ -21,7 +24,10 @@ void	free_env(t_env *env)
 	ft_tryfree(env);
 }
 
-/*	Frees the array of user inputs.	*/
+/**
+ * @brief	Frees the array of user inputs.
+ * @param	inputs: An array of sanitised user inputs
+**/
 
 void	free_inputs(char **inputs)
 {
@@ -38,7 +44,9 @@ void	free_inputs(char **inputs)
 	ft_tryfree(inputs);
 }
 
-/*	Frees a list. Only frees the list elements, not the content.	*/
+/**
+ * @brief	Frees all list elements of a list. Not for freeing list content
+**/
 
 void	freelist(t_list *list)
 {
@@ -52,8 +60,9 @@ void	freelist(t_list *list)
 	}
 }
 
-/*	Frees a list. This also frees the malloced content contained in each
-	list element.	*/
+/**
+ * @brief	Frees all list elements and content from a list
+**/
 
 void	freelist_malloc(t_list *list)
 {

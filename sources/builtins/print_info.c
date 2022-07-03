@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 19:06:45 by jbrown            #+#    #+#             */
-/*   Updated: 2022/06/27 17:05:10 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/03 14:55:52 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 extern t_prog	g_program;
 
-/*	Prints the current working directory.	*/
+/**
+ * @brief	Prints the current working directory
+ * @returns	boolean true
+**/
 
 bool	builtin_pwd(void)
 {
@@ -24,7 +27,10 @@ bool	builtin_pwd(void)
 	return (true);
 }
 
-/*	Prints the environment variables of the system.	*/
+/**
+ * @brief	Prints the environment variables of the system
+ * @returns	boolean true
+**/
 
 bool	builtin_env(void)
 {

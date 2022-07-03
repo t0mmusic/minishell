@@ -6,13 +6,19 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 19:42:57 by jbrown            #+#    #+#             */
-/*   Updated: 2022/06/27 16:52:44 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/03 15:11:58 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 extern t_prog	g_program;
+
+/**
+ * @brief	Initialises all elements of the global variable. Most are set to
+ * NULL, paths is given an array of all paths from the environment variables
+ * and prompt is given the user prompt.
+**/
 
 void	init_global(void)
 {

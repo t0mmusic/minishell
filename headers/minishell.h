@@ -6,14 +6,15 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/02 16:19:29 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/03 15:01:28 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# define BUFFER	10;
+# define BUFFER		10;
+# define S_IFDIR	0
 
 # include "imported/libft.h"
 # include "ft_printf_fd.h"
@@ -31,6 +32,8 @@
 # include <limits.h>
 # include <errno.h>
 # include <signal.h>
+# include <sys/stat.h>
+# include <sys/types.h>
 
 /*	structure used for storing environment variables. Can also be used for
 	regular shell variables if 'silent' is true.	*/
@@ -85,11 +88,11 @@ bool	builtin_unset(void);
 
 /*	Standard input/output redirection	*/
 void	std_sort(char *path, char **commands);
-
-void	std_output(char *path, char *file);
-void	std_output_append(char *path, char *file);
-void	std_input(char *path, char *file);
-void	std_input_delim(char *path, char *file);
+int		check_file_access(char *file);
+int		std_output(char *path, char *file);
+int		std_output_append(char *path, char *file);
+int		std_input(char *path, char *file);
+int		std_input_delim(char *path, char *file);
 
 /*	Signal Handling	*/
 void	ctrl_handler(int sig);
@@ -103,11 +106,11 @@ char	*ft_getenv(char *var);
 /*	Utilities	*/
 char	*get_prompt(void);
 int		ft_isspace(int c);
-char	*ft_get_cwd(void);
 void	split_agrs(char *str);
 bool	check_blank(char *str);
 char	*expand_string(char *str);
 int		ft_tryfree(void *ptr);
+int		log_err(char *input, char *message, int ret);
 
 /*	Malloc/free	*/
 void	free_inputs(char **inputs);

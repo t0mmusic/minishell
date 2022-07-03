@@ -6,14 +6,18 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 16:14:15 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/02 16:57:52 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/03 14:46:59 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*	Attempts to free a pointer in a subprocess before freeing normally. For
-	testing purposes only.	*/
+/**
+ * @brief	Attempts to free a pointer in a subprocess before freeing normally.
+ * ! For testing purposes only.
+ * @param	ptr: the pointer to be freed.
+ * @returns	exit_status: the exit status of the subprocess.
+**/
 
 int	ft_tryfree(void *ptr)
 {

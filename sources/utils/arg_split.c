@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 09:21:16 by jbrown            #+#    #+#             */
-/*   Updated: 2022/06/24 12:24:37 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/03 15:37:39 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,12 @@
 
 extern t_prog	g_program;
 
-/*	Checks a string from a ' or a " to see if it has a match. Returns true
-	if it does, false if it doesn't.	*/
+/**
+ * @brief	Checks a string from a ' or a " to see if it has a match.
+ * @param	str: The users input from the prompt
+ * @param	current: current index of str
+ * @returns	boolean true if match is found, false if not
+**/
 
 static bool	is_bookend(char *str, int *current)
 {
@@ -39,8 +43,13 @@ static bool	is_bookend(char *str, int *current)
 	return (false);
 }
 
-/*	Finds strings of characters, either based on contiguous characters with no
-	spaces, or strings bookended by quotes.	*/
+/**
+ * @brief	Finds strings of characters, either based on contiguous characters
+ * with no spaces, or strings bookended by quotes.
+ * @param	str: The users input from the prompt
+ * @param	current: current index of str
+ * @returns	ret: token of user input
+**/
 
 static char	*ft_cpystr(char *str, int *current)
 {
@@ -70,7 +79,15 @@ static char	*ft_cpystr(char *str, int *current)
 	return (ret);
 }
 
-/*	Creates a linked list of all the inputs entered by the user.	*/
+/**
+ * @brief	Creates a linked list of all the inputs entered by the user.
+ * * A linked list was chosen because it is difficult to determine how many
+ * * tokens are needed right away. Being able to dynamically expand the list
+ * * is crucial
+ * @param	inputs: list of user inputs
+ * @param	str: The users input from the prompt
+ * @returns	inputs: list of user inputs
+**/
 
 static t_list	*arg_list(t_list *inputs, char *str)
 {
@@ -87,8 +104,11 @@ static t_list	*arg_list(t_list *inputs, char *str)
 	return (inputs);
 }
 
-/*	Splits all of the user inputs into separate strings based mostly on spaces,
-	but also based on whether they are in quotes.	*/
+/**
+ * @brief	Splits all of the user inputs into separate strings based mostly on
+ * spaces, but also based on whether they are in quotes.
+ * @param	str: The users input from the prompt
+**/
 
 void	split_agrs(char *str)
 {

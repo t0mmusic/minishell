@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 15:17:29 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/02 16:47:54 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/03 15:05:47 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 extern t_prog	g_program;
 
-/*	Loop for the program to continuously call readline. */
+/**
+ * @brief	Loop for the program to continuously call readline
+ * ! Needs to accomodate all incoming changes
+**/
 
 void	program_loop(void)
 {
@@ -42,6 +45,14 @@ void	program_loop(void)
 		}
 	}
 }
+
+/**
+ * @brief	main function. Initialises global variable and begins program loop
+ * @param	ac: number of arguments input (unused)
+ * @param	av: array of arguments input (unused)
+ * @param	envp: array of environment variables input
+ * @returns	0 (should never occour due to program loop)
+**/
 
 int	main(int ac, char *av[], char *envp[])
 {

@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 12:13:09 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/02 16:28:46 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/03 15:25:50 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,12 @@
 
 extern t_prog	g_program;
 
-/*	Finds the matching environment variable from the list in the global variable.
-	If there is no match, it returns an empty string instead.	*/
+/**
+ * @brief	Finds the matching environment variable from the list in the global
+ * variable. If there is no match, it returns an empty string instead.
+ * @param	var: The variable name
+ * @returns	matching varible content, or empty string if no match is found
+**/
 
 char	*ft_getenv(char *var)
 {
@@ -35,8 +39,12 @@ char	*ft_getenv(char *var)
 	return (ft_strdup(""));
 }
 
-/*	Takes all of the strings in a list and combines them into a single char
-	array.	*/
+/**
+ * @brief	Takes all of the strings in a list and combines them into a
+ * single char array.
+ * @param	lst: linked list of sanitised user inputs
+ * @returns	ret: char array of combined user inputs
+**/
 
 char	*join_list(t_list *lst)
 {
@@ -56,9 +64,14 @@ char	*join_list(t_list *lst)
 	return (ret);
 }
 
-/*	Takes a piece of a string and extracts an environment variable. If there
-	is no matching variable, it returns an empty string. Needs to be updated
-	to use internal environment list.	*/
+/**
+ * @brief	Takes a piece of a string and extracts an environment variable.
+ * If there is no matching variable, it returns an empty string.
+ * @param	str: The users input from the prompt
+ * @param	*i: reference to current index of str
+ * @param	*j: reference used to save beginning of current token
+ * @returns	env: string of sanitised input
+**/
 
 char	*get_env(char *str, int *i, int *j)
 {
@@ -81,8 +94,13 @@ char	*get_env(char *str, int *i, int *j)
 	return (env);
 }
 
-/*	Converts the content of a list into a string if the list is
-	full. Also frees the original string input by the user.	*/
+/**
+ * @brief	Converts the content of a list into a string if the list is full.
+ * Also frees the original string input by the user.
+ * @param	str: The users input from the prompt
+ * @param	lst: list of sanitised user inputs (tokens)
+ * @returns	str: newly tokenised string of user inputs
+**/
 
 char	*lst_to_str(char *str, t_list *lst)
 {
@@ -100,8 +118,12 @@ char	*lst_to_str(char *str, t_list *lst)
 	return (str);
 }
 
-/*	Expands a string input by the user if it contains environment variables.
-	It there are no evs, it remains the same.	*/
+/**
+ * @brief	Expands a string input by the user if it contains environment
+ * variables. If there are no evs, it remains the same.
+ * @param	str: The users input from the prompt
+ * @returns	tokenised string of user inputs
+**/
 
 char	*expand_string(char *str)
 {
