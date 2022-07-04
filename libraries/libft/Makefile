@@ -6,7 +6,7 @@
 #    By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/25 23:45:33 by Nathanael         #+#    #+#              #
-#    Updated: 2022/07/04 13:47:07 by jbrown           ###   ########.fr        #
+#    Updated: 2022/07/04 20:00:44 by jbrown           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,7 @@ $(BLDDIR)/$(NAME): $(OBJECTS)
 
 $(OBJDIR)/%.o : $(SRCDIR)/%.c
 	@$(MKDIR) '$(@D)'
-	@$(CC) $(CFLAGS) -c $< -o
+	@$(CC) $(CFLAGS) -c $< -o $@
 	@clear
 	@printf "Linked source: %s into object: %s\n" $< $@
 

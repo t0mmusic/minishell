@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:34:01 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/04 14:10:26 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/04 20:26:00 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	ctrl_handler(int sig)
 	if (!g_program.pid)
 	{
 		ioctl(STDIN_FILENO, TIOCSTI, "\n");
-		// rl_replace_line("", 0);
-		// rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_on_new_line();
 	}
 	else
 		kill(g_program.pid, SIGKILL);

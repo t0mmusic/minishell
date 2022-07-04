@@ -6,7 +6,7 @@
 #    By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 16:30:35 by Nathanael         #+#    #+#              #
-#    Updated: 2022/07/04 14:05:43 by jbrown           ###   ########.fr        #
+#    Updated: 2022/07/04 20:03:27 by jbrown           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,14 +39,14 @@ FCLN	:=	$(OBJDIR)
 #								COMPILER/FLAGS								   #
 ################################################################################
 CC		=	gcc
-COMFLAG	=	-Wall -Wextra -Werror -std=c99 -I $(HDRDIR)
+COMFLAG	=	-Wall -Wextra -Werror -std=c99 -D_POSIX_C_SOURCE -I $(HDRDIR)
 
 CFLAGS	=	$(COMFLAG) -g
 LFLAGS	=	$(COMFLAG)
 RLFLAGS =	-I /usr/local/opt/readline/include \
 			-I ~/.brew/opt/readline/include \
 			# -L /usr/local/opt/readline/lib \
-			# -L ~/.brew/opt/readline/lib 
+			# -L ~/.brew/opt/readline/lib
 
 ################################################################################
 #								EXTERNAL UTILITIES							   #

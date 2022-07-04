@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 19:06:45 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/04 10:43:45 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/04 20:21:09 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ bool	builtin_env(void)
 	while (lst)
 	{
 		current = lst->content;
-		printf("%s\n", current->full);
+		if (!current->silent)
+			printf("%s\n", current->full);
 		lst = lst->next;
 	}
 	return (true);

@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/04 15:46:27 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/04 21:02:16 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 
 # include "imported/libft.h"
 # include "ft_printf_fd.h"
+# include "colours.h"
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -39,7 +40,7 @@
 # include <signal.h>
 # include <sys/stat.h>
 # include <sys/types.h>
-# include <sys/ioctl.h> 
+# include <sys/ioctl.h>
 
 /*	structure used for storing environment variables. Can also be used for
 	regular shell variables if 'silent' is true.	*/
@@ -118,6 +119,8 @@ char	*expand_string(char *str);
 int		ft_tryfree(void *ptr);
 int		log_err(char *input, char *message, int ret);
 char	*lst_to_str(char *str, t_list *lst);
+char	*ft_ansii(char *str, char *colour);
+char	*ft_free_join(char *s1, char *s2);
 
 /*	Malloc/free	*/
 void	free_inputs(char **inputs);

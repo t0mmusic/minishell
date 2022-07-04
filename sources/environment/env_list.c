@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 09:22:12 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/04 14:22:03 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/04 20:35:59 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	edit_env(t_env *new, char *str, int split, bool silent)
  * @param	str: Name of environment variable
  * @param	silent: boolean value indicating whether to print with 'env'
  * ! Consider using split instead of searching for '='
+ * ! Needs to account for strings in quotes
 **/
 
 void	add_env(char *str, bool silent)
