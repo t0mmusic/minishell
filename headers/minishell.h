@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/03 15:01:28 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/04 10:49:14 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,13 @@
 # define MINISHELL_H
 
 # define BUFFER		10;
-# define S_IFDIR	0
+
+# ifndef S_IFDIR
+#  define S_IFDIR 0040000;
+# endif
+# ifndef S_IXUSR
+#  define S_IXUSR 0000100;
+# endif
 
 # include "imported/libft.h"
 # include "ft_printf_fd.h"
