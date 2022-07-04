@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 12:01:59 by jbrown            #+#    #+#             */
-/*   Updated: 2022/06/27 17:18:56 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/04 11:22:42 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 extern t_prog	g_program;
 
-/*	Adds a new environment variable. */
+/**
+ * @brief	Adds a new environment variable.
+ * @returns	true: boolean to indicate this is a built-in function
+**/
 
 bool	builtin_export(void)
 {
@@ -22,7 +25,10 @@ bool	builtin_export(void)
 	return (true);
 }
 
-/*	Removes an environment variable if it exists.	*/
+/**
+ * @brief	Removes an environment variable if it exists.
+ * @returns	true: boolean to indicate this is a built-in function
+**/
 
 bool	builtin_unset(void)
 {

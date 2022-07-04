@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 09:22:12 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/02 16:29:00 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/04 11:14:14 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 extern t_prog	g_program;
 
-/*	Finds the matching list element selected for removal, then removes it.	*/
+/**
+ * @brief	Finds the matching list element selected for removal, then removes it
+ * @param	str: a string matching the name of an evironment variable
+**/
 
 void	remove_env(char *str)
 {
@@ -43,7 +46,13 @@ void	remove_env(char *str)
 	}
 }
 
-/*	Assigns all required values for the environment variable.	*/
+/**
+ * @brief	Assigns all required values for the environment variable.
+ * @param	new: environment variable structure
+ * @param	str: The full environment variable, variable and content
+ * @param	split: integer variable of the index of the '='
+ * @param	silent: boolean value indicating whether to print with 'env'
+**/
 
 void	edit_env(t_env *new, char *str, int split, bool silent)
 {
@@ -53,10 +62,15 @@ void	edit_env(t_env *new, char *str, int split, bool silent)
 	new->silent = silent;
 }
 
-/*	Checks if the entered variable is new. If it is, it will save the value of
-	the full string (variable and content), the seperate variable and content,
-	and the boolean value indicating whether this is an environment variable
-	or just a regular one.	*/
+/**
+ * @brief	Checks if the entered variable is new. If it is, it will save the
+ * value of the full string (variable and content), the seperate variable and
+ * content, and the boolean value indicating whether this is an environment
+ * variable or just a regular one.
+ * @param	str: Name of environment variable
+ * @param	silent: boolean value indicating whether to print with 'env'
+ * ! Consider using split instead of searching for '='
+**/
 
 void	add_env(char *str, bool silent)
 {
@@ -83,7 +97,10 @@ void	add_env(char *str, bool silent)
 	ft_lstadd_back(&g_program.env, ft_lstnew(new));
 }
 
-/*	Initialises the list containing all of the environment variables.	*/
+/**
+ * @brief	Initialises the list containing all of the environment variables.
+ * @param	env: array of system environment variables
+**/
 
 void	env_init(char **env)
 {

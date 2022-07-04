@@ -6,13 +6,19 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 15:47:38 by jbrown            #+#    #+#             */
-/*   Updated: 2022/06/20 16:26:04 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/04 11:21:54 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 extern t_prog	g_program;
+
+/**
+ * @brief	prints the string input by the user. If the user has added the flag
+ * '-n', it will not print a newline.
+ * @returns	true: boolean to indicate this is a built-in function
+**/
 
 bool	builtin_echo(void)
 {

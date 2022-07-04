@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/04 10:36:58 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/04 10:58:28 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 # define MINISHELL_H
 
 # define BUFFER		10;
+
+# ifndef S_IFDIR
+#  define S_IFDIR 0040000;
+# endif
+# ifndef S_IXUSR
+#  define S_IXUSR 0000100;
+# endif
 
 # include "imported/libft.h"
 # include "ft_printf_fd.h"

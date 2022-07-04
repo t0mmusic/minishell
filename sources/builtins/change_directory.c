@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 19:41:41 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/02 16:43:30 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/04 11:20:04 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 extern t_prog	g_program;
 
-/*	Updates the PWD and OLDPWD environment variables on a directory change. */
+/**
+ * @brief	Updates the PWD and OLDPWD environment variables on directory change.
+ * @param	path: The path that will be changed to
+**/
 
 static void	update_pwd(char *path)
 {
@@ -36,7 +39,9 @@ static void	update_pwd(char *path)
 	g_program.prompt = get_prompt();
 }
 
-/*	Changes the directory to root if the user does not enter any arguments.	*/
+/**
+ * @brief	Changes the directory to root if the user does not enter arguments.
+**/
 
 static bool	root_directory(void)
 {
@@ -44,8 +49,12 @@ static bool	root_directory(void)
 	return (true);
 }
 
-/*	Takes the location of the current working directory and appends the input
-	path to it.	*/
+/**
+ * @brief	Takes the location of the current working directory and appends the
+ * input path to it.
+ * @param	target_dir: the directory we want to go to
+ * @returns	path: full path of desired directory
+**/
 
 static char	*relative_path(char *target_dir)
 {
@@ -60,9 +69,12 @@ static char	*relative_path(char *target_dir)
 	return (path);
 }
 
-/*	Checks the user input path to see if it has no arguments, an agrument for an
-	adjacent directory, or an absolute path. It then checks if that directory is
-	valid or if the user can access it before attempting to redirect.	*/
+/**
+ * @brief	Checks the user input path to see if it has no arguments, an agrument
+ * for an adjacent directory, or an absolute path. It then checks if that
+ * directory is valid or if the user can access it before attempting to redirect.
+ * @returns	true: boolean to indicate this is a built-in function
+**/
 
 bool	change_directory(void)
 {

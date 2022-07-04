@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 19:42:57 by jbrown            #+#    #+#             */
-/*   Updated: 2022/06/27 16:57:59 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/04 11:26:29 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 extern t_prog	g_program;
 
-/*	These functions must run in the main process. cd will only affect the
-	process it is currently changing, meaning only that process will move to a
-	different directory. exit will only exit the process it is used on, which
-	must be the main process to properly exit the program. If the user has
-	entered an exit value, that will be used for exit.	*/
+/**
+ * @brief	Checks to see if the command entered by the user is one of the
+ * recreated inbuilt functions. These functions are executed in the main
+ * process to ensure that they are handled in the same way that the real
+ * shell handles them.
+ * @returns	boolean true if the command was found, false if not.
+**/
 
 bool	inbuilt_check(void)
 {
@@ -37,8 +39,13 @@ bool	inbuilt_check(void)
 	return (false);
 }
 
-/*	These functions work with pipes and redirects, so they are run in a
-	sub process. need to add:*/
+/**
+ * @brief	Checks to see if the command entered by the user is one of the
+ * recreated inbuilt functions. These functions are executed in a sub-process
+ * to ensure that they are handled in the same way that the real shell handles
+ * them.
+ * @returns	boolean true if the command was found, false if not.
+**/
 
 bool	inbuilt_subprocess(void)
 {
