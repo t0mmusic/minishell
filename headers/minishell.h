@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/04 21:02:16 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/04 21:44:17 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 # ifndef S_IXUSR
 #  define S_IXUSR 0000100;
 # endif
+
+# define R_END 0
+# define W_END 1
 
 # include "imported/libft.h"
 # include "ft_printf_fd.h"
