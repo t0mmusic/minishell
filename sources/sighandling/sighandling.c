@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:34:01 by jbrown            #+#    #+#             */
-/*   Updated: 2022/06/24 17:16:32 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/04 10:05:11 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ extern t_prog	g_program;
 
 void	ctrl_handler(int sig)
 {
-	if (sig == SIGQUIT)
-		return ;
+	if (sig != SIGINT)
+		printf("How did you do this???");
 	ft_printf_fd("\n", 1);
 	if (!g_program.pid)
 	{
-		ft_printf_fd("", 1);
+		ft_printf_fd(g_program.prompt, 1);
 	}
 	else
 		kill(g_program.pid, SIGKILL);

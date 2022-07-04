@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:57:22 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/03 15:02:32 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/04 10:34:09 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 /**
  * @brief	Checks if the user has entered a blank prompt
+ * If the user has entered ctrl-d, str will be NULL, and the program will exit
  * @param	str: The users input from the prompt
  * @returns	boolean false if any non-space chars are found, true if not
 **/
@@ -22,6 +23,8 @@ bool	check_blank(char *str)
 {
 	int	i;
 
+	if (!str)
+		exit (0);
 	i = 0;
 	while (str[i])
 	{
@@ -36,6 +39,7 @@ bool	check_blank(char *str)
  * @brief	Gives the user name and current directory for the prompt.
  * This is updated each time the user enters a command.
  * ! Currently causing issue on MacOS due to colour
+ * ! Unfortunately, solution may be to omit colour...
  * @returns	prompt: The prompt for readline, showing user and directory.
 **/
 
@@ -45,7 +49,7 @@ char	*get_prompt(void)
 	char	*tmp;
 	char	buffer[512];
 
-	prompt = ft_strjoin(getenv("LOGNAME"), "@\001\x1b[32mminishell\x1b[0m\002 ");
+	prompt = ft_strjoin(getenv("LOGNAME"), "@minishell ");
 	tmp = prompt;
 	prompt = ft_strjoin(tmp, getcwd(buffer, sizeof(buffer)));
 	ft_tryfree(tmp);

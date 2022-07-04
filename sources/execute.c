@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:40:21 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/03 14:52:48 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/04 10:20:17 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ char	*join_path(char *path, char *command)
 
 /**
  * @brief	Checks the command entered by the user against all of the possible
-	paths. If it finds one that matches, it will set the path in the
-	prog structure and return 1. Otherwise, returns 0.
+ * paths. If it finds one that matches, it will set the path in the
+ * prog structure and return 1. Otherwise, returns 0.
  * @returns	boolean true if command exists, false if not
  * ! Occasionally fails on MacOS, reason unkown.
 **/
@@ -51,7 +51,7 @@ bool	command_valid(void)
 	while (g_program.paths[i])
 	{
 		tmp = join_path(g_program.paths[i], g_program.path);
-		if (!access(tmp, 0))
+		if (access(tmp, F_OK) >= 0)
 		{
 			g_program.path = tmp;
 			return (true);
@@ -64,9 +64,9 @@ bool	command_valid(void)
 
 /**
  * @brief	The user enters a command (with arguments). If the command is one
-	of the recreated builtins, the command will be executed internally.
-	Otherwise, the function checks if this is a shell command. If it is,
-	it is executed appropriately. Otherwise, an error message is diplayed
+ * of the recreated builtins, the command will be executed internally.
+ * Otherwise, the function checks if this is a shell command. If it is,
+ * it is executed appropriately. Otherwise, an error message is diplayed
 **/
 
 void	out_process(void)
@@ -78,6 +78,7 @@ void	out_process(void)
 	{
 		execve(g_program.path, g_program.commands, g_program.envp);
 	}
-	ft_printf_fd("minishell: %s ain't no command!\n", 2, g_program.path);
+	ft_printf_fd("\e[0;31mminishell: %s ain't no command!\e[0m\n",
+		2, g_program.commands[0]);
 	exit (EXIT_FAILURE);
 }

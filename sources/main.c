@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 15:17:29 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/03 15:05:47 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/04 10:25:03 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	program_loop(void)
 	{
 		g_program.pid = 0;
 		str = NULL;
+		signal(SIGINT, ctrl_handler);
+		signal(SIGQUIT, SIG_IGN);
 		str = readline(g_program.prompt);
 		if (check_blank(str))
 			continue ;
@@ -61,8 +63,6 @@ int	main(int ac, char *av[], char *envp[])
 	init_global();
 	env_init(envp);
 	g_program.envp = envp;
-	signal(SIGINT, ctrl_handler);
-	signal(SIGQUIT, ctrl_handler);
 	program_loop();
 	return (0);
 }
