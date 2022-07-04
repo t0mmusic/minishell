@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:57:22 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/04 10:34:09 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/04 10:48:14 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,13 @@ char	*get_prompt(void)
 {
 	char	*prompt;
 	char	*tmp;
-	char	buffer[512];
+	char	*pwd;
 
 	prompt = ft_strjoin(getenv("LOGNAME"), "@minishell ");
 	tmp = prompt;
-	prompt = ft_strjoin(tmp, getcwd(buffer, sizeof(buffer)));
+	pwd = ft_getenv("PWD");
+	prompt = ft_strjoin(tmp, pwd);
+	free(pwd);
 	ft_tryfree(tmp);
 	tmp = prompt;
 	prompt = ft_strjoin(tmp, " $ ");

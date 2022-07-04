@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 19:06:45 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/03 14:55:52 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/04 10:43:45 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@ extern t_prog	g_program;
 
 bool	builtin_pwd(void)
 {
-	char	buffer[512];
+	char	*pwd;
 
-	ft_printf_fd("%s\n", 1, getcwd(buffer, sizeof(buffer)));
+	pwd = ft_getenv("PWD");
+	printf("%s\n", pwd);
+	free(pwd);
 	return (true);
 }
 

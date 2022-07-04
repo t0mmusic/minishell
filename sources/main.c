@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 15:17:29 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/04 10:25:03 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/04 10:49:42 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ int	main(int ac, char *av[], char *envp[])
 {
 	(void)ac;
 	(void)av;
-	init_global();
 	env_init(envp);
+	init_global();
 	g_program.envp = envp;
 	program_loop();
 	return (0);
