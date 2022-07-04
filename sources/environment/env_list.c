@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 09:22:12 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/04 11:14:14 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/04 14:22:03 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ void	remove_env(char *str)
 		}
 		prev = lst;
 		lst = lst->next;
-		current = lst->content;
+		if (lst)
+			current = lst->content;
 	}
 }
 

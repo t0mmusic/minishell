@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/04 10:58:28 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/04 15:46:27 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include <stdlib.h>
 # include <string.h>
 # include <fcntl.h>
 # include <dirent.h>
@@ -40,6 +39,7 @@
 # include <signal.h>
 # include <sys/stat.h>
 # include <sys/types.h>
+# include <sys/ioctl.h> 
 
 /*	structure used for storing environment variables. Can also be used for
 	regular shell variables if 'silent' is true.	*/
@@ -117,6 +117,7 @@ bool	check_blank(char *str);
 char	*expand_string(char *str);
 int		ft_tryfree(void *ptr);
 int		log_err(char *input, char *message, int ret);
+char	*lst_to_str(char *str, t_list *lst);
 
 /*	Malloc/free	*/
 void	free_inputs(char **inputs);
@@ -126,5 +127,8 @@ void	free_env(t_env *env);
 
 /*	Initialisation	*/
 void	init_global(void);
+
+/*	Bonus	*/
+char	*find_matches(char *str);
 
 #endif

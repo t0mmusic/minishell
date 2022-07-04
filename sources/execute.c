@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:40:21 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/04 10:20:17 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/04 14:51:35 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ bool	command_valid(void)
 
 void	out_process(void)
 {
+	free(g_program.paths);
+	g_program.paths = ft_split(ft_getenv("PATH"), ':');
 	if (inbuilt_subprocess())
 		exit(0);
 	g_program.path = g_program.commands[0];

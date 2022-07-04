@@ -6,7 +6,7 @@
 #    By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/25 23:45:33 by Nathanael         #+#    #+#              #
-#    Updated: 2022/06/17 12:01:25 by jbrown           ###   ########.fr        #
+#    Updated: 2022/07/04 13:47:07 by jbrown           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ FCLN	:=	$(OBJDIR)
 #								COMPILER/FLAGS								   #
 ################################################################################
 CC		=	gcc
-CFLAGS	=	-Wall -Wextra -Werror -std=c99 -I $(HDRDIR)
+CFLAGS	=	-Wall -Wextra -Werror -std=c99 -MD -g3 -I $(HDRDIR)
 
 ################################################################################
 #								EXTERNAL UTILITIES							   #
@@ -67,7 +67,7 @@ $(BLDDIR)/$(NAME): $(OBJECTS)
 
 $(OBJDIR)/%.o : $(SRCDIR)/%.c
 	@$(MKDIR) '$(@D)'
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o
 	@clear
 	@printf "Linked source: %s into object: %s\n" $< $@
 

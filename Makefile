@@ -6,7 +6,7 @@
 #    By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 16:30:35 by Nathanael         #+#    #+#              #
-#    Updated: 2022/06/17 12:01:49 by jbrown           ###   ########.fr        #
+#    Updated: 2022/07/04 14:05:43 by jbrown           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,10 @@ COMFLAG	=	-Wall -Wextra -Werror -std=c99 -I $(HDRDIR)
 
 CFLAGS	=	$(COMFLAG) -g
 LFLAGS	=	$(COMFLAG)
+RLFLAGS =	-I /usr/local/opt/readline/include \
+			-I ~/.brew/opt/readline/include \
+			# -L /usr/local/opt/readline/lib \
+			# -L ~/.brew/opt/readline/lib 
 
 ################################################################################
 #								EXTERNAL UTILITIES							   #
@@ -86,7 +90,7 @@ $(BUILDIR)/$(NAME): $(OBJECTS)
 
 $(OBJDIR)/%.o : $(SRCDIR)/%.c
 	@$(MKDIR) '$(@D)'
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) $(RLFLAGS) -c $< -o $@
 	@clear
 	@printf "Linked source: %s into object: %s\n" $< $@
 

@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 09:21:16 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/03 15:37:39 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/04 15:41:37 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ static char	*ft_cpystr(char *str, int *current)
 	}
 	if (end != '\'')
 		return (expand_string(ret));
+	// if (end != '\"' && end != '\'')
+	// 	return (find_matches(ret));
 	return (ret);
 }
 

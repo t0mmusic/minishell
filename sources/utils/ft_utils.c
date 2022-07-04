@@ -6,11 +6,12 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:57:22 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/04 10:48:14 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/04 12:39:32 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "colours.h"
 
 /**
  * @brief	Checks if the user has entered a blank prompt
@@ -48,8 +49,16 @@ char	*get_prompt(void)
 	char	*prompt;
 	char	*tmp;
 	char	*pwd;
+	char	*colour;
 
-	prompt = ft_strjoin(getenv("LOGNAME"), "@minishell ");
+	prompt = ft_strjoin(getenv("LOGNAME"), "@");
+	colour = ft_strjoin(BLUE, "minishell ");
+	tmp = colour;
+	colour = ft_strjoin(tmp, DEFAULT);
+	free(tmp);
+	tmp = prompt;
+	prompt = ft_strjoin(prompt, colour);
+	ft_tryfree(tmp);
 	tmp = prompt;
 	pwd = ft_getenv("PWD");
 	prompt = ft_strjoin(tmp, pwd);

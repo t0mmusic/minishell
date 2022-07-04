@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:34:01 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/04 11:03:57 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/04 14:10:26 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,19 @@ extern t_prog	g_program;
  * @brief	cathes the SIGINT signal sent by ctrl-c. If there is a subprocess
  * running, this will close that process. Otherwise, just re-issues the prompt.
  * @param	sig: integer representing the signal caught
- * ! Does not perfectly handle reprompting the user. Should be resetting the
- * ! prompt before giving it back to user. Possibly not an issue.
+ * ! Requires use of rl_replace_line to function, however cannot get this to
+ * ! compile. Looking for solution
 **/
 
 void	ctrl_handler(int sig)
 {
 	if (sig != SIGINT)
-		printf("How did you do this???");
-	ft_printf_fd("\n", 1);
+		printf("How did you do this???\n");
 	if (!g_program.pid)
 	{
-		ft_printf_fd(g_program.prompt, 1);
+		ioctl(STDIN_FILENO, TIOCSTI, "\n");
+		// rl_replace_line("", 0);
+		// rl_on_new_line();
 	}
 	else
 		kill(g_program.pid, SIGKILL);
