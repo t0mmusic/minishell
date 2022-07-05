@@ -26,6 +26,7 @@ void	ctrl_handler(int sig)
 {
 	if (sig != SIGINT)
 		printf("How did you do this???\n");
+	g_program.exit_status = 130;
 	if (!g_program.pid)
 	{
 		ioctl(STDIN_FILENO, TIOCSTI, "\n");

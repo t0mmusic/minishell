@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jbrown <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/04 21:02:16 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/05 15:47:13 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 # define BUFFER		10;
 
 # ifndef S_IFDIR
-#  define S_IFDIR 0040000;
+#  define S_IFDIR 0040000
 # endif
 # ifndef S_IXUSR
-#  define S_IXUSR 0000100;
+#  define S_IXUSR 0000100
 # endif
 
 # include "imported/libft.h"
@@ -109,9 +109,10 @@ void	env_init(char **env);
 void	add_env(char *str, bool silent);
 void	remove_env(char *str);
 char	*ft_getenv(char *var);
+void    update_envp(void);
 
 /*	Utilities	*/
-char	*get_prompt(void);
+void	get_prompt(void);
 int		ft_isspace(int c);
 void	split_agrs(char *str);
 bool	check_blank(char *str);

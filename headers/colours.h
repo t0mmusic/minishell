@@ -15,7 +15,7 @@
 # define COLOURS_H
 
 # define DEFAULT "\001\033[0;39m\002"
-# define GRAY "\001\033[1;90m\002"
+# define GREY "\001\033[1;90m\002"
 # define RED "\001\033[1;91m\002"
 # define GREEN "\001\033[1;92m\002"
 # define YELLOW "\001\033[1;93m\002"

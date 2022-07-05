@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jbrown <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 09:22:12 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/04 20:35:59 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/05 16:26:50 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	remove_env(char *str)
 				g_program.env = g_program.env->next;
 			free_env(current);
 			ft_tryfree(lst);
+			get_prompt();
 			return ;
 		}
 		prev = lst;
@@ -97,6 +98,7 @@ void	add_env(char *str, bool silent)
 	new = malloc(sizeof(new) * 3);
 	edit_env(new, str, split, silent);
 	ft_lstadd_back(&g_program.env, ft_lstnew(new));
+	get_prompt();
 }
 
 /**

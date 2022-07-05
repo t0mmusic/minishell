@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jbrown <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:57:22 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/04 20:56:59 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/05 16:24:51 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,17 +74,27 @@ char	*ft_ansii(char *str, char *colour)
  * ! Currently causing issue on MacOS due to colour
  * ! Unfortunately, solution may be to omit colour...
  * @returns	prompt: The prompt for readline, showing user and directory.
+ * ! Add option to change prompt to environment variable PS1
 **/
 
-char	*get_prompt(void)
+void	get_prompt(void)
 {
 	char	*prompt;
+	char	*user_prompt;
 
+	free(g_program.prompt);
+	user_prompt = ft_getenv("PS1");
+	if (!check_blank(user_prompt))
+	{
+		g_program.prompt = user_prompt;
+		return ;
+	}
+	free(user_prompt);
 	prompt = ft_free_join(ft_getenv("LOGNAME"), ft_strdup("@"));
 	prompt = ft_free_join(prompt, ft_ansii("minishell ", GREEN));
-	prompt = ft_free_join(prompt, ft_getenv("PWD"));
+	prompt = ft_free_join(prompt, ft_ansii(ft_getenv("PWD"), GREY));
 	prompt = ft_free_join(prompt, ft_ansii(" $ ", BLUE));
-	return (prompt);
+	g_program.prompt = prompt;
 }
 
 /**

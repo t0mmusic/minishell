@@ -22,9 +22,17 @@ extern t_prog	g_program;
 
 void	init_global(void)
 {
+	char	*shlvl;
+	int		lvl;
+
 	g_program.envp = NULL;
 	g_program.paths = ft_split(getenv("PATH"), ':');
-	g_program.prompt = get_prompt();
+	shlvl = ft_getenv("SHLVL");
+	lvl = ft_atoi(shlvl) + 1;
+	free(shlvl);
+	shlvl = ft_free_join(ft_strdup("SHLVL="), ft_itoa(lvl));
+	add_env(shlvl, false);
+	get_prompt();
 	g_program.path = NULL;
 	g_program.commands = NULL;
 	g_program.cwd = NULL;

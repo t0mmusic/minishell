@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   change_directory.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jbrown <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 19:41:41 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/04 11:20:04 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/05 16:24:29 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static void	update_pwd(char *path)
 	char	*old_pwd;
 	char	*new_pwd;
 	char	*var;
-	char	buffer[512];
 
 	chdir(path);
 	var = ft_getenv("PWD");
@@ -32,11 +31,10 @@ static void	update_pwd(char *path)
 	add_env(old_pwd, false);
 	ft_tryfree(var);
 	ft_tryfree(old_pwd);
-	new_pwd = ft_strjoin("PWD=", getcwd(buffer, sizeof(buffer)));
+	new_pwd = ft_strjoin("PWD=", getcwd(NULL, 0));
 	add_env(new_pwd, false);
 	ft_tryfree(new_pwd);
-	ft_tryfree(g_program.prompt);
-	g_program.prompt = get_prompt();
+	get_prompt();
 }
 
 /**

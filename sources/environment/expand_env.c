@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jbrown <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 12:13:09 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/04 15:12:54 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/05 15:57:10 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ extern t_prog	g_program;
  * variable. If there is no match, it returns an empty string instead.
  * @param	var: The variable name
  * @returns	matching varible content, or empty string if no match is found
+ * ! Not returning the last variable in the list
 **/
 
 char	*ft_getenv(char *var)
