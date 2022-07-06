@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arg_split.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrown <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 09:21:16 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/06 15:22:15 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/07 09:02:37 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,11 @@ static char	*sub_quotes(char *str, int *current)
 
 	i = *current;
 	end = str[i];
-	if (str[i] == '\'' || str[i] == '\"')
-	{
+	i++;
+	while (str[i] && str[i] != end)
 		i++;
-		while (str[i] && str[i] != end)
-			i++;
-		ret = ft_substr(str, *current + 1, i - *current - 1);
-		*current = i + 1;
-	}
+	ret = ft_substr(str, *current + 1, i - *current - 1);
+	*current = i + 1;
 	return (ret);
 }
 
