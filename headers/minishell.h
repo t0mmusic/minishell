@@ -6,7 +6,7 @@
 /*   By: jbrown <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/05 15:47:13 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/06 15:24:41 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 # ifndef S_IXUSR
 #  define S_IXUSR 0000100
 # endif
+
+# define R_END 0
+# define W_END 1
 
 # include "imported/libft.h"
 # include "ft_printf_fd.h"
@@ -109,7 +112,7 @@ void	env_init(char **env);
 void	add_env(char *str, bool silent);
 void	remove_env(char *str);
 char	*ft_getenv(char *var);
-void    update_envp(void);
+void	update_envp(void);
 
 /*	Utilities	*/
 void	get_prompt(void);
@@ -131,6 +134,11 @@ void	free_env(t_env *env);
 
 /*	Initialisation	*/
 void	init_global(void);
+void	init_yesenv(char **av);
+void	init_noenv(char **av);
+
+/*	Error	*/
+char	*error_code(void);
 
 /*	Bonus	*/
 char	*find_matches(char *str);

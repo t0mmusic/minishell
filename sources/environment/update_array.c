@@ -6,7 +6,7 @@
 /*   By: jbrown <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 15:38:53 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/05 15:51:00 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/06 15:55:11 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,28 @@ extern t_prog	g_program;
  * list of environment variables used by minishell.
 **/
 
-void    update_envp(void)
+void	update_envp(void)
 {
-    int     size;
-    int     i;
-    char    **envp;
-    t_list  *lst;
-    t_env   *env;
+	int		size;
+	int		i;
+	char	**envp;
+	t_list	*lst;
+	t_env	*env;
 
-    size = ft_lstsize(g_program.env);
-    envp = malloc(sizeof(*envp) * size + 1);
-    lst = g_program.env;
-    i = 0;
-    while (lst)
-    {
-        env = lst->content;
-        envp[i] = env->full;
-        lst = lst->next;
-        i++;
-    }
-    envp[i] = NULL;
-    g_program.envp = envp;
+	size = ft_lstsize(g_program.env);
+	envp = malloc(sizeof(*envp) * size + 1);
+	lst = g_program.env;
+	i = 0;
+	while (lst)
+	{
+		env = lst->content;
+		if (env->silent == false)
+		{
+			envp[i] = env->full;
+			i++;
+		}
+		lst = lst->next;
+	}
+	envp[i] = NULL;
+	g_program.envp = envp;
 }

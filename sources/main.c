@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jbrown <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 15:17:29 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/04 10:49:42 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/06 15:24:48 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,16 @@ void	program_loop(void)
 int	main(int ac, char *av[], char *envp[])
 {
 	(void)ac;
-	(void)av;
-	env_init(envp);
 	init_global();
+	if (!*envp)
+	{
+		init_noenv(av);
+	}
+	else
+	{
+		env_init(envp);
+		init_yesenv(av);
+	}
 	g_program.envp = envp;
 	program_loop();
 	return (0);

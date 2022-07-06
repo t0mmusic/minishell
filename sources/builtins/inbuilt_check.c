@@ -3,16 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   inbuilt_check.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jbrown <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 19:42:57 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/04 11:26:29 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/06 15:52:18 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 extern t_prog	g_program;
+
+/**
+ * @brief	Adds a variable that is not a part of the environment variables.
+ * When printing the environment variable list, this will not be included, but
+ * it can still be called on in the shell
+ * @param	var: the variable to be added
+ * @returns	boolean true
+**/
+
+bool	add_var(char *var)
+{
+	add_env(var, true);
+	return (true);
+}
 
 /**
  * @brief	Checks to see if the command entered by the user is one of the
@@ -36,6 +50,8 @@ bool	inbuilt_check(void)
 			exit (ft_atoi(g_program.user_inputs[1]));
 		exit (0);
 	}
+	if (ft_strchr(g_program.user_inputs[0], '='))
+		return (add_var(g_program.user_inputs[0]));
 	return (false);
 }
 

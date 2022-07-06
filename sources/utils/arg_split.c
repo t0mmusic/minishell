@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arg_split.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jbrown <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 09:21:16 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/04 21:06:45 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/06 15:22:15 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,13 @@ static bool	is_bookend(char *str, int *current)
 }
 
 /**
- * @brief	Finds strings of characters, either based on contiguous characters
- * with no spaces, or strings bookended by quotes.
+ * @brief	Creates a substring of the characters between quotes
  * @param	str: The users input from the prompt
  * @param	current: current index of str
- * @returns	ret: token of user input
- * ! Add wildcard expansion somewhere here
+ * @returns	ret: substring between quotes
 **/
 
-static char	*ft_cpystr(char *str, int *current)
+static char	*sub_quotes(char *str, int *current)
 {
 	char	end;
 	char	*ret;
@@ -68,13 +66,40 @@ static char	*ft_cpystr(char *str, int *current)
 		ret = ft_substr(str, *current + 1, i - *current - 1);
 		*current = i + 1;
 	}
-	else
+	return (ret);
+}
+
+/**
+ * @brief	Finds strings of characters, either based on contiguous characters
+ * with no spaces, or strings bookended by quotes.
+ * @param	str: The users input from the prompt
+ * @param	current: current index of str
+ * @returns	ret: token of user input
+ * ! Add wildcard expansion somewhere here
+**/
+
+static char	*ft_cpystr(char *str, int *current)
+{
+	char	end;
+	char	*ret;
+	int		i;
+
+	ret = ft_strdup("");
+	i = *current;
+	end = str[i];
+	while (str[i] && !ft_isspace(str[i]))
 	{
-		while (str[i] && !ft_isspace(str[i]))
+		if (str[i] && is_bookend(str, &i) && (str[i] == '\'' || str[i] == '\"'))
+		{
+			ret = ft_free_join(ret, ft_substr(str, *current, i - *current));
+			ret = ft_free_join(ret, sub_quotes(str, &i));
+			*current = i;
+		}
+		else
 			i++;
-		ret = ft_substr(str, *current, i - *current);
-		*current = i;
 	}
+	ret = ft_free_join(ret, ft_substr(str, *current, i - *current));
+	*current = i;
 	if (end != '\'')
 		return (expand_string(ret));
 	return (ret);
@@ -129,6 +154,7 @@ void	split_agrs(char *str)
 		inputs = inputs->next;
 		i++;
 	}
+	add_env(ft_strjoin("_=", args[i - 1]), false);
 	args[i] = NULL;
 	freelist(head);
 	g_program.user_inputs = args;

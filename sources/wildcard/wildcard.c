@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jbrown <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 10:13:07 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/04 15:56:07 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/06 13:55:04 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	ft_strnrcmp(const char *s1, const char *s2, size_t len)
 	}
 	return (s1[i] - s2[j]);
 }
-
 
 /**
  * @brief	Returns a value based on the type of wildcard.

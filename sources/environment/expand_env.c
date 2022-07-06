@@ -6,7 +6,7 @@
 /*   By: jbrown <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 12:13:09 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/05 15:57:10 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/06 13:53:22 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,7 @@ char	*get_env(char *str, int *i, int *j)
 	}
 	if (str[*j + 1] == '?' && *j + 2 == *i)
 	{
-		if (g_program.exit_status == 256)
-			return (ft_itoa(127));
-		return (ft_itoa(g_program.exit_status));
+		return (error_code());
 	}
 	*i = *i - 1;
 	tmp = ft_substr(str, *j + 1, *i - *j);

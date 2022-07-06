@@ -6,7 +6,7 @@
 /*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 14:45:52 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/02 17:58:37 by Nathanael        ###   ########.fr       */
+/*   Updated: 2022/07/04 14:44:31 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ int	std_output(char *path, char *file)
 	int	fd;
 
 	(void)path;
-	fd = open(file, O_CREAT | O_TRUNC | O_RDONLY | O_WRONLY, 0664);
+	fd = open(file, O_CREAT | O_RDWR | O_TRUNC, 0664);
 	if (fd < 0)
 	{
 		return (check_file_access(file));
 	}
-	// dup2(fd, STDOUT_FILENO);
+	dup2(fd, STDOUT_FILENO);
 	close(fd);
 	return (0);
 }
@@ -42,17 +42,23 @@ $> vim output.txt
 */
 int	std_output_append(char *path, char *file)
 {
-	int	fd;
+	int		fd;
+	int		status;
+	char	buf;
 
 	(void)path;
-	fd = open(file, O_CREAT | O_RDONLY | O_WRONLY | O_APPEND, 0644);
+	printf("Output append mode\n");
+	fd = open(file, O_CREAT | O_RDWR | O_APPEND, 0644);
 	if (fd < 0)
 	{
 		return (check_file_access(file));
 	}
+	status = read(fd, &buf, 1);
+	while (status)
+		status = read(fd, &buf, 1);
 	// dup2(fd, STDOUT_FILENO);
 	close(fd);
-	return (0);
+	return (fd);
 }
 
 /*
@@ -76,7 +82,7 @@ e.g:
 $>	vim	output.txt
 	1	test
 	2	testing123	
-$>	wc -l < output.txt
+$>	wc -l << output.txt
 	2
 */
 int	std_input_delim(char *path, char *file)

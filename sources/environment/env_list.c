@@ -6,7 +6,7 @@
 /*   By: jbrown <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 09:22:12 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/05 16:26:50 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/06 14:22:37 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	edit_env(t_env *new, char *str, int split, bool silent)
 	new->var = ft_substr(str, 0, split);
 	new->content = ft_substr(str, split + 1, ft_strlen(&str[split]));
 	new->silent = silent;
+	get_prompt();
 }
 
 /**
@@ -98,7 +99,6 @@ void	add_env(char *str, bool silent)
 	new = malloc(sizeof(new) * 3);
 	edit_env(new, str, split, silent);
 	ft_lstadd_back(&g_program.env, ft_lstnew(new));
-	get_prompt();
 }
 
 /**
@@ -108,6 +108,8 @@ void	add_env(char *str, bool silent)
 
 void	env_init(char **env)
 {
+	if (!env)
+		return ;
 	while (*env)
 	{
 		add_env(*env, false);

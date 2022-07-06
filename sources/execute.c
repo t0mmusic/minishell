@@ -6,7 +6,7 @@
 /*   By: jbrown <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:40:21 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/05 15:51:09 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/06 14:03:38 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	out_process(void)
 	{
 		execve(g_program.path, g_program.commands, g_program.envp);
 	}
-	ft_printf_fd("%sminishell: %s ain't no command!%s\n",
-		2, RED, g_program.commands[0], DEFAULT);
+	ft_printf_fd("minishell: %s ain't no command!\n",
+		2, g_program.commands[0]);
 	exit (EXIT_FAILURE);
 }
