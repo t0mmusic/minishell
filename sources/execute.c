@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrown <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:40:21 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/06 14:03:38 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/07 15:51:08 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,26 +40,27 @@ char	*join_path(char *path, char *command)
  * ! Occasionally fails on MacOS, reason unkown.
 **/
 
-bool	command_valid(void)
+char	*command_valid(char *path)
 {
 	char	*tmp;
 	int		i;
 
-	if (!access(g_program.path, 0))
-		return (true);
+	if (!access(path, 0))
+		return (path);
 	i = 0;
 	while (g_program.paths[i])
 	{
-		tmp = join_path(g_program.paths[i], g_program.path);
+		tmp = join_path(g_program.paths[i], path);
+		// ft_printf_fd("tmp = %s\n", 2, tmp);
 		if (access(tmp, F_OK) >= 0)
 		{
-			g_program.path = tmp;
-			return (true);
+			path = tmp;
+			return (path);
 		}
 		ft_tryfree(tmp);
 		i++;
 	}
-	return (false);
+	return (NULL);
 }
 
 /**
@@ -67,19 +68,26 @@ bool	command_valid(void)
  * of the recreated builtins, the command will be executed internally.
  * Otherwise, the function checks if this is a shell command. If it is,
  * it is executed appropriately. Otherwise, an error message is diplayed
+ * ! Issue unresolved, unclear what the issue is
 **/
 
 void	out_process(void)
-{
+{	
+	char	*path;
+
 	free(g_program.paths);
 	g_program.paths = ft_split(ft_getenv("PATH"), ':');
 	update_envp();
 	if (inbuilt_subprocess())
 		exit(0);
-	g_program.path = g_program.commands[0];
-	if (command_valid())
+	path = g_program.commands[0];
+	path = command_valid(path);
+	if (path)
 	{
-		execve(g_program.path, g_program.commands, g_program.envp);
+		// ft_printf_fd("path:%s, command[0]:%s, envp[0]:%s\n", 2,
+		// 	path, g_program.commands[0], g_program.envp[0]);
+		execve(path, g_program.commands, g_program.envp);
+		exit(1);
 	}
 	ft_printf_fd("minishell: %s ain't no command!\n",
 		2, g_program.commands[0]);
