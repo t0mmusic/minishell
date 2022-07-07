@@ -6,7 +6,7 @@
 #    By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 16:30:35 by Nathanael         #+#    #+#              #
-#    Updated: 2022/07/07 09:28:32 by jbrown           ###   ########.fr        #
+#    Updated: 2022/07/07 09:47:12 by jbrown           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ COMFLAG	=	-Wall -Wextra -Werror -std=c99 -D_POSIX_C_SOURCE -I $(HDRDIR)
 CFLAGS	=	$(COMFLAG) -g
 LFLAGS	=	$(COMFLAG)
 RLFLAGS =	-I/usr/local/opt/readline/include
+RLLIB	=	-L/usr/local/opt/readline/lib
 
 ################################################################################
 #								EXTERNAL UTILITIES							   #
@@ -81,7 +82,7 @@ libs:
 	@printf "Libraries made: %s\n" $(LIB)
 
 $(BUILDIR)/$(NAME): $(OBJECTS)
-	@$(CC) $(OBJECTS) $(LFLAGS) $(RLFLAGS) -o $@ $(ALLLIB)
+	@$(CC) $(OBJECTS) $(LFLAGS) $(RLFLAGS) $(RLLIB) -o $@ $(ALLLIB)
 	@clear
 	@printf "Built program %s successfully\n" $@
 

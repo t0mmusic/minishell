@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrown <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:57:22 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/05 16:24:51 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/07 10:02:31 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,16 +71,14 @@ char	*ft_ansii(char *str, char *colour)
 /**
  * @brief	Gives the user name and current directory for the prompt.
  * This is updated each time the user enters a command.
- * ! Currently causing issue on MacOS due to colour
- * ! Unfortunately, solution may be to omit colour...
  * @returns	prompt: The prompt for readline, showing user and directory.
- * ! Add option to change prompt to environment variable PS1
 **/
 
 void	get_prompt(void)
 {
 	char	*prompt;
 	char	*user_prompt;
+	char	*tmp;
 
 	free(g_program.prompt);
 	user_prompt = ft_getenv("PS1");
@@ -90,9 +88,11 @@ void	get_prompt(void)
 		return ;
 	}
 	free(user_prompt);
-	prompt = ft_free_join(ft_getenv("LOGNAME"), ft_strdup("@"));
-	prompt = ft_free_join(prompt, ft_ansii("minishell ", GREEN));
-	prompt = ft_free_join(prompt, ft_ansii(ft_getenv("PWD"), GREY));
+	prompt = ft_free_join(ft_getenv("LOGNAME"), ft_strdup("@minishell "));
+	tmp = prompt;
+	prompt = ft_free_join(ft_ansii(prompt, GREEN),
+			ft_ansii(ft_getenv("PWD"), CYAN));
+	free(tmp);
 	prompt = ft_free_join(prompt, ft_ansii(" $ ", BLUE));
 	g_program.prompt = prompt;
 }

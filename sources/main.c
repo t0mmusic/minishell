@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrown <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 15:17:29 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/06 15:24:48 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/07 14:18:59 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,7 @@ void	program_loop(void)
 		split_agrs(str);
 		ft_tryfree(str);
 		std_sort(getenv("PWD"), g_program.user_inputs);
-		if (!inbuilt_check())
-		{
-			g_program.pid = fork();
-			if (!g_program.pid)
-			{
-				check_pipes();
-			}
-			waitpid(g_program.pid, &g_program.exit_status, 0);
-		}
+		command();
 	}
 }
 

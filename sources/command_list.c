@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 12:46:25 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/03 15:09:52 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/07 13:53:35 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	pipe_split(void)
  * @brief	Sets the current list of arguments for a command to be executed.
  * The list is delimited by a pipe entered by the user, or by the end of the
  * input argument list.
+ * ! Add error for unexpected pipe at end of arg list
 **/
 
 void	set_commands(void)
@@ -58,9 +59,7 @@ void	set_commands(void)
 	current = g_program.user_inputs;
 	i = 0;
 	while (current[i] && strcmp("|", current[i]))
-	{
 		i++;
-	}
 	if (!current[i])
 		g_program.commands = current;
 	else
@@ -85,7 +84,8 @@ void	execute_commands(void)
 {
 	set_commands();
 	pipe_split();
-	while (*g_program.user_inputs && ft_strcmp("|", *g_program.user_inputs))
+	while (*g_program.user_inputs && ft_strcmp("|", *g_program.user_inputs)
+		&& !interp_token(*g_program.user_inputs))
 	{
 		g_program.user_inputs++;
 	}
@@ -110,6 +110,11 @@ void	check_pipes(void)
 		exit (0);
 	while (g_program.user_inputs[i])
 	{
+		if (interp_token(g_program.user_inputs[i]))
+		{
+			g_program.user_inputs[i] = NULL;
+			break ;
+		}
 		if (!ft_strcmp("|", g_program.user_inputs[i]))
 			execute_commands();
 		i++;

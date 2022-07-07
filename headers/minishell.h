@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrown <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/06 15:24:41 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/07 14:17:44 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ void	print_env(void);
 /*	Run processes	*/
 void	out_process(void);
 void	check_pipes(void);
+void	command(void);
+void	next_command(void);
 
 /*	Inbuilt function recretations	*/
 bool	inbuilt_check(void);
@@ -142,5 +144,6 @@ char	*error_code(void);
 
 /*	Bonus	*/
 char	*find_matches(char *str);
+bool	interp_token(char *token);
 
 #endif

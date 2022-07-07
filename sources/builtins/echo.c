@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 15:47:38 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/04 14:23:39 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/07 09:35:41 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ extern t_prog	g_program;
  * @brief	prints the string input by the user. If the user has added the flag
  * '-n', it will not print a newline.
  * @returns	true: boolean to indicate this is a built-in function
- * ! Needs to print the correct exit status of last process
 **/
 
 bool	builtin_echo(void)
