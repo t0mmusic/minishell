@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 12:46:25 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/08 12:33:59 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/08 16:58:27 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,9 @@ void	set_commands(void)
 	while (current[i] && strcmp("|", current[i]))
 		i++;
 	if (!current[i])
+	{
 		g_program.commands = current;
+	}
 	else
 	{
 		g_program.commands = malloc(sizeof(char *) * i);
@@ -110,7 +112,9 @@ void	check_pipes(void)
 		exit (0);
 	while (g_program.user_inputs[i])
 	{
-		if (interp_token(g_program.user_inputs[i]))
+		if (interp_token(g_program.user_inputs[i])
+			|| !ft_strcmp(">", g_program.user_inputs[i])
+			|| !ft_strcmp(">>", g_program.user_inputs[i]))
 		{
 			g_program.user_inputs[i] = NULL;
 			break ;

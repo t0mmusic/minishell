@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/08 15:51:27 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/08 17:26:46 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,9 +139,10 @@ char	*ft_ansii(char *str, char *colour);
 char	*ft_free_join(char *s1, char *s2);
 void	ft_lstall(t_list *lst, char *(*f)(char *));
 void	iterate_user_inputs(void);
+void	delete_lstelem(t_list **lst);
 
 /*	Malloc/free	*/
-void	free_inputs(char **inputs);
+void	free_inputs(void);
 void	freelist(t_list *list);
 void	freelist_malloc(t_list *list);
 void	free_env(t_env *env);

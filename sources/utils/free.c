@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:11:29 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/03 15:15:43 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/08 17:29:13 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,21 @@ void	free_env(t_env *env)
  * @param	inputs: An array of sanitised user inputs
 **/
 
-void	free_inputs(char **inputs)
+void	free_inputs(void)
 {
 	int	i;
 
-	if (!inputs)
+	if (g_program.user_inputs)
 		return ;
 	i = 0;
-	while (inputs[i])
+	while (g_program.user_inputs[i])
 	{
-		ft_tryfree(inputs[i]);
+		ft_tryfree(g_program.user_inputs[i]);
+		g_program.user_inputs[i] = NULL;
 		i++;
 	}
-	ft_tryfree(inputs);
+	ft_tryfree(g_program.user_inputs);
+	g_program.user_inputs = NULL;
 }
 
 /**

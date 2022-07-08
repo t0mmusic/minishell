@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 15:00:17 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/08 15:53:32 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/08 17:07:43 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,16 @@
 // 	free(tmp);
 // 	free(line);
 // }
+
+void	delete_lstelem(t_list **lst)
+{
+	t_list	*tmp;
+
+	tmp = *lst;
+	*lst = tmp->next;
+	free(tmp->content);
+	free(tmp);
+}
 
 /**
  * @brief	Incremements through user_inputs, freeing each pointer

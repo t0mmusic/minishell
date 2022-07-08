@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:40:21 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/08 15:26:09 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/08 16:33:50 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ void	out_process(void)
 	path = command_valid(path);
 	if (path)
 	{
+//		ft_printf_fd("Path: %s\nCommand: %s\nEnv: %s\n", 2,
+//			path, g_program.commands[0], g_program.envp[0]);
 		execve(path, g_program.commands, g_program.envp);
 		exit(1);
 	}

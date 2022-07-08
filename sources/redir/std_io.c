@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   std_io.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
+/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 14:45:52 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/04 14:44:31 by Nathanael        ###   ########.fr       */
+/*   Updated: 2022/07/08 17:31:40 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ $> vim output.txt
 int	std_output(char *path, char *file)
 {
 	int	fd;
+	int	pid;
 
 	(void)path;
 	fd = open(file, O_CREAT | O_RDWR | O_TRUNC, 0664);
@@ -28,8 +29,17 @@ int	std_output(char *path, char *file)
 	{
 		return (check_file_access(file));
 	}
-	dup2(fd, STDOUT_FILENO);
+	pid = fork();
+	if (!pid)
+	{
+		dup2(fd, STDOUT_FILENO);
+		close(fd);
+		command();
+		exit(0);
+	}
 	close(fd);
+	free_inputs();
+	waitpid(pid, 0, 0);
 	return (0);
 }
 
@@ -43,22 +53,26 @@ $> vim output.txt
 int	std_output_append(char *path, char *file)
 {
 	int		fd;
-	int		status;
-	char	buf;
+	int		pid;
 
 	(void)path;
-	printf("Output append mode\n");
 	fd = open(file, O_CREAT | O_RDWR | O_APPEND, 0644);
 	if (fd < 0)
 	{
 		return (check_file_access(file));
 	}
-	status = read(fd, &buf, 1);
-	while (status)
-		status = read(fd, &buf, 1);
-	// dup2(fd, STDOUT_FILENO);
+	pid = fork();
+	if (!pid)
+	{
+		dup2(fd, STDOUT_FILENO);
+		close(fd);
+		command();
+		exit(0);
+	}
 	close(fd);
-	return (fd);
+	free_inputs();
+	waitpid(pid, 0, 0);
+	return (0);
 }
 
 /*
