@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 12:46:25 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/07 13:53:35 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/08 12:33:59 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	pipe_split(void)
  * @brief	Sets the current list of arguments for a command to be executed.
  * The list is delimited by a pipe entered by the user, or by the end of the
  * input argument list.
- * ! Add error for unexpected pipe at end of arg list
+ * ! Add error for unexpected pipe or whatever at end of arg list
 **/
 
 void	set_commands(void)

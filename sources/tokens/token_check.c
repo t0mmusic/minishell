@@ -6,13 +6,31 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 10:38:33 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/08 11:13:25 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/08 15:55:27 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 extern t_prog	g_program;
+
+/**
+ * @brief	Removes uninterpreted characters from tokens
+ * @param	token: the token being processed
+ * @returns	the processed token
+ * * removes '|', '\', '&&' and '||' from tokens
+**/
+
+char	*trim_token(char *token)
+{
+	if (is_quotes(token))
+		return (token);
+	token = remove_str(token, "\\");
+	token = remove_str(token, ";");
+	token = remove_str(token, "&&");
+	token = remove_str(token, "||");
+	return (token);
+}
 
 /**
  * @brief	Checks a string from a ' or a " to see if it has a match.
@@ -43,14 +61,24 @@ bool	is_bookend(char *str, int *current)
 	return (false);
 }
 
-int	is_quotes(char *str)
+/**
+ * @brief	Checks if the first value of a string is a ' or a "
+ * @param	str: the current token
+ * @returns	boolean true if match is found, false if not
+**/
+
+bool	is_quotes(char *str)
 {
-	if (str[0] == '\'')
-		return (2);
-	if (str[0] == '\"')
-		return (1);
-	return (0);
+	if (str[0] == '\'' || str[0] == '\"')
+		return (true);
+	return (false);
 }
+
+/**
+ * @brief	Removes quotes from the ends of a token
+ * @param	str: the current token
+ * @returns	the token sans quotes
+**/
 
 char	*remove_quotes(char *str)
 {
@@ -71,27 +99,18 @@ char	*remove_quotes(char *str)
 	return (ret);
 }
 
+/**
+ * @brief	Takes list of broken token and compiles it into a single
+ * string with the appropriate values.
+ * @param	lst: the list containing token fragments
+ * @returns	rebuilt token
+**/
+
 char	*sanitise_tokens(t_list *lst)
 {
-	t_list	*head;
-
-	head = lst;
-	while (lst)
-	{
-		lst->content = find_matches(lst->content);
-		lst = lst->next;
-	}
-	lst = head;
-	while (lst)
-	{
-		lst->content = expand_string(lst->content);
-		lst = lst->next;
-	}
-	lst = head;
-	while (lst)
-	{
-		lst->content = remove_quotes(lst->content);
-		lst = lst->next;
-	}
-	return (lst_to_str(ft_strdup(""), head));
+	ft_lstall(lst, find_matches);
+	ft_lstall(lst, expand_string);
+	ft_lstall(lst, trim_token);
+	ft_lstall(lst, remove_quotes);
+	return (lst_to_str(ft_strdup(""), lst));
 }

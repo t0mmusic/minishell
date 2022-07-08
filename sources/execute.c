@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:40:21 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/07 15:51:08 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/08 15:26:09 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ char	*command_valid(char *path)
 	while (g_program.paths[i])
 	{
 		tmp = join_path(g_program.paths[i], path);
-		// ft_printf_fd("tmp = %s\n", 2, tmp);
 		if (access(tmp, F_OK) >= 0)
 		{
 			path = tmp;
@@ -84,8 +83,6 @@ void	out_process(void)
 	path = command_valid(path);
 	if (path)
 	{
-		// ft_printf_fd("path:%s, command[0]:%s, envp[0]:%s\n", 2,
-		// 	path, g_program.commands[0], g_program.envp[0]);
 		execve(path, g_program.commands, g_program.envp);
 		exit(1);
 	}

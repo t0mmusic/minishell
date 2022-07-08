@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/08 11:08:53 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/08 15:51:27 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,10 +117,14 @@ char	*ft_getenv(char *var);
 void	update_envp(void);
 
 /*	Token Handling	*/
-int		is_quotes(char *str);
+bool	is_quotes(char *str);
 char	*remove_quotes(char *str);
 char	*sanitise_tokens(t_list *lst);
 bool	is_bookend(char *str, int *current);
+void	extra_token(t_list **lst, char *str, int *i);
+char	*remove_str(char *s1, char *s2);
+void	cpy_without(char *src, char *dst, int i, int len);
+bool	and_or(char *token);
 
 /*	Utilities	*/
 void	get_prompt(void);
@@ -133,6 +137,8 @@ int		log_err(char *input, char *message, int ret);
 char	*lst_to_str(char *str, t_list *lst);
 char	*ft_ansii(char *str, char *colour);
 char	*ft_free_join(char *s1, char *s2);
+void	ft_lstall(t_list *lst, char *(*f)(char *));
+void	iterate_user_inputs(void);
 
 /*	Malloc/free	*/
 void	free_inputs(char **inputs);
