@@ -6,42 +6,13 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 09:21:16 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/07 14:41:01 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/08 11:16:19 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 extern t_prog	g_program;
-
-/**
- * @brief	Checks a string from a ' or a " to see if it has a match.
- * @param	str: The users input from the prompt
- * @param	current: current index of str
- * @returns	boolean true if match is found, false if not
-**/
-
-static bool	is_bookend(char *str, int *current)
-{
-	char	bookend;
-	int		i;
-
-	i = *current;
-	if (str[i] != '\'' && str[i] != '\"')
-		return (true);
-	if (!str[i + 1])
-		return (false);
-	bookend = str[i];
-	i += 1;
-	while (str[i])
-	{
-		if (str[i] == bookend)
-			return (true);
-		i++;
-	}
-	*current += 1;
-	return (false);
-}
 
 /**
  * @brief	Creates a substring of the characters between quotes
@@ -61,7 +32,7 @@ static char	*sub_quotes(char *str, int *current)
 	i++;
 	while (str[i] && str[i] != end)
 		i++;
-	ret = ft_substr(str, *current + 1, i - *current - 1);
+	ret = ft_substr(str, *current, i - *current + 1);
 	*current = i + 1;
 	return (ret);
 }
@@ -78,28 +49,28 @@ static char	*sub_quotes(char *str, int *current)
 static char	*ft_cpystr(char *str, int *current)
 {
 	char	end;
-	char	*ret;
+	t_list	*lst;
 	int		i;
 
-	ret = ft_strdup("");
+	lst = NULL;
 	i = *current;
 	end = str[i];
 	while (str[i] && !ft_isspace(str[i]))
 	{
 		if (str[i] && is_bookend(str, &i) && (str[i] == '\'' || str[i] == '\"'))
 		{
-			ret = ft_free_join(ret, ft_substr(str, *current, i - *current));
-			ret = ft_free_join(ret, sub_quotes(str, &i));
+			end = str[i];
+			ft_lstadd_back(&lst,
+				ft_lstnew(ft_substr(str, *current, i - *current)));
+			ft_lstadd_back(&lst, ft_lstnew(sub_quotes(str, &i)));
 			*current = i;
 		}
 		else
 			i++;
 	}
-	ret = ft_free_join(ret, ft_substr(str, *current, i - *current));
+	ft_lstadd_back(&lst, ft_lstnew(ft_substr(str, *current, i - *current)));
 	*current = i;
-	if (end != '\'')
-		return (expand_string(ret));
-	return (ret);
+	return (sanitise_tokens(lst));
 }
 
 /**

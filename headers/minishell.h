@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/07 14:17:44 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/08 11:08:53 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,12 @@ void	add_env(char *str, bool silent);
 void	remove_env(char *str);
 char	*ft_getenv(char *var);
 void	update_envp(void);
+
+/*	Token Handling	*/
+int		is_quotes(char *str);
+char	*remove_quotes(char *str);
+char	*sanitise_tokens(t_list *lst);
+bool	is_bookend(char *str, int *current);
 
 /*	Utilities	*/
 void	get_prompt(void);

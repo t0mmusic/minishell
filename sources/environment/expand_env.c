@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrown <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 12:13:09 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/06 13:53:22 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/08 11:13:44 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ extern t_prog	g_program;
  * variable. If there is no match, it returns an empty string instead.
  * @param	var: The variable name
  * @returns	matching varible content, or empty string if no match is found
- * ! Not returning the last variable in the list
 **/
 
 char	*ft_getenv(char *var)
@@ -38,31 +37,6 @@ char	*ft_getenv(char *var)
 		lst = lst->next;
 	}
 	return (ft_strdup(""));
-}
-
-/**
- * @brief	Takes all of the strings in a list and combines them into a
- * single char array.
- * @param	lst: linked list of sanitised user inputs
- * @returns	ret: char array of combined user inputs
-**/
-
-char	*join_list(t_list *lst)
-{
-	char	*tmp;
-	char	*ret;
-
-	lst = lst->next;
-	tmp = ft_strdup(lst->content);
-	ret = tmp;
-	while (lst->next)
-	{
-		ret = ft_strjoin(tmp, lst->next->content);
-		ft_tryfree(tmp);
-		tmp = ret;
-		lst = lst->next;
-	}
-	return (ret);
 }
 
 /**
@@ -90,7 +64,7 @@ char	*get_env(char *str, int *i, int *j)
 	}
 	*i = *i - 1;
 	tmp = ft_substr(str, *j + 1, *i - *j);
-	env = ft_strdup(ft_getenv(tmp));
+	env = ft_getenv(tmp);
 	ft_tryfree(tmp);
 	return (env);
 }
@@ -109,13 +83,18 @@ char	*lst_to_str(char *str, t_list *lst)
 	t_list	*head;
 
 	head = lst;
-	if (lst->next)
+	if (lst)
 	{
 		tmp = str;
-		str = join_list(lst);
+		str = lst->content;
 		ft_tryfree(tmp);
+		while (lst->next)
+		{
+			str = ft_free_join(str, lst->next->content);
+			lst = lst->next;
+		}
+		freelist(head);
 	}
-	freelist_malloc(head);
 	return (str);
 }
 
@@ -132,7 +111,9 @@ char	*expand_string(char *str)
 	int		j;
 	t_list	*strs;
 
-	strs = ft_lstnew(ft_strdup("Head"));
+	if (is_quotes(str))
+		return (str);
+	strs = NULL;
 	i = 0;
 	j = 0;
 	while (str[i])

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrown <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 10:13:07 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/06 13:55:04 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/08 11:34:35 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ t_list	*multi_match(char *str, t_list *lst)
 	{
 		if (!ft_strncmp(str, p_dirent->d_name, ft_strlen(comp[0]))
 			&& !ft_strnrcmp(str, p_dirent->d_name, ft_strlen(comp[1])))
-			ft_lstadd_back(&lst, ft_lstnew(p_dirent->d_name));
+			ft_lstadd_back(&lst, ft_lstnew(ft_strjoin(p_dirent->d_name, " ")));
 		p_dirent = readdir(p_dir);
 	}
 	closedir(p_dir);
@@ -122,7 +122,7 @@ t_list	*add_match(char *str, t_list *lst,
 	{
 		if (!f(str, p_dirent->d_name, ft_strlen(str) - 1))
 		{
-			ft_lstadd_back(&lst, ft_lstnew(p_dirent->d_name));
+			ft_lstadd_back(&lst, ft_lstnew(ft_strjoin(p_dirent->d_name, " ")));
 		}
 		p_dirent = readdir(p_dir);
 	}
@@ -141,7 +141,7 @@ char	*find_matches(char *str)
 	t_list	*matches;
 	int		wild;	
 
-	if (!ft_strchr(str, '*'))
+	if (!ft_strchr(str, '*') || is_quotes(str))
 		return (str);
 	matches = NULL;
 	wild = check_wild(str);
@@ -156,6 +156,11 @@ char	*find_matches(char *str)
 	if (wild == 3)
 	{
 		matches = multi_match(str, matches);
+	}
+	if (!matches)
+	{
+		ft_printf_fd("minishell: no matches found for %s", 2, str);
+		return (ft_strdup(""));
 	}
 	return (lst_to_str(str, matches));
 }
