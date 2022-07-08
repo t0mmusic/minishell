@@ -7,6 +7,7 @@
 .vscode/
 .DS_Store
 philo.code-workspace
+valgrind-update.txt
 
 # Temporary directories
 objects/

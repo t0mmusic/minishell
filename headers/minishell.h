@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/08 17:26:46 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/08 18:09:44 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,12 +99,12 @@ bool	builtin_export(void);
 bool	builtin_unset(void);
 
 /*	Standard input/output redirection	*/
-void	std_sort(char *path, char **commands);
+void	std_sort(char **commands);
 int		check_file_access(char *file);
-int		std_output(char *path, char *file);
-int		std_output_append(char *path, char *file);
-int		std_input(char *path, char *file);
-int		std_input_delim(char *path, char *file);
+int		std_output(char *filename);
+int		std_output_append(char *filename);
+int		std_input(char *filename);
+int		std_input_delim(char *filename);
 
 /*	Signal Handling	*/
 void	ctrl_handler(int sig);

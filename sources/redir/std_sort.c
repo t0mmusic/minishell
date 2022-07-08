@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   std_sort.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 14:24:41 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/03 14:38:11 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/08 18:09:37 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,17 @@ int	check_file_access(char *file)
 	{
 		if (buf.st_mode & S_IFDIR)
 		{
-			printf("Comparison: %d", buf.st_mode & S_IFDIR);
 			return (log_err(file, ": is a directory", 1));
 		}
 		else if ((buf.st_mode & S_IXUSR) == 0)
 		{
-			printf("Comparison: %d", buf.st_mode & S_IXUSR);
 			return (log_err(file, ": permission denied", 1));
 		}
 	}
 	return (log_err(file, ": no such file or directory", 1));
 }
 
-void	std_sort(char *path, char **commands)
+void	std_sort(char **commands)
 {
 	int		i;
 
@@ -40,13 +38,13 @@ void	std_sort(char *path, char **commands)
 	while (commands[i])
 	{
 		if (ft_strcmp(commands[i], ">") == 0)
-			std_output(path, commands[i + 1]);
+			std_output(commands[i + 1]);
 		else if (ft_strcmp(commands[i], ">>") == 0)
-			std_output_append(path, commands[i + 1]);
+			std_output_append(commands[i + 1]);
 		else if (ft_strcmp(commands[i], "<") == 0)
-			std_input(path, commands[i + 1]);
+			std_input(commands[i + 1]);
 		else if (ft_strcmp(commands[i], "<<") == 0)
-			std_input_delim(path, commands[i + 1]);
+			std_input_delim(commands[i + 1]);
 		i++;
 	}
 }
