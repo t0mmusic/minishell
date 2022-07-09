@@ -6,14 +6,13 @@
 /*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 14:45:52 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/09 14:27:42 by Nathanael        ###   ########.fr       */
+/*   Updated: 2022/07/09 15:56:20 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 extern t_prog	g_program;
-
 
 /**
  * @brief	Output Redirection Truncation ">"
@@ -116,11 +115,14 @@ $>	wc -l << output.txt
 int	std_input_delim(char *delim)
 {
 	int		fd;
+	int		*sigstatus;
 
 	fd = open(HERE_DOC_TMPFILE, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd < 0)
 		return (check_file_access(HERE_DOC_TMPFILE));
 	here_doc(&fd, delim);
+	sigstatus = heredoc_signal_get();
+	ft_tryfree(sigstatus);
 	close(fd);
 	iterate_user_inputs();
 	iterate_user_inputs();

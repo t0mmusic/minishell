@@ -6,7 +6,7 @@
 /*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/09 14:30:15 by Nathanael        ###   ########.fr       */
+/*   Updated: 2022/07/09 15:55:57 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,8 @@ int		std_input_delim(char *filename);
 
 /*	Signal Handling	*/
 void	ctrl_handler(int sig);
+void	heredoc_handler(int sig);
+int		*heredoc_signal_get(void);
 
 /*	Environment	*/
 void	env_init(char **env);
