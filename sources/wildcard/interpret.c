@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 12:02:26 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/09 15:09:52 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/09 15:38:57 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,30 +26,10 @@ extern t_prog	g_program;
 
 void	extra_token(t_list **lst, char *str, int *i)
 {
-	// add_interp_token(lst, i, str, ";");
-	// add_interp_token(lst, i, str, "&&");
-	// add_interp_token(lst, i, str, "||");
-	// add_interp_token(lst, i, str, "|");
-	if (!strncmp(&str[*i], "|", 1))
-	{
-		ft_lstadd_back(lst, ft_lstnew(ft_strdup("|")));
-		*i += 1;
-	}
-	if (!strncmp(&str[*i], ";", 1))
-	{
-		ft_lstadd_back(lst, ft_lstnew(ft_strdup(";")));
-		*i += 1;
-	}
-	if (!strncmp(&str[*i], "&&", 2))
-	{
-		ft_lstadd_back(lst, ft_lstnew(ft_strdup("&&")));
-		*i += 2;
-	}
-	if (!strncmp(&str[*i], "||", 2))
-	{
-		ft_lstadd_back(lst, ft_lstnew(ft_strdup("||")));
-		*i += 2;
-	}
+	add_interp_token(lst, i, str, ";");
+	add_interp_token(lst, i, str, "&&");
+	add_interp_token(lst, i, str, "||");
+	add_interp_token(lst, i, str, "|");
 }
 
 /**

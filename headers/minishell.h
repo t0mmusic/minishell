@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/09 15:00:42 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/09 15:43:12 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define MINISHELL_H
 
 # define BUFFER		10;
+# define R_END 0
+# define W_END 1
+# define HERE_DOC_TMPFILE "./.heredoc_tmp"
 
 # ifndef S_IFDIR
 #  define S_IFDIR 0040000
@@ -21,9 +24,6 @@
 # ifndef S_IXUSR
 #  define S_IXUSR 0000100
 # endif
-
-# define R_END 0
-# define W_END 1
 
 # include "imported/libft.h"
 # include "ft_printf_fd.h"
@@ -99,6 +99,7 @@ bool	builtin_export(void);
 bool	builtin_unset(void);
 
 /*	Standard input/output redirection	*/
+void	here_doc(int *fd, char *delim);
 void	std_sort(char **commands);
 int		check_file_access(char *file);
 int		std_output(char *filename);
@@ -126,6 +127,7 @@ char	*remove_str(char *s1, char *s2);
 void	cpy_without(char *src, char *dst, int i, int len);
 bool	and_or(char *token);
 void	add_interp_token(t_list **lst, int *i, char *s1, char *s2);
+bool	interp_char(char c);
 
 /*	Utilities	*/
 void	get_prompt(void);

@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 14:56:01 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/09 15:00:00 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/09 15:41:37 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,11 @@ void	add_interp_token(t_list **lst, int *i, char *s1, char *s2)
 		ft_lstadd_back(lst, ft_lstnew(ft_strdup(s2)));
 		*i += len;
 	}
+}
+
+bool	interp_char(char c)
+{
+	if (c == '|' || c == '&' || c == ';' || c == '(' || c == ')')
+		return (true);
+	return (false);
 }
