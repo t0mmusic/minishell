@@ -8,6 +8,7 @@
 .DS_Store
 philo.code-workspace
 valgrind-update.txt
+.heredoc_tmp
 
 # Temporary directories
 objects/

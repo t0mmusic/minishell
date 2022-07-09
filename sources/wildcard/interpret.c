@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 12:02:26 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/09 15:38:57 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/09 18:51:16 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	extra_token(t_list **lst, char *str, int *i)
 	add_interp_token(lst, i, str, "&&");
 	add_interp_token(lst, i, str, "||");
 	add_interp_token(lst, i, str, "|");
+	add_interp_token(lst, i, str, ")");
+	add_interp_token(lst, i, str, "(");
 }
 
 /**
@@ -43,7 +45,8 @@ void	extra_token(t_list **lst, char *str, int *i)
 
 bool	and_or(char *token)
 {
-	if (!ft_strcmp(token, ";"))
+	if (!ft_strcmp(token, ";") || !ft_strcmp(token, "(")
+		|| !ft_strcmp(token, ")"))
 		return (true);
 	if (!ft_strcmp(token, "&&") && !g_program.exit_status)
 		return (true);
@@ -62,26 +65,24 @@ bool	and_or(char *token)
 
 void	next_command(void)
 {
-	while (*g_program.user_inputs && !interp_token(*g_program.user_inputs))
+	g_program.user_inputs = update_array(g_program.user_inputs);
+	if (!g_program.user_inputs)
+		return ;
+	if (!and_or(g_program.user_inputs[0]) || !g_program.user_inputs[1])
 	{
-		iterate_user_inputs();
-	}
-	if (!*g_program.user_inputs)
+		free_array(g_program.user_inputs);
 		g_program.user_inputs = NULL;
-	else
-	{
-		if (and_or(*g_program.user_inputs) == false)
-		{
-			g_program.user_inputs = NULL;
-			return ;
-		}
-		iterate_user_inputs();
-		if (*g_program.user_inputs)
-		{
-			split_agrs(*g_program.user_inputs);
-			command();
-		}
+		return ;
 	}
+	if (!ft_strcmp(g_program.user_inputs[0], "("))
+	{
+		parentheses();
+		return ;
+	}
+	g_program.user_inputs = realloc_back(g_program.user_inputs,
+			g_program.user_inputs[1]);
+	split_agrs(*g_program.user_inputs);
+	command();
 }
 
 /**
@@ -90,7 +91,8 @@ void	next_command(void)
 
 void	command(void)
 {
-	if (!inbuilt_check() && !interp_token(*g_program.user_inputs))
+	if (g_program.user_inputs && !inbuilt_check()
+		&& !interp_token(*g_program.user_inputs))
 	{
 		g_program.pid = fork();
 		if (!g_program.pid)
@@ -113,7 +115,9 @@ bool	interp_token(char *token)
 {
 	if (!ft_strcmp(token, ";")
 		|| !ft_strcmp(token, "||")
-		|| !ft_strcmp(token, "&&"))
+		|| !ft_strcmp(token, "&&")
+		|| !ft_strcmp(token, ")")
+		|| !ft_strcmp(token, "("))
 	{
 		return (true);
 	}

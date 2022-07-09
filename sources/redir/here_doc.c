@@ -6,7 +6,7 @@
 /*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 14:46:49 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/09 15:05:51 by Nathanael        ###   ########.fr       */
+/*   Updated: 2022/07/09 15:52:52 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void	here_doc(int *fd, char *delim)
 	int		i;
 
 	i = 0;
-	signal(SIGINT, ctrl_handler);
+	signal(SIGINT, heredoc_handler);
 	line = readline("heredoc> ");
 	while (line)
 	{
-		signal(SIGINT, ctrl_handler);
-		if (!ft_strncmp(line, delim, ft_strlen(delim) + 1))
+		if (!ft_strncmp(line, delim, ft_strlen(delim) + 1) || \
+			*(heredoc_signal_get()) == 1)
 		{
 			close(fd[W_END]);
 			free(line);

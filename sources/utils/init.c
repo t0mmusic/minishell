@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrown <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 19:42:57 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/06 16:01:28 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/09 19:07:19 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void	init_yesenv(char **av)
 	free(shlvl);
 	shlvl = ft_free_join(ft_strdup("SHLVL="), ft_itoa(lvl));
 	add_env(shlvl, false);
-	get_prompt();
 }
 
 /**

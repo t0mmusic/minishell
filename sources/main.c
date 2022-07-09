@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 15:17:29 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/09 11:25:25 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/09 19:08:38 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	program_loop(void)
 
 	while (1)
 	{
+		get_prompt();
 		g_program.pid = 0;
 		str = NULL;
 		signal(SIGINT, ctrl_handler);

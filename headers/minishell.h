@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/09 15:43:12 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/09 19:41:35 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,8 @@ int		std_input_delim(char *filename);
 
 /*	Signal Handling	*/
 void	ctrl_handler(int sig);
+void	heredoc_handler(int sig);
+int		*heredoc_signal_get(void);
 
 /*	Environment	*/
 void	env_init(char **env);
@@ -148,7 +150,11 @@ void	delete_lstelem(t_list **lst);
 void	free_inputs(void);
 void	freelist(t_list *list);
 void	freelist_malloc(t_list *list);
-void	free_env(t_env *env);
+void	free_env(t_env **env);
+char	**update_array(char **arr);
+void	free_array(char **arr);
+char	**realloc_back(char **arr, char *delim);
+char	**realloc_front(char **arr, char *delim);
 
 /*	Initialisation	*/
 void	init_global(void);
@@ -158,6 +164,7 @@ void	init_noenv(char **av);
 /*	Error	*/
 char	*error_code(void);
 void	normalise_exit(void);
+void	parentheses(void);
 
 /*	Bonus	*/
 char	*find_matches(char *str);

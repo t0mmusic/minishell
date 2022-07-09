@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:11:29 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/09 11:28:38 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/09 19:42:41 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,18 @@
 /**
  * @brief	Frees an environment structure, including all allocated pointers.
  * ! Need to evaluate what has to be freed here.
+ * ! Might need to pass by reference
 **/
 
-void	free_env(t_env *env)
+void	free_env(t_env **env)
 {
-	ft_tryfree(env->var);
-	ft_tryfree(env->content);
-	ft_tryfree(env);
+	t_env	*current;
+
+	current = *env;
+	ft_tryfree(current->full);
+	ft_tryfree(current->var);
+	ft_tryfree(current->content);
+	ft_tryfree(current);
 }
 
 /**

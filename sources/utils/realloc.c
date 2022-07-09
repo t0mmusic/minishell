@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 15:58:09 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/09 16:13:14 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/09 17:52:26 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	**realloc_back(char **arr, char *delim)
 		free(arr[i]);
 		i++;
 	}
-	len = ++i;
+	len = i;
 	while (arr[len])
 		len++;
 	ret = malloc(sizeof(*ret) * len - i);
@@ -62,4 +62,37 @@ char	**realloc_back(char **arr, char *delim)
 	ret[len] = NULL;
 	free (arr);
 	return (ret);
+}
+
+void	free_array(char **arr)
+{
+	int	i;
+
+	i = -1;
+	while (arr[++i])
+		free(arr[i]);
+	free(arr);
+}
+
+char	**update_array(char **arr)
+{
+	int		i;
+	char	*token;
+
+	i = 0;
+	if (!arr)
+		return (NULL);
+	while (arr[i])
+	{
+		if (interp_token(arr[i]))
+		{
+			token = arr[i];
+			break ;
+		}
+		i++;
+	}
+	if (arr[i])
+		return (realloc_back(arr, token));
+	free_array(arr);
+	return (NULL);
 }

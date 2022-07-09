@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 10:38:33 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/08 15:55:27 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/09 17:38:54 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ char	*trim_token(char *token)
 	token = remove_str(token, ";");
 	token = remove_str(token, "&&");
 	token = remove_str(token, "||");
+	token = remove_str(token, "(");
+	token = remove_str(token, ")");
 	return (token);
 }
 
