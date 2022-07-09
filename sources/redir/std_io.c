@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   std_io.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 14:45:52 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/09 11:55:20 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/09 14:27:42 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern t_prog	g_program;
+
 
 /**
  * @brief	Output Redirection Truncation ">"
@@ -110,14 +113,14 @@ $>	vim	output.txt
 $>	wc -l << output.txt
 	2
 */
-int	std_input_delim(char *filename)
+int	std_input_delim(char *delim)
 {
 	int		fd;
 
-	fd = open(filename, O_RDONLY, 0644);
+	fd = open(HERE_DOC_TMPFILE, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd < 0)
-		return (check_file_access(filename));
-	dup2(fd, STDIN_FILENO);
+		return (check_file_access(HERE_DOC_TMPFILE));
+	here_doc(&fd, delim);
 	close(fd);
 	iterate_user_inputs();
 	iterate_user_inputs();

@@ -3,46 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 14:46:49 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/07 09:34:14 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/09 15:05:51 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	here_doc(char *delim, int *fd)
+void	here_doc(int *fd, char *delim)
 {
-	(void)delim;
-	(void)fd;
+	char	*line;
+	char	*tmp;
+	int		i;
+
+	i = 0;
+	signal(SIGINT, ctrl_handler);
+	line = readline("heredoc> ");
+	while (line)
+	{
+		signal(SIGINT, ctrl_handler);
+		if (!ft_strncmp(line, delim, ft_strlen(delim) + 1))
+		{
+			close(fd[W_END]);
+			free(line);
+			return ;
+		}
+		tmp = ft_strjoin(&line[i], "\n");
+		ft_putstr_fd(&tmp[i], fd[W_END]);
+		ft_tryfree(line);
+		line = readline("heredoc> ");
+		i++;
+	}
+	ft_tryfree(tmp);
+	ft_tryfree(line);
+	close(fd[W_END]);
 }
-
-// void	here_doc(char *delim, int *fd)
-// {
-// 	char	*line;
-// 	char	*temp;
-// 	int		i;
-
-// 	close(fd[R_END]);
-// 	signal(SIGINT, handle_hd_sig);
-// 	ft_putstr_fd("...", STDIN_FILENO);
-// 	i = get_next_line(STDIN_FILENO, &line);
-// 	while (i)
-// 	{
-// 		if (!ft_strncmp(line, delim, ft_strlen(delim) + 1)
-// 			|| *(get_signal_st() == 1))
-// 		{
-// 			close(fd[W_END]);
-// 			free(line);
-// 			return ;
-// 		}
-// 		temp = ft_strjoin(line, "\n");
-// 		ft_putstr_fd(temp, fd[W_END]);
-// 		free_tmp(tmp, line);
-// 		ft_putstr_fd("... ", STDIN_FILENO);
-// 		i = get_next_line(STDIN_FILENO, &line);
-// 	}
-// 	close(fd[W_END]);
-// 	free(line);
-// }
