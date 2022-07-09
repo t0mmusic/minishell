@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
+/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/08 18:09:44 by Nathanael        ###   ########.fr       */
+/*   Updated: 2022/07/09 15:00:42 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ void	extra_token(t_list **lst, char *str, int *i);
 char	*remove_str(char *s1, char *s2);
 void	cpy_without(char *src, char *dst, int i, int len);
 bool	and_or(char *token);
+void	add_interp_token(t_list **lst, int *i, char *s1, char *s2);
 
 /*	Utilities	*/
 void	get_prompt(void);
@@ -154,6 +155,7 @@ void	init_noenv(char **av);
 
 /*	Error	*/
 char	*error_code(void);
+void	normalise_exit(void);
 
 /*	Bonus	*/
 char	*find_matches(char *str);

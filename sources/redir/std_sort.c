@@ -6,16 +6,16 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 14:24:41 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/09 11:53:03 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/09 14:19:17 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	main_redirect(int pid)
+void	main_redirect(void)
 {
 	free_inputs();
-	waitpid(pid, 0, 0);
+	waitpid(g_program.pid, &g_program.exit_status, 0);
 }
 
 bool	check_redirect(void)
@@ -56,12 +56,11 @@ int	check_file_access(char *file)
 void	std_sort(char **commands)
 {
 	int		i;
-	int		pid;
 
 	if (!check_redirect())
 		return ;
-	pid = fork();
-	if (!pid)
+	g_program.pid = fork();
+	if (!g_program.pid)
 	{
 		i = 0;
 		while (commands[i])
@@ -77,7 +76,8 @@ void	std_sort(char **commands)
 			i++;
 		}
 		command();
-		exit(0);
+		normalise_exit();
+		exit(g_program.exit_status);
 	}
-	main_redirect(pid);
+	main_redirect();
 }

@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 12:02:26 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/08 15:23:54 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/09 15:09:52 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ extern t_prog	g_program;
 
 void	extra_token(t_list **lst, char *str, int *i)
 {
+	// add_interp_token(lst, i, str, ";");
+	// add_interp_token(lst, i, str, "&&");
+	// add_interp_token(lst, i, str, "||");
+	// add_interp_token(lst, i, str, "|");
 	if (!strncmp(&str[*i], "|", 1))
 	{
 		ft_lstadd_back(lst, ft_lstnew(ft_strdup("|")));
@@ -72,6 +76,8 @@ bool	and_or(char *token)
  * @brief	If the user has entered multiple commands seperated by ;, && or ||,
  * this function will iterate to the next function in the list and determine if
  * that command will be executed.
+ * ! Need to keep track of initial user_inputs pointer to free at the end
+ * ! Probably need to update the whole iteration thing
 **/
 
 void	next_command(void)
@@ -104,7 +110,7 @@ void	next_command(void)
 
 void	command(void)
 {
-	if (!inbuilt_check())
+	if (!inbuilt_check() && !interp_token(*g_program.user_inputs))
 	{
 		g_program.pid = fork();
 		if (!g_program.pid)

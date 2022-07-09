@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 14:45:52 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/09 11:55:20 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/09 14:19:29 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ int	std_output(char *filename)
 	dup2(fd, STDOUT_FILENO);
 	close(fd);
 	command();
-	exit(0);
+	normalise_exit();
+	exit(g_program.exit_status);
 	return (0);
 }
 
@@ -69,7 +70,8 @@ int	std_output_append(char *filename)
 	dup2(fd, STDOUT_FILENO);
 	close(fd);
 	command();
-	exit(0);
+	normalise_exit();
+	exit(g_program.exit_status);
 	return (0);
 }
 

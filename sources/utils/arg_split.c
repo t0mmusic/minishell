@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 09:21:16 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/08 15:30:54 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/09 14:45:05 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ static t_list	*arg_list(t_list *inputs, char *str)
 			i++;
 		if (str[i] == '|' || str[i] == '&' || str[i] == ';')
 			extra_token(&inputs, str, &i);
-		if (and_or(ft_lstlast(inputs)->content) == true)
+		if (and_or(ft_lstlast(inputs)->content) && inputs != ft_lstlast(inputs))
 		{
 			ft_lstadd_back(&inputs,
 				ft_lstnew(ft_substr(str, i, ft_strlen(str) - i)));
