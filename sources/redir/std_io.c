@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   std_io.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
+/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 14:45:52 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/08 18:05:31 by Nathanael        ###   ########.fr       */
+/*   Updated: 2022/07/09 11:55:20 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  * it does
 
  * @return	Returns a check if the file can be accessed, otherwise it will exit
- * back to the main process. 
+ * back to the main process.
 
  * @example
  * echo "test" > output.txt
@@ -29,24 +29,16 @@
 int	std_output(char *filename)
 {
 	int	fd;
-	int	pid;
 
 	fd = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0664);
 	if (fd < 0)
 	{
 		return (check_file_access(filename));
 	}
-	pid = fork();
-	if (!pid)
-	{
-		dup2(fd, STDOUT_FILENO);
-		close(fd);
-		command();
-		exit(0);
-	}
+	dup2(fd, STDOUT_FILENO);
 	close(fd);
-	free_inputs();
-	waitpid(pid, 0, 0);
+	command();
+	exit(0);
 	return (0);
 }
 
@@ -70,22 +62,14 @@ int	std_output(char *filename)
 int	std_output_append(char *filename)
 {
 	int		fd;
-	int		pid;
 
 	fd = open(filename, O_CREAT | O_WRONLY | O_APPEND, 0644);
 	if (fd < 0)
 		return (check_file_access(filename));
-	pid = fork();
-	if (!pid)
-	{
-		dup2(fd, STDOUT_FILENO);
-		close(fd);
-		command();
-		exit(0);
-	}
+	dup2(fd, STDOUT_FILENO);
 	close(fd);
-	free_inputs();
-	waitpid(pid, 0, 0);
+	command();
+	exit(0);
 	return (0);
 }
 
@@ -99,29 +83,21 @@ int	std_output_append(char *filename)
  * @example
  * vim	output.txt
 	1	test
-	2	testing123	
+	2	testing123
  *	wc -l < output.txt
 	2
 **/
 int	std_input(char *filename)
 {
 	int		fd;
-	int		pid;
 
 	fd = open(filename, O_RDONLY, 0644);
 	if (fd < 0)
 		return (check_file_access(filename));
-	pid = fork();
-	if (!pid)
-	{
-		dup2(fd, STDIN_FILENO);
-		close(fd);
-		command();
-		exit(0);
-	}
+	dup2(fd, STDIN_FILENO);
 	close(fd);
-	free_inputs();
-	waitpid(pid, 0, 0);
+	iterate_user_inputs();
+	iterate_user_inputs();
 	return (0);
 }
 
@@ -130,28 +106,20 @@ Input Redirection Using Delimiter
 e.g:
 $>	vim	output.txt
 	1	test
-	2	testing123	
+	2	testing123
 $>	wc -l << output.txt
 	2
 */
 int	std_input_delim(char *filename)
 {
 	int		fd;
-	int		pid;
 
 	fd = open(filename, O_RDONLY, 0644);
 	if (fd < 0)
 		return (check_file_access(filename));
-	pid = fork();
-	if (!pid)
-	{
-		dup2(fd, STDIN_FILENO);
-		close(fd);
-		command();
-		exit(0);
-	}
+	dup2(fd, STDIN_FILENO);
 	close(fd);
-	free_inputs();
-	waitpid(pid, 0, 0);
+	iterate_user_inputs();
+	iterate_user_inputs();
 	return (0);
 }

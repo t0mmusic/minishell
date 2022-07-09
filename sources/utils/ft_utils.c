@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:57:22 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/07 10:02:31 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/09 11:25:06 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ char	*ft_free_join(char *s1, char *s2)
 
 	tmp = s1;
 	s1 = ft_strjoin(tmp, s2);
-	free(tmp);
-	free(s2);
+	ft_tryfree(tmp);
+	ft_tryfree(s2);
 	return (s1);
 }
 

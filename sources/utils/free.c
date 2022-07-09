@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:11:29 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/08 17:29:13 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/09 11:28:38 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	free_inputs(void)
 {
 	int	i;
 
-	if (g_program.user_inputs)
+	if (!g_program.user_inputs)
 		return ;
 	i = 0;
 	while (g_program.user_inputs[i])
