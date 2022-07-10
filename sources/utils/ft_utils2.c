@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 15:00:17 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/10 12:27:13 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/10 16:36:27 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,11 @@ void	iterate_user_inputs(void)
  * @param	lst: the function to be applied
 **/
 
-void	ft_lstall(t_list *lst, char *(*f)(char *))
+void	ft_lstall(t_list **head, char *(*f)(char *))
 {
+	t_list	*lst;
+
+	lst = *head;
 	while (lst != NULL)
 	{
 		lst->content = f(lst->content);

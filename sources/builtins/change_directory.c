@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 19:41:41 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/10 12:08:10 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/10 21:40:41 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void	update_pwd(char *path)
 	char	*old_pwd;
 	char	*new_pwd;
 	char	*var;
+	char	buffer[512];
 
 	chdir(path);
 	var = ft_getenv("PWD");
@@ -31,7 +32,7 @@ static void	update_pwd(char *path)
 	add_env(old_pwd, false);
 	free(var);
 	free(old_pwd);
-	new_pwd = ft_strjoin("PWD=", getcwd(NULL, 0));
+	new_pwd = ft_strjoin("PWD=", getcwd(buffer, sizeof(buffer)));
 	add_env(new_pwd, false);
 	free(new_pwd);
 	get_prompt();
@@ -58,9 +59,9 @@ static char	*relative_path(char *target_dir)
 {
 	char	*path;
 	char	*tmp;
-	// char	buffer[512];
+	char	buffer[512];
 
-	path = ft_strjoin(getcwd(NULL, 0), "/");
+	path = ft_strjoin(getcwd(buffer, sizeof(buffer)), "/");
 	tmp = path;
 	path = ft_strjoin(path, target_dir);
 	free(tmp);
@@ -88,7 +89,7 @@ bool	change_directory(void)
 		path = relative_path(target_dir);
 	if (access(path, F_OK) < 0)
 	{
-		ft_printf_fd("cd: Ain't no %s directory!\n", 1, target_dir);
+		ft_printf_fd("cd: Ain't no %s directory!\n", 2, target_dir);
 		g_program.exit_status = 1;
 	}
 	else

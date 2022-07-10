@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 19:42:57 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/10 11:11:21 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/10 14:48:45 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ bool	add_var(char *var)
 
 bool	inbuilt_check(void)
 {
+	if (!*g_program.user_inputs)
+		return (false);
 	if (!ft_strcmp("cd", g_program.user_inputs[0]))
 		return (change_directory());
 	if (!ft_strcmp("export", g_program.user_inputs[0]))

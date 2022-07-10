@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 19:42:57 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/10 12:09:18 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/10 21:38:28 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,11 @@ void	init_yesenv(char **av)
 {
 	char	*shlvl;
 	int		lvl;
+	char	buffer[512];
 
 	add_env_easy("SHELL=", av[0], false);
 	g_program.paths = ft_split(getenv("PATH"), ':');
-	add_env_easy("PWD=", getcwd(NULL, 0), false);
+	add_env_easy("PWD=", getcwd(buffer, sizeof(buffer)), false);
 	shlvl = ft_getenv("SHLVL");
 	lvl = ft_atoi(shlvl) + 1;
 	free(shlvl);

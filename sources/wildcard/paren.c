@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 17:27:09 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/09 18:52:28 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/10 15:49:40 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,10 @@ void	parentheses(void)
 		split_agrs(str);
 		free(str);
 		g_program.user_inputs = realloc_front(g_program.user_inputs, ")");
-		command();
+		if (g_program.user_inputs)
+			command();
 		normalise_exit();
-		exit(g_program.exit_status);
+		free_exit(g_program.exit_status);
 	}
 	parent_paren();
 }

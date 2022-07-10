@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   realloc.c                                          :+:      :+:    :+:   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 15:58:09 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/09 17:52:26 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/10 16:09:11 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,15 @@ char	**realloc_front(char **arr, char *delim)
 	i = 0;
 	while (arr[i] && ft_strcmp(arr[i], delim))
 		i++;
-	ret = malloc(sizeof(*ret) * i);
+	ret = malloc(sizeof(*ret) * (i + 1));
 	len = 0;
 	while (len < i)
 	{
-		ret[len] = arr[len];
+		ret[len] = ft_strdup(arr[len]);
 		len++;
 	}
 	ret[len] = NULL;
-	while (arr[i])
-	{
-		free(arr[i]);
-		i++;
-	}
-	free (arr);
+	free_array(arr);
 	return (ret);
 }
 
@@ -46,21 +41,26 @@ char	**realloc_back(char **arr, char *delim)
 	int		i;
 	int		len;
 
+	if (!delim || !ft_strcmp(arr[0], delim))
+		return (arr);
 	i = 0;
 	while (arr[i] && ft_strcmp(arr[i], delim))
-	{
-		free(arr[i]);
 		i++;
-	}
 	len = i;
-	while (arr[len])
+	while (arr[len] && ft_strcmp(arr[len], ""))
 		len++;
-	ret = malloc(sizeof(*ret) * len - i);
+	ret = malloc(sizeof(*ret) * (len - i + 1));
 	len = 0;
-	while (arr[i])
-		ret[len++] = arr[i++];
+	while (arr[i] && ft_strcmp(arr[i], ""))
+		ret[len++] = ft_strdup(arr[i++]);
 	ret[len] = NULL;
-	free (arr);
+	free_array(arr);
+	i = -1;
+	if (!ret[1] && !ft_strcmp(ret[0], ")"))
+	{
+		free_array(ret);
+		return (NULL);
+	}
 	return (ret);
 }
 
@@ -68,8 +68,10 @@ void	free_array(char **arr)
 {
 	int	i;
 
+	if (!arr)
+		return ;
 	i = -1;
-	while (arr[++i])
+	while (arr[++i] != NULL)
 		free(arr[i]);
 	free(arr);
 }

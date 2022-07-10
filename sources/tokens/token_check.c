@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 10:38:33 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/09 17:38:54 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/10 21:43:01 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,11 +108,11 @@ char	*remove_quotes(char *str)
  * @returns	rebuilt token
 **/
 
-char	*sanitise_tokens(t_list *lst)
+char	*sanitise_tokens(t_list **lst)
 {
 	ft_lstall(lst, find_matches);
 	ft_lstall(lst, expand_string);
 	ft_lstall(lst, trim_token);
 	ft_lstall(lst, remove_quotes);
-	return (lst_to_str(ft_strdup(""), lst));
+	return (lst_to_str(ft_strdup(""), *lst));
 }

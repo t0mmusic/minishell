@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 09:21:16 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/10 12:02:37 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/10 21:47:10 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static char	*ft_cpystr(char *str, int *current)
 				ft_lstnew(ft_substr(str, *current, i - *current)));
 			*current = i;
 			if (interp_char(str[i]))
-				return (sanitise_tokens(lst));
+				return (sanitise_tokens(&lst));
 			ft_lstadd_back(&lst, ft_lstnew(sub_quotes(str, &i)));
 			*current = i;
 		}
@@ -70,7 +70,7 @@ static char	*ft_cpystr(char *str, int *current)
 	}
 	ft_lstadd_back(&lst, ft_lstnew(ft_substr(str, *current, i - *current)));
 	*current = i;
-	return (sanitise_tokens(lst));
+	return (sanitise_tokens(&lst));
 }
 
 /**

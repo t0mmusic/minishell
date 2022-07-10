@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 15:47:38 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/07 09:35:41 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/10 16:08:30 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,21 @@ extern t_prog	g_program;
 bool	builtin_echo(void)
 {
 	bool	newline;
-	char	**print;
+	int		i;
 
+	i = 0;
 	newline = true;
 	if (g_program.commands[1] && !ft_strcmp(g_program.commands[1], "-n"))
 	{
 		newline = false;
-		g_program.commands++;
+		i++;
 	}
-	g_program.commands++;
-	print = g_program.commands;
-	while (*print)
+	i++;
+	while (g_program.commands[i])
 	{
-		ft_printf_fd("%s", 1, *print);
-		print++;
-		if (*print)
+		ft_printf_fd("%s", 1, g_program.commands[i]);
+		i++;
+		if (g_program.commands[i])
 			ft_printf_fd(" ", 1);
 	}
 	if (newline)
