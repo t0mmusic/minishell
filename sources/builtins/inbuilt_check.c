@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 19:42:57 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/07 15:01:50 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/10 11:11:21 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ bool	inbuilt_check(void)
 	if (!ft_strcmp("exit", g_program.user_inputs[0]))
 	{
 		if (g_program.user_inputs[1])
-			exit (ft_atoi(g_program.user_inputs[1]));
-		exit (0);
+			free_exit(ft_atoi(g_program.user_inputs[1]));
+		free_exit(0);
 	}
 	if (ft_strchr(g_program.user_inputs[0], '='))
 		return (add_var(g_program.user_inputs[0]));

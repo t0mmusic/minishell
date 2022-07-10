@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   change_directory.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrown <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 19:41:41 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/05 16:24:29 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/10 12:08:10 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ static void	update_pwd(char *path)
 	var = ft_getenv("PWD");
 	old_pwd = ft_strjoin("OLDPWD=", var);
 	add_env(old_pwd, false);
-	ft_tryfree(var);
-	ft_tryfree(old_pwd);
+	free(var);
+	free(old_pwd);
 	new_pwd = ft_strjoin("PWD=", getcwd(NULL, 0));
 	add_env(new_pwd, false);
-	ft_tryfree(new_pwd);
+	free(new_pwd);
 	get_prompt();
 }
 
@@ -58,12 +58,12 @@ static char	*relative_path(char *target_dir)
 {
 	char	*path;
 	char	*tmp;
-	char	buffer[512];
+	// char	buffer[512];
 
-	path = ft_strjoin(getcwd(buffer, sizeof(buffer)), "/");
+	path = ft_strjoin(getcwd(NULL, 0), "/");
 	tmp = path;
 	path = ft_strjoin(path, target_dir);
-	ft_tryfree(tmp);
+	free(tmp);
 	return (path);
 }
 
@@ -93,6 +93,6 @@ bool	change_directory(void)
 	}
 	else
 		update_pwd(path);
-	ft_tryfree(path);
+	free(path);
 	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 15:00:17 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/08 17:07:43 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/10 12:27:13 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,8 @@ char	*remove_str(char *s1, char *s2)
 	if (len <= len2)
 		return (s1);
 	ret = ft_strdup(s1);
-	i = 0;
-	while (ret[i])
+	i = -1;
+	while (ret[++i])
 	{
 		if (!ft_strncmp(&s1[i], s2, len2))
 		{
@@ -120,7 +120,7 @@ char	*remove_str(char *s1, char *s2)
 			s1 = ft_strdup(ret);
 			len = ft_strlen(s1);
 		}
-		i++;
 	}
+	free(s1);
 	return (ret);
 }

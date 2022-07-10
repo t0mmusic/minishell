@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 09:22:12 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/09 19:49:06 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/10 10:42:10 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	remove_env(char *str)
 				prev->next = lst->next;
 			else
 				g_program.env = g_program.env->next;
-			// free_env(&current);
-			ft_tryfree(lst);
+			free_env(&lst);
+			free(lst);
 			return ;
 		}
 		prev = lst;
@@ -55,16 +55,18 @@ void	remove_env(char *str)
  * @param	silent: boolean value indicating whether to print with 'env'
 **/
 
-void	edit_env(t_env **env, char *str, int split, bool silent)
+void	edit_env(t_list **lst, char *str, int split, bool silent)
 {
-	t_env	*new;
+	t_env	*env;
+	t_list	*current;
 
-	new = malloc(sizeof(new) * 3);
-	new->full = ft_strdup(str);
-	new->var = ft_substr(str, 0, split);
-	new->content = ft_substr(str, split + 1, ft_strlen(&str[split]));
-	new->silent = silent;
-	*env = new;
+	current = *lst;
+	env = malloc(sizeof(*env) * (sizeof(char *) * 3 + sizeof(bool)));
+	env->full = ft_strdup(str);
+	env->var = ft_substr(str, 0, split);
+	env->content = ft_substr(str, split + 1, ft_strlen(&str[split]));
+	env->silent = silent;
+	current->content = env;
 }
 
 /**
@@ -93,14 +95,15 @@ void	add_env(char *str, bool silent)
 		new = lst->content;
 		if (new->var && !ft_strncmp(new->var, str, split))
 		{
-			// free_env(&new);
-			edit_env(&new, str, split, silent);
+			free_env(&lst);
+			edit_env(&lst, str, split, silent);
 			return ;
 		}
 		lst = lst->next;
 	}
-	edit_env(&new, str, split, silent);
-	ft_lstadd_back(&g_program.env, ft_lstnew(new));
+	lst = ft_lstnew(NULL);
+	edit_env(&lst, str, split, silent);
+	ft_lstadd_back(&g_program.env, lst);
 }
 
 /**

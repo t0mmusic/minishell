@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:40:21 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/08 16:33:50 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/10 12:25:07 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*join_path(char *path, char *command)
 
 	tmp = ft_strjoin(path, "/");
 	ret = ft_strjoin(tmp, command);
-	ft_tryfree(tmp);
+	free(tmp);
 	return (ret);
 }
 
@@ -56,7 +56,7 @@ char	*command_valid(char *path)
 			path = tmp;
 			return (path);
 		}
-		ft_tryfree(tmp);
+		free(tmp);
 		i++;
 	}
 	return (NULL);
@@ -71,24 +71,23 @@ char	*command_valid(char *path)
 **/
 
 void	out_process(void)
-{	
+{
 	char	*path;
 
-	free(g_program.paths);
-	g_program.paths = ft_split(ft_getenv("PATH"), ':');
-	update_envp();
 	if (inbuilt_subprocess())
-		exit(0);
+		free_exit(0);
+	free_array(g_program.paths);
+	path = ft_getenv("PATH");
+	g_program.paths = ft_split(path, ':');
+	free(path);
+	update_envp();
 	path = g_program.commands[0];
 	path = command_valid(path);
 	if (path)
 	{
-//		ft_printf_fd("Path: %s\nCommand: %s\nEnv: %s\n", 2,
-//			path, g_program.commands[0], g_program.envp[0]);
 		execve(path, g_program.commands, g_program.envp);
-		exit(1);
 	}
 	ft_printf_fd("minishell: %s ain't no command!\n",
 		2, g_program.commands[0]);
-	exit (EXIT_FAILURE);
+	free_exit(EXIT_FAILURE);
 }

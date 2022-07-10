@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 14:45:52 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/09 17:11:34 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/10 10:26:29 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ int	std_input_delim(char *delim)
 		return (check_file_access(HERE_DOC_TMPFILE));
 	here_doc(&fd, delim);
 	sigstatus = heredoc_signal_get();
-	ft_tryfree(sigstatus);
+	free(sigstatus);
 	close(fd);
 	g_program.user_inputs = realloc_back(g_program.user_inputs,
 			g_program.user_inputs[2]);

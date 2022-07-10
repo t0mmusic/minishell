@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 13:28:07 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/09 14:22:58 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/10 11:43:01 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,14 @@ void	normalise_exit(void)
 	if (g_program.exit_status == 512)
 		g_program.exit_status = 2;
 	g_program.exit_status = g_program.exit_status;
+}
+
+void	free_exit(int code)
+{
+	free_full_env();
+	freelist(g_program.env);
+	free_array(g_program.user_inputs);
+	free(g_program.prompt);
+	free_array(g_program.paths);
+	exit(code);
 }

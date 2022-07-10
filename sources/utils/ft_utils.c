@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:57:22 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/09 11:25:06 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/10 11:59:57 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ char	*ft_free_join(char *s1, char *s2)
 
 	tmp = s1;
 	s1 = ft_strjoin(tmp, s2);
-	ft_tryfree(tmp);
-	ft_tryfree(s2);
+	free(tmp);
+	free(s2);
 	return (s1);
 }
 
@@ -90,8 +90,10 @@ void	get_prompt(void)
 	free(user_prompt);
 	prompt = ft_free_join(ft_getenv("LOGNAME"), ft_strdup("@minishell "));
 	tmp = prompt;
-	prompt = ft_free_join(ft_ansii(prompt, GREEN),
-			ft_ansii(ft_getenv("PWD"), CYAN));
+	prompt = ft_ansii(prompt, GREEN);
+	free(tmp);
+	tmp = ft_getenv("PWD");
+	prompt = ft_free_join(prompt, ft_ansii(tmp, CYAN));
 	free(tmp);
 	prompt = ft_free_join(prompt, ft_ansii(" $ ", BLUE));
 	g_program.prompt = prompt;

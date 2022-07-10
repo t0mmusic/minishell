@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 09:21:16 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/09 15:44:04 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/10 12:02:37 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,21 +120,21 @@ void	split_agrs(char *str)
 	t_list	*inputs;
 	t_list	*head;
 
-	inputs = ft_lstnew("Head");
+	inputs = ft_lstnew(ft_strdup("Head"));
 	head = arg_list(inputs, str);
 	args = malloc(sizeof(*args) * ft_lstsize(inputs));
 	i = 0;
 	while (inputs->next)
 	{
 		if (ft_strcmp("\\", inputs->next->content))
-			args[i] = inputs->next->content;
+			args[i] = ft_strdup(inputs->next->content);
 		else
 			i--;
 		inputs = inputs->next;
 		i++;
 	}
-	add_env(ft_strjoin("_=", args[i - 1]), false);
+	add_env_easy("_=", args[i - 1], false);
 	args[i] = NULL;
-	freelist(head);
+	freelist_malloc(head);
 	g_program.user_inputs = args;
 }

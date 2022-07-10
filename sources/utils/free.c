@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:11:29 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/09 19:42:41 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/10 11:16:10 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,29 @@
  * ! Might need to pass by reference
 **/
 
-void	free_env(t_env **env)
+void	free_env(t_list **lst)
 {
-	t_env	*current;
+	t_env	*env;
+	t_list	*current;
 
-	current = *env;
-	ft_tryfree(current->full);
-	ft_tryfree(current->var);
-	ft_tryfree(current->content);
-	ft_tryfree(current);
+	current = *lst;
+	env = current->content;
+	free(env->full);
+	free(env->var);
+	free(env->content);
+	free(env);
+}
+
+void	free_full_env(void)
+{
+	t_list	*lst;
+
+	lst = g_program.env;
+	while (lst)
+	{
+		free_env(&lst);
+		lst = lst->next;
+	}
 }
 
 /**
@@ -43,11 +57,11 @@ void	free_inputs(void)
 	i = 0;
 	while (g_program.user_inputs[i])
 	{
-		ft_tryfree(g_program.user_inputs[i]);
+		free(g_program.user_inputs[i]);
 		g_program.user_inputs[i] = NULL;
 		i++;
 	}
-	ft_tryfree(g_program.user_inputs);
+	free(g_program.user_inputs);
 	g_program.user_inputs = NULL;
 }
 
@@ -63,7 +77,7 @@ void	freelist(t_list *list)
 	{
 		current = list;
 		list = list->next;
-		ft_tryfree(current);
+		free(current);
 	}
 }
 
@@ -77,9 +91,9 @@ void	freelist_malloc(t_list *list)
 
 	while (list)
 	{
-		ft_tryfree(list->content);
+		free(list->content);
 		current = list;
 		list = list->next;
-		ft_tryfree(current);
+		free(current);
 	}
 }

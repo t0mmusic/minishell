@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 12:46:25 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/08 16:58:27 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/10 11:01:18 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,14 @@ void	set_commands(void)
 	}
 	else
 	{
-		g_program.commands = malloc(sizeof(char *) * i);
+		g_program.commands = malloc(sizeof(*g_program.commands) * (i + 1));
 		j = 0;
 		while (j < i)
 		{
 			g_program.commands[j] = current[j];
 			j++;
 		}
-		g_program.commands[j] = NULL;
+		g_program.commands[i] = NULL;
 	}
 }
 
@@ -93,7 +93,7 @@ void	execute_commands(void)
 	}
 	if (!ft_strcmp("|", *g_program.user_inputs))
 		g_program.user_inputs++;
-	ft_tryfree(g_program.commands);
+	free(g_program.commands);
 	check_pipes();
 }
 
