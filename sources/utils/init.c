@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 19:42:57 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/10 21:38:28 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/11 10:28:54 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,11 @@ void	add_env_easy(char *var, char *content, bool silent)
 
 void	init_noenv(char **av)
 {
+	char	buffer[512];
+
 	g_program.env = NULL;
 	add_env_easy("SHELL=", av[0], false);
-	add_env_easy("PWD=", getcwd(NULL, 0), false);
+	add_env_easy("PWD=", getcwd(buffer, sizeof(buffer)), false);
 	add_env("LOGNAME=guest", false);
 	add_env("USER=guest", false);
 	add_env("SHLVL=1", false);
@@ -84,10 +86,7 @@ void	init_yesenv(char **av)
 void	init_global(void)
 {
 	g_program.envp = NULL;
-	g_program.path = NULL;
 	g_program.commands = NULL;
-	g_program.cwd = NULL;
-	g_program.root = NULL;
 	g_program.user_inputs = NULL;
 	g_program.exit_status = 0;
 }

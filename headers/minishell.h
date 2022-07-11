@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/10 16:36:52 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/11 10:28:28 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,7 @@ typedef struct s_env
 typedef struct s_prog
 {
 	char	**envp;
-	char	*path;
 	char	*prompt;
-	char	*cwd;
-	char	*root;
 	char	**paths;
 	char	**commands;
 	char	**user_inputs;

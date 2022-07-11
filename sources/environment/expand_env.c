@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 12:13:09 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/11 09:31:34 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/11 10:38:19 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ char	*get_env(char *str, int *i, int *j)
 		*i = *i - 1;
 		return (error_code());
 	}
-	tmp = ft_substr(str, *j + 1, *i - *j);
 	*i = *i - 1;
+	tmp = ft_substr(str, *j + 1, *i - *j);
 	env = ft_getenv(tmp);
 	free(tmp);
 	return (env);

@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 14:24:41 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/09 15:12:04 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/11 11:49:55 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,26 +53,32 @@ int	check_file_access(char *file)
 	return (log_err(file, ": no such file or directory", 1));
 }
 
+/**
+ * ! need to make sure that commands is equal to the user_inputs to
+ * ! prevent heap use after free
+**/
+
 void	std_sort(char **commands)
 {
 	int		i;
 
+	(void)commands;
 	if (!check_redirect())
 		return ;
 	g_program.pid = fork();
 	if (!g_program.pid)
 	{
 		i = 0;
-		while (commands[i])
+		while (g_program.user_inputs[i])
 		{
-			if (ft_strcmp(commands[i], ">") == 0)
-				std_output(commands[i + 1]);
-			else if (ft_strcmp(commands[i], ">>") == 0)
-				std_output_append(commands[i + 1]);
-			else if (ft_strcmp(commands[i], "<") == 0)
-				std_input(commands[i + 1]);
-			else if (ft_strcmp(commands[i], "<<") == 0)
-				std_input_delim(commands[i + 1]);
+			if (ft_strcmp(g_program.user_inputs[i], ">") == 0)
+				std_output(g_program.user_inputs[i + 1]);
+			else if (ft_strcmp(g_program.user_inputs[i], ">>") == 0)
+				std_output_append(g_program.user_inputs[i + 1]);
+			else if (ft_strcmp(g_program.user_inputs[i], "<") == 0)
+				i = std_input(g_program.user_inputs[i + 1]);
+			else if (ft_strcmp(g_program.user_inputs[i], "<<") == 0)
+				i = std_input_delim(g_program.user_inputs[i + 1]);
 			i++;
 		}
 		command();

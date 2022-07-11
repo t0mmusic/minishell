@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update_array.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrown <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 15:38:53 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/06 15:55:11 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/11 10:27:54 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	update_envp(void)
 	t_env	*env;
 
 	size = ft_lstsize(g_program.env);
-	envp = malloc(sizeof(*envp) * size + 1);
+	envp = malloc(sizeof(*envp) * (size + 1));
 	lst = g_program.env;
 	i = 0;
 	while (lst)

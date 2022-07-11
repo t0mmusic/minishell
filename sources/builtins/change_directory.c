@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 19:41:41 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/10 21:40:41 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/11 09:58:57 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ static char	*relative_path(char *target_dir)
  * for an adjacent directory, or an absolute path. It then checks if that
  * directory is valid or if the user can access it before attempting to redirect.
  * @returns	true: boolean to indicate this is a built-in function
+ * ! Needs to check whether what is entered is a directory
 **/
 
 bool	change_directory(void)

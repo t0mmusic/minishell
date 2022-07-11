@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 12:46:25 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/10 11:01:18 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/11 11:10:51 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ extern t_prog	g_program;
  * @brief	Creates a pipeline for the input and output of each command.
  * The input is the originally specified input file (by default standard input)
  * and the output is the originally specified output file (by default standard
- * output). Once all the commands have been excecuted, the final command will be
+ * output). Once all the commands have been executed, the final command will be
  * output appropriately.
+ * ! needs to perform in the same way as bash on cat | cat | ls
 **/
 
 void	pipe_split(void)
@@ -33,7 +34,7 @@ void	pipe_split(void)
 	{
 		close(pipefd[1]);
 		dup2(pipefd[0], 0);
-		waitpid(pid, 0, 0);
+		waitpid(pid, 0, WNOHANG);
 	}
 	else
 	{

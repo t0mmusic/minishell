@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 12:02:26 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/09 18:51:16 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/11 11:02:57 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	command(void)
 		{
 			check_pipes();
 		}
-		waitpid(g_program.pid, &g_program.exit_status, 0);
+		waitpid(0, &g_program.exit_status, 0);
 	}
 	while (g_program.user_inputs)
 		next_command();
