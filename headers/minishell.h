@@ -6,16 +6,13 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/11 14:36:28 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/11 14:43:25 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# define BUFFER		10;
-# define R_END 0
-# define W_END 1
 # define HERE_DOC_TMPFILE "./.heredoc_tmp"
 
 # ifndef S_IFDIR
