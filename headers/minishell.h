@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/11 14:17:44 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/11 14:36:28 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ t_prog	g_program;
 
 void	program_loop(void);
 void	check_args(int argcount, char **argvect, char *envp[]);
-void	print_env(void);
 
 /*	Run processes	*/
 void	out_process(void);
