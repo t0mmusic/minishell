@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 14:24:41 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/11 11:49:55 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/11 11:53:27 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,10 @@ int	check_file_access(char *file)
  * ! prevent heap use after free
 **/
 
-void	std_sort(char **commands)
+void	std_sort(void)
 {
 	int		i;
 
-	(void)commands;
 	if (!check_redirect())
 		return ;
 	g_program.pid = fork();

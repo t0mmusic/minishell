@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 14:45:52 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/11 11:32:18 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/11 11:51:49 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	std_input(char *filename)
 	close(fd);
 	g_program.user_inputs = realloc_back(g_program.user_inputs,
 			g_program.user_inputs[2]);
-	return (0);
+	return (-1);
 }
 
 /*
@@ -122,11 +122,11 @@ int	std_input_delim(char *delim)
 	fd = open(HERE_DOC_TMPFILE, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd < 0)
 		return (check_file_access(HERE_DOC_TMPFILE));
-	here_doc(&fd, delim);
+	here_doc(fd, delim);
 	sigstatus = heredoc_signal_get();
 	free(sigstatus);
 	close(fd);
 	g_program.user_inputs = realloc_back(g_program.user_inputs,
 			g_program.user_inputs[2]);
-	return (0);
+	return (-1);
 }

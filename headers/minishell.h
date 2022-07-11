@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/11 10:28:28 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/11 11:53:36 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,8 @@ bool	builtin_export(void);
 bool	builtin_unset(void);
 
 /*	Standard input/output redirection	*/
-void	here_doc(int *fd, char *delim);
-void	std_sort(char **commands);
+void	here_doc(int fd, char *delim);
+void	std_sort(void);
 int		check_file_access(char *file);
 int		std_output(char *filename);
 int		std_output_append(char *filename);

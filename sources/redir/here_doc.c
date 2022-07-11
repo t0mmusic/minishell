@@ -6,13 +6,13 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 14:46:49 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/11 11:25:09 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/11 11:51:07 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	here_doc(int *fd, char *delim)
+void	here_doc(int fd, char *delim)
 {
 	char	*line;
 	char	*tmp;
@@ -26,17 +26,17 @@ void	here_doc(int *fd, char *delim)
 		if (!ft_strncmp(line, delim, ft_strlen(delim) + 1) || \
 			*(heredoc_signal_get()) == 1)
 		{
-			close(*fd);
+			close(fd);
 			free(line);
 			return ;
 		}
 		tmp = ft_strjoin(&line[i], "\n");
-		ft_putstr_fd(&tmp[i], *fd);
+		ft_putstr_fd(&tmp[i], fd);
 		ft_tryfree(line);
 		line = readline("heredoc> ");
 		i++;
 	}
 	ft_tryfree(tmp);
 	ft_tryfree(line);
-	close(*fd);
+	close(fd);
 }
