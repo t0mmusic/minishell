@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/11 14:43:25 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/11 16:40:20 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,5 +167,6 @@ void	free_exit(int code);
 /*	Bonus	*/
 char	*find_matches(char *str);
 bool	interp_token(char *token);
+void	remove_space(void);
 
 #endif

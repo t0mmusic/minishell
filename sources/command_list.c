@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 12:46:25 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/11 11:10:51 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/11 15:21:35 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	pipe_split(void)
 	{
 		close(pipefd[1]);
 		dup2(pipefd[0], 0);
-		waitpid(pid, 0, WNOHANG);
+		waitpid(pid, 0, 0);
 	}
 	else
 	{

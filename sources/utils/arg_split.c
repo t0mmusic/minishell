@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 09:21:16 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/10 21:47:10 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/11 14:59:08 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ void	split_agrs(char *str)
 
 	inputs = ft_lstnew(ft_strdup("Head"));
 	head = arg_list(inputs, str);
-	args = malloc(sizeof(*args) * ft_lstsize(inputs));
+	args = malloc(sizeof(*args) * (ft_lstsize(inputs) + 1));
 	i = 0;
 	while (inputs->next)
 	{

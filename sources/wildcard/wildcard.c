@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 10:13:07 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/08 11:34:35 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/11 16:36:33 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ t_list	*add_match(char *str, t_list *lst,
 {
 	struct dirent	*p_dirent;
 	DIR				*p_dir;
+	bool			flag;
 
 	p_dir = opendir(ft_getenv("PWD"));
 	p_dirent = readdir(p_dir);
@@ -122,9 +123,14 @@ t_list	*add_match(char *str, t_list *lst,
 	{
 		if (!f(str, p_dirent->d_name, ft_strlen(str) - 1))
 		{
-			ft_lstadd_back(&lst, ft_lstnew(ft_strjoin(p_dirent->d_name, " ")));
+			ft_lstadd_back(&lst, ft_lstnew(ft_strdup(p_dirent->d_name)));
+			flag = true;
 		}
+		else
+			flag = false;
 		p_dirent = readdir(p_dir);
+		if (p_dirent && flag)
+			ft_lstadd_back(&lst, ft_lstnew(ft_strdup(" ")));
 	}
 	closedir(p_dir);
 	return (lst);
@@ -134,6 +140,8 @@ t_list	*add_match(char *str, t_list *lst,
  * @brief	Finds matching files based on different criteria.
  * @param	str: The users input from the prompt
  * @returns	new string of matches
+ * ! modify this so that it takes in a string and the token list
+ * ! removes the original token and replaces it with this list.
 **/
 
 char	*find_matches(char *str)
