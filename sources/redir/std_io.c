@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   std_io.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 14:45:52 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/10 10:26:29 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/11 11:24:16 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ int	std_input_delim(char *delim)
 	fd = open(HERE_DOC_TMPFILE, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd < 0)
 		return (check_file_access(HERE_DOC_TMPFILE));
-	here_doc(&fd, delim);
+	here_doc(fd, delim);
 	sigstatus = heredoc_signal_get();
 	free(sigstatus);
 	close(fd);

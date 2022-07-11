@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/10 16:36:52 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/11 11:25:17 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ bool	builtin_export(void);
 bool	builtin_unset(void);
 
 /*	Standard input/output redirection	*/
-void	here_doc(int *fd, char *delim);
+void	here_doc(int fd, char *delim);
 void	std_sort(char **commands);
 int		check_file_access(char *file);
 int		std_output(char *filename);
