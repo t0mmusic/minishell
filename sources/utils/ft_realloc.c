@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 15:58:09 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/10 16:09:11 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/11 13:55:25 by Nathanael        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,9 @@ void	free_array(char **arr)
 
 	if (!arr)
 		return ;
-	i = -1;
-	while (arr[++i] != NULL)
+	i = 0;
+	while (arr[i++] != NULL)
 		free(arr[i]);
-	free(arr);
 }
 
 char	**update_array(char **arr)
