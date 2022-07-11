@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 14:45:52 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/11 11:51:49 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/11 14:19:05 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	std_output(char *filename)
 	}
 	dup2(fd, STDOUT_FILENO);
 	close(fd);
+	remove_redir(">");
 	command();
 	normalise_exit();
 	exit(g_program.exit_status);
@@ -71,6 +72,7 @@ int	std_output_append(char *filename)
 		return (check_file_access(filename));
 	dup2(fd, STDOUT_FILENO);
 	close(fd);
+	remove_redir(">>");
 	command();
 	normalise_exit();
 	exit(g_program.exit_status);
@@ -95,13 +97,13 @@ int	std_input(char *filename)
 {
 	int		fd;
 
+	error_redir("<");
 	fd = open(filename, O_RDONLY, 0644);
 	if (fd < 0)
 		return (check_file_access(filename));
 	dup2(fd, STDIN_FILENO);
 	close(fd);
-	g_program.user_inputs = realloc_back(g_program.user_inputs,
-			g_program.user_inputs[2]);
+	remove_redir("<");
 	return (-1);
 }
 
@@ -119,14 +121,16 @@ int	std_input_delim(char *delim)
 	int		fd;
 	int		*sigstatus;
 
+	error_redir("<<");
 	fd = open(HERE_DOC_TMPFILE, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (fd < 0)
 		return (check_file_access(HERE_DOC_TMPFILE));
 	here_doc(fd, delim);
 	sigstatus = heredoc_signal_get();
 	free(sigstatus);
+	fd = open(HERE_DOC_TMPFILE, O_RDONLY, 0644);
+	dup2(fd, STDIN_FILENO);
 	close(fd);
-	g_program.user_inputs = realloc_back(g_program.user_inputs,
-			g_program.user_inputs[2]);
+	remove_redir("<<");
 	return (-1);
 }

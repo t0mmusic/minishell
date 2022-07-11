@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/11 11:53:36 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/11 14:17:44 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ int		std_output(char *filename);
 int		std_output_append(char *filename);
 int		std_input(char *filename);
 int		std_input_delim(char *filename);
+void	remove_redir(char *type);
+void	error_redir(char *type);
 
 /*	Signal Handling	*/
 void	ctrl_handler(int sig);
