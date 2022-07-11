@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 14:45:52 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/11 14:19:05 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/11 14:26:29 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,15 +107,19 @@ int	std_input(char *filename)
 	return (-1);
 }
 
-/*
-Input Redirection Using Delimiter
-e.g:
-$>	vim	output.txt
-	1	test
-	2	testing123
-$>	wc -l << output.txt
-	2
-*/
+/**
+ * @brief	Input Redirection Mode "<<"
+
+ * @param	delim	The character to stop the heredoc from executing
+
+ * @return	Returns -1
+
+ * @example
+ * ls << b
+	heredoc> a
+	heredoc> b
+ * <ls output of current directory>
+**/
 int	std_input_delim(char *delim)
 {
 	int		fd;
