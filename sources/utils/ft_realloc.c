@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrown <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 15:58:09 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/12 15:50:07 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/12 19:23:29 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ char	**realloc_back(char **arr, char *delim)
 		ret[len++] = ft_strdup(arr[i++]);
 	ret[len] = NULL;
 	free_array(arr);
-	i = -1;
 	if (!ret[1] && !ft_strcmp(ret[0], ")"))
 	{
 		free_array(ret);
@@ -71,8 +70,8 @@ void	free_array(char **arr)
 	if (!arr)
 		return ;
 	i = 0;
-	while (arr[i++] != NULL)
-		free(arr[i]);
+	while (arr[i] != NULL)
+		free(arr[i++]);
 	free(arr);
 }
 

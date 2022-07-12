@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 10:13:07 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/11 16:36:33 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/12 21:31:01 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ int	check_wild(char *str)
 }
 
 /**
- * @brief	Splits the string in half at the * and then checks files in 
- * the directory for matches of both. If they do, it adds them to the 
+ * @brief	Splits the string in half at the * and then checks files in
+ * the directory for matches of both. If they do, it adds them to the
  * back of the list.
  * @param	str: The users input from the prompt
  * @param	lst: list of all matches
@@ -85,10 +85,14 @@ t_list	*multi_match(char *str, t_list *lst)
 	char			**comp;
 	struct dirent	*p_dirent;
 	DIR				*p_dir;
+	char			*pwd;
 
-	p_dir = opendir(ft_getenv("PWD"));
+	pwd = ft_getenv("PWD");
+	p_dir = opendir(pwd);
+	free(pwd);
 	p_dirent = readdir(p_dir);
 	comp = ft_split(str, '*');
+	ft_lstadd_back(&lst, ft_lstnew(ft_strdup("<WILD> ")));
 	while (p_dirent)
 	{
 		if (!ft_strncmp(str, p_dirent->d_name, ft_strlen(comp[0]))
@@ -97,6 +101,7 @@ t_list	*multi_match(char *str, t_list *lst)
 		p_dirent = readdir(p_dir);
 	}
 	closedir(p_dir);
+	free_array(comp);
 	return (lst);
 }
 
@@ -116,21 +121,23 @@ t_list	*add_match(char *str, t_list *lst,
 	struct dirent	*p_dirent;
 	DIR				*p_dir;
 	bool			flag;
+	char			*pwd;
 
-	p_dir = opendir(ft_getenv("PWD"));
+	pwd = ft_getenv("PWD");
+	p_dir = opendir(pwd);
+	free(pwd);
 	p_dirent = readdir(p_dir);
+	ft_lstadd_back(&lst, ft_lstnew(ft_strdup("<WILD> ")));
 	while (p_dirent)
 	{
 		if (!f(str, p_dirent->d_name, ft_strlen(str) - 1))
 		{
-			ft_lstadd_back(&lst, ft_lstnew(ft_strdup(p_dirent->d_name)));
+			ft_lstadd_back(&lst, ft_lstnew(ft_strjoin(p_dirent->d_name, " ")));
 			flag = true;
 		}
 		else
 			flag = false;
 		p_dirent = readdir(p_dir);
-		if (p_dirent && flag)
-			ft_lstadd_back(&lst, ft_lstnew(ft_strdup(" ")));
 	}
 	closedir(p_dir);
 	return (lst);
@@ -147,7 +154,7 @@ t_list	*add_match(char *str, t_list *lst,
 char	*find_matches(char *str)
 {
 	t_list	*matches;
-	int		wild;	
+	int		wild;
 
 	if (!ft_strchr(str, '*') || is_quotes(str))
 		return (str);

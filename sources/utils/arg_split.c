@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 09:21:16 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/11 14:59:08 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/12 20:03:35 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ static char	*ft_cpystr(char *str, int *current)
 	i = *current;
 	while (str[i] && !ft_isspace(str[i]))
 	{
-		if (interp_char(str[i])
-			|| (is_bookend(str, &i) && (str[i] == '\'' || str[i] == '\"')))
+		if (interp_char(str[i]) || (is_bookend(str, &i)
+			&& (str[i] == '\'' || str[i] == '\"')))
 		{
 			ft_lstadd_back(&lst,
 				ft_lstnew(ft_substr(str, *current, i - *current)));
@@ -122,6 +122,7 @@ void	split_agrs(char *str)
 
 	inputs = ft_lstnew(ft_strdup("Head"));
 	head = arg_list(inputs, str);
+	free(str);
 	args = malloc(sizeof(*args) * (ft_lstsize(inputs) + 1));
 	i = 0;
 	while (inputs->next)

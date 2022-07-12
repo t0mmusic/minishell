@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 10:38:33 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/11 16:35:20 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/12 19:20:51 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ char	*remove_quotes(char *str)
 	while (str[i] && str[i] != end)
 		i++;
 	ret = ft_substr(str, 1, i - 1);
+	free(str);
 	if (end == '\"')
 		return (expand_string(ret));
 	return (ret);

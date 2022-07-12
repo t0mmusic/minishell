@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 15:17:29 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/11 17:17:55 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/12 21:10:59 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	program_loop(void)
 			continue ;
 		add_history(str);
 		split_agrs(str);
-		free(str);
+		wild_token();
 		std_sort();
 		if (g_program.user_inputs)
 			command();

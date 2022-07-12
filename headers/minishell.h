@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrown <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/12 16:16:27 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/12 21:10:43 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ char	*ft_free_join(char *s1, char *s2);
 void	ft_lstall(t_list **head, char *(*f)(char *));
 void	iterate_user_inputs(void);
 void	delete_lstelem(t_list **lst);
+void	wild_token(void);
 
 /*	Malloc/free	*/
 void	free_inputs(void);
