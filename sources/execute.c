@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jbrown <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:40:21 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/11 15:21:59 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/12 16:24:50 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ char	*join_path(char *path, char *command)
  * paths. If it finds one that matches, it will set the path in the
  * prog structure and return 1. Otherwise, returns 0.
  * @returns	boolean true if command exists, false if not
- * ! Occasionally fails on MacOS, reason unkown.
 **/
 
 char	*command_valid(char *path)
@@ -67,7 +66,6 @@ char	*command_valid(char *path)
  * of the recreated builtins, the command will be executed internally.
  * Otherwise, the function checks if this is a shell command. If it is,
  * it is executed appropriately. Otherwise, an error message is diplayed
- * ! Issue unresolved, unclear what the issue is
 **/
 
 void	out_process(void)

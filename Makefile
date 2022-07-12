@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+         #
+#    By: jbrown <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 16:30:35 by Nathanael         #+#    #+#              #
-#    Updated: 2022/07/09 19:04:07 by Nathanael        ###   ########.fr        #
+#    Updated: 2022/07/12 16:28:18 by jbrown           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,11 +38,11 @@ FCLN	:=	$(OBJDIR)
 ################################################################################
 #								COMPILER/FLAGS								   #
 ################################################################################
-CC		=	clang
+CC		=	gcc
 COMFLAG	=	-Wall -Wextra -Werror -std=c99 -D_POSIX_C_SOURCE -I $(HDRDIR)
 
-CFLAGS	=	-fsanitize=address $(COMFLAG) -g
-LFLAGS	=	-fsanitize=address $(COMFLAG)
+CFLAGS	=	$(COMFLAG) -g
+LFLAGS	=	$(COMFLAG)
 RLFLAGS =	-I/usr/local/opt/readline/include
 RLLIB	=	-L/usr/local/opt/readline/lib
 
@@ -112,7 +112,7 @@ jordan: #Pushes to Jordan's Github repo
 	@echo "commit msg"
 	@read COMMIT; \
 	git commit -m "$$COMMIT"; \
-	git push;
+	git push -u origin leaks;
 
 git: #Pushes to vogsphere repo
 	@git remote set-url origin https://github.com/t0mmusic/minishell.git

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_codes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jbrown <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 13:28:07 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/10 11:43:01 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/12 16:22:22 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,6 @@ void	free_exit(int code)
 	free_array(g_program.user_inputs);
 	free(g_program.prompt);
 	free_array(g_program.paths);
+	check_leaks();
 	exit(code);
 }
