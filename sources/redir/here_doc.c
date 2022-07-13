@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 14:46:49 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/11 14:23:24 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/13 20:44:00 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	here_doc(int fd, char *delim)
 		}
 		tmp = ft_strjoin(line, "\n");
 		ft_putstr_fd(tmp, fd);
+		free(tmp);
 		free(line);
 		line = readline("heredoc> ");
 	}

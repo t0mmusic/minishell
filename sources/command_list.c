@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 12:46:25 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/11 15:21:35 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/13 20:39:49 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,17 @@ void	pipe_split(void)
 	pid = fork();
 	if (pid)
 	{
+		if (!g_program.pid)
+			g_program.pid = pid;
 		close(pipefd[1]);
 		dup2(pipefd[0], 0);
-		waitpid(pid, 0, 0);
+		close(pipefd[0]);
 	}
 	else
 	{
 		close(pipefd[0]);
 		dup2(pipefd[1], 1);
+		close(pipefd[1]);
 		out_process();
 	}
 }
@@ -85,17 +88,38 @@ void	set_commands(void)
 
 void	execute_commands(void)
 {
+	int	i;
+
 	set_commands();
 	pipe_split();
-	while (*g_program.user_inputs && ft_strcmp("|", *g_program.user_inputs)
-		&& !interp_token(*g_program.user_inputs))
+	i = 0;
+	while (g_program.user_inputs[i] && ft_strcmp("|", g_program.user_inputs[i])
+		&& !interp_token(g_program.user_inputs[i]))
 	{
-		g_program.user_inputs++;
+		i++;
 	}
-	if (!ft_strcmp("|", *g_program.user_inputs))
-		g_program.user_inputs++;
+	if (!ft_strcmp("|", g_program.user_inputs[i]))
+	{
+		g_program.user_inputs = realloc_back(g_program.user_inputs, "|");
+		g_program.user_inputs = realloc_back(g_program.user_inputs,
+				g_program.user_inputs[1]);
+	}
+	i = 0;
 	free(g_program.commands);
-	check_pipes();
+}
+
+void	last_command(void)
+{
+	int	pid;
+
+	if (!g_program.pid)
+		out_process();
+	pid = fork();
+	if (!pid)
+		out_process();
+	waitpid(g_program.pid, &g_program.exit_status, 0);
+	normalise_exit();
+	free_exit(g_program.exit_status);
 }
 
 /**
@@ -121,9 +145,12 @@ void	check_pipes(void)
 			break ;
 		}
 		if (!ft_strcmp("|", g_program.user_inputs[i]))
+		{
 			execute_commands();
+			i = -1;
+		}
 		i++;
 	}
 	g_program.commands = g_program.user_inputs;
-	out_process();
+	last_command();
 }

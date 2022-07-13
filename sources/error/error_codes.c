@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_codes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrown <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 13:28:07 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/12 16:22:22 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/13 21:07:37 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	normalise_exit(void)
 void	free_exit(int code)
 {
 	free_full_env();
+	free(g_program.envp);
 	freelist(g_program.env);
 	free_array(g_program.user_inputs);
 	free(g_program.prompt);

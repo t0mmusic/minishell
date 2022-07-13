@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 15:17:29 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/12 21:10:59 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/13 21:10:17 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	main(int ac, char *av[], char *envp[])
 		env_init(envp);
 		init_yesenv(av);
 	}
-	g_program.envp = envp;
+	update_envp();
 	program_loop();
 	return (0);
 }

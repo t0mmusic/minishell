@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 13:10:35 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/11 14:14:46 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/13 20:47:18 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ void	remove_redir(char *type)
 			i += 2;
 		if (!g_program.user_inputs[i])
 			break ;
-		new[j++] = g_program.user_inputs[i++];
+		new[j++] = ft_strdup(g_program.user_inputs[i++]);
 	}
 	new[j] = NULL;
-	free(g_program.user_inputs);
+	free_array(g_program.user_inputs);
 	g_program.user_inputs = new;
 }

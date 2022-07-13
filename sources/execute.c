@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbrown <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:40:21 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/12 16:24:50 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/13 21:11:07 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	out_process(void)
 	path = ft_getenv("PATH");
 	g_program.paths = ft_split(path, ':');
 	free(path);
+	free(g_program.envp);
 	update_envp();
 	path = g_program.commands[0];
 	path = command_valid(path);
