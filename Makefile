@@ -6,7 +6,7 @@
 #    By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 16:30:35 by Nathanael         #+#    #+#              #
-#    Updated: 2022/07/14 16:00:57 by Nathanael        ###   ########.fr        #
+#    Updated: 2022/07/14 18:28:52 by Nathanael        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,43 @@ TEMPDIR =	$(BUILDIR) $(IDRDIR)
 ################################################################################
 #								FILES										   #
 ################################################################################
-SOURCES	:=	$(shell find $(SRCDIR) -name '*.c')
-IMPHDR	:=	$(shell find $(LIBDIR)/** -name '*.h')
+SOURCES	:=	\
+$(SRCDIR)/execute.c \
+$(SRCDIR)/main.c \
+$(SRCDIR)/command_list.c \
+$(SRCDIR)/redir/here_doc.c \
+$(SRCDIR)/redir/remove_redir.c \
+$(SRCDIR)/redir/std_sort.c \
+$(SRCDIR)/redir/std_io.c \
+$(SRCDIR)/utils/init.c \
+$(SRCDIR)/utils/ft_utils2.c \
+$(SRCDIR)/utils/ft_utils.c \
+$(SRCDIR)/utils/try_free.c \
+$(SRCDIR)/utils/ft_realloc.c \
+$(SRCDIR)/utils/ft_utils3.c \
+$(SRCDIR)/utils/free.c \
+$(SRCDIR)/utils/log_err.c \
+$(SRCDIR)/utils/arg_split.c \
+$(SRCDIR)/builtins/print_info.c \
+$(SRCDIR)/builtins/inbuilt_check.c \
+$(SRCDIR)/builtins/export_unset.c \
+$(SRCDIR)/builtins/change_directory.c \
+$(SRCDIR)/builtins/echo.c \
+$(SRCDIR)/printf_fd/ft_printf.c \
+$(SRCDIR)/printf_fd/basic_print.c \
+$(SRCDIR)/environment/expand_env.c \
+$(SRCDIR)/environment/env_list.c \
+$(SRCDIR)/environment/update_array.c \
+$(SRCDIR)/wildcard/paren.c \
+$(SRCDIR)/wildcard/interpret.c \
+$(SRCDIR)/wildcard/wildcard.c \
+$(SRCDIR)/sighandling/sighandling.c \
+$(SRCDIR)/error/error_codes.c \
+$(SRCDIR)/tokens/token_utils.c \
+$(SRCDIR)/tokens/token_check.c
+
+IMPHDR	:=	$(LIBDIR)/libft/headers/libft.h
+
 LIB		:=	$(shell find $(LIBDIR) -depth 1 -type d)
 OBJECTS	:=	$(SOURCES:$(SRCDIR)/%.c=$(BUILDIR)/%.o)
 
@@ -56,7 +91,7 @@ CP		=	cp
 #								LIBRARIES									   #
 ################################################################################
 L42DIR	=	$(LIBDIR)/libft
-LIB42	=	$(L42DIR)/build/libft.a
+LIB42	=	$(L42DIR)/libft.a
 READLN	=	-lreadline
 
 ALLLIB	=	$(LIB42) $(READLN)
