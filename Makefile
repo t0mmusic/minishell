@@ -6,7 +6,7 @@
 #    By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 16:30:35 by Nathanael         #+#    #+#              #
-#    Updated: 2022/07/09 19:04:07 by Nathanael        ###   ########.fr        #
+#    Updated: 2022/07/14 11:37:27 by Nathanael        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,11 +18,10 @@ NAME 	=	minishell
 BUILDIR	=	./build
 HDRDIR	=	./headers
 LIBDIR	=	./libraries
-OBJDIR	=	./objects
 SRCDIR	=	./sources
 IDRDIR	=	./headers/imported
 
-TEMPDIR =	$(OBJDIR) $(BUILDIR) $(IDRDIR)
+TEMPDIR =	$(BUILDIR) $(IDRDIR)
 
 ################################################################################
 #								FILES										   #
@@ -30,19 +29,19 @@ TEMPDIR =	$(OBJDIR) $(BUILDIR) $(IDRDIR)
 SOURCES	:=	$(shell find $(SRCDIR) -name '*.c')
 IMPHDR	:=	$(shell find $(LIBDIR)/** -name '*.h')
 LIB		:=	$(shell find $(LIBDIR) -depth 1 -type d)
-OBJECTS	:=	$(SOURCES:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
+OBJECTS	:=	$(SOURCES:$(SRCDIR)/%.c=$(BUILDIR)/%.o)
 
-CLNDIR	:=	$(IDRDIR) $(BUILDIR)
-FCLN	:=	$(OBJDIR)
+CLNDIR	:=	$(IDRDIR)
+FCLN	:=	$(BUILDIR)
 
 ################################################################################
 #								COMPILER/FLAGS								   #
 ################################################################################
-CC		=	clang
+CC		=	gcc
 COMFLAG	=	-Wall -Wextra -Werror -std=c99 -D_POSIX_C_SOURCE -I $(HDRDIR)
 
-CFLAGS	=	-fsanitize=address $(COMFLAG) -g
-LFLAGS	=	-fsanitize=address $(COMFLAG)
+CFLAGS	=	$(COMFLAG) -g
+LFLAGS	=	$(COMFLAG)
 RLFLAGS =	-I/usr/local/opt/readline/include
 RLLIB	=	-L/usr/local/opt/readline/lib
 
@@ -67,7 +66,7 @@ ALLLIB	=	$(LIB42) $(READLN)
 ################################################################################
 .DELETE_ON_ERROR:
 
-all: dirs libs $(BUILDIR)/$(NAME)
+all: dirs libs $(NAME)
 
 dirs:
 	@$(MKDIR) $(TEMPDIR)
@@ -81,12 +80,12 @@ libs:
 	@printf "Imported header: %s\n" $(IMPHDR)
 	@printf "Libraries made: %s\n" $(LIB)
 
-$(BUILDIR)/$(NAME): $(OBJECTS)
+$(NAME): $(OBJECTS)
 	@$(CC) $(OBJECTS) $(LFLAGS) $(RLFLAGS) $(RLLIB) -o $@ $(ALLLIB)
 	@clear
 	@printf "Built program %s successfully\n" $@
 
-$(OBJDIR)/%.o : $(SRCDIR)/%.c
+$(BUILDIR)/%.o : $(SRCDIR)/%.c
 	@$(MKDIR) '$(@D)'
 	@$(CC) $(CFLAGS) $(RLFLAGS) -c $< -o $@
 	@clear
