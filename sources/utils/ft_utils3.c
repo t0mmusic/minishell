@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 16:38:42 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/12 21:29:08 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/14 13:08:20 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ void	wild_token(void)
 	if (!g_program.user_inputs[i])
 		return ;
 	split = ft_split(g_program.user_inputs[i], ' ');
-	expand = malloc(sizeof(*expand) *
-		(ft_array_size(g_program.user_inputs) + ft_array_size(split) - 1));
+	expand = malloc(sizeof(*expand) * (ft_array_size(g_program.user_inputs)
+				+ ft_array_size(split) - 1));
 	expand = expand_arr(expand, split, i);
 	free_array(g_program.user_inputs);
 	free_array(split);
