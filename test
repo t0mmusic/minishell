@@ -1,4 +1,13 @@
-hello
-[92mAll Malloc Calls have been freed
-wolrd
-[92mAll Malloc Calls have been freed
+int main(void)
+{
+return(50);
+}
+int main(void)
+{
+return(50);
+}
+1
+2
+3
+4
+5

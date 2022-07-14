@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 09:21:16 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/12 20:03:35 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/14 09:05:32 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static char	*ft_cpystr(char *str, int *current)
 	while (str[i] && !ft_isspace(str[i]))
 	{
 		if (interp_char(str[i]) || (is_bookend(str, &i)
-			&& (str[i] == '\'' || str[i] == '\"')))
+				&& (str[i] == '\'' || str[i] == '\"')))
 		{
 			ft_lstadd_back(&lst,
 				ft_lstnew(ft_substr(str, *current, i - *current)));

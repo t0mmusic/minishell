@@ -6,13 +6,31 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 15:17:29 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/13 21:10:17 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/14 10:04:03 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 extern t_prog	g_program;
+
+bool	valid_inputs(void)
+{
+	int	i;
+
+	i = 0;
+	while (g_program.user_inputs[i])
+		i++;
+	if (!ft_strcmp(g_program.user_inputs[i - 1], "|")
+		|| !ft_strcmp(g_program.user_inputs[i - 1], "&&")
+		|| !ft_strcmp(g_program.user_inputs[i - 1], "||"))
+	{
+		ft_printf_fd("minishell: unexpected token: %s\n",
+			2, g_program.user_inputs[i - 1]);
+		return (false);
+	}
+	return (true);
+}
 
 /**
  * @brief	Loop for the program to continuously call readline
@@ -35,6 +53,8 @@ void	program_loop(void)
 			continue ;
 		add_history(str);
 		split_agrs(str);
+		if (!valid_inputs())
+			continue ;
 		wild_token();
 		std_sort();
 		if (g_program.user_inputs)

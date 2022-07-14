@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 12:13:09 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/11 10:38:19 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/14 09:34:23 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ char	*get_env(char *str, int *i, int *j)
 	char	*tmp;
 
 	*i = *i + 1;
-	while (str[*i] && (!ft_isspace(str[*i]) && str[*i] != '$'))
+	while (str[*i] && (!ft_isspace(str[*i]) && str[*i] != '$')
+		&& str[*i] != '\'')
 	{
 		*i = *i + 1;
 	}
@@ -112,8 +113,9 @@ char	*expand_string(char *str)
 	int		j;
 	t_list	*strs;
 
-	if (is_quotes(str))
+	if (is_quotes(str) && !g_program.double_quotes)
 		return (str);
+	g_program.double_quotes = false;
 	strs = NULL;
 	i = 0;
 	j = 0;

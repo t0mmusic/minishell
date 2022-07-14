@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/12 21:10:43 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/14 09:29:07 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_prog
 	char	**user_inputs;
 	int		exit_status;
 	int		pid;
+	bool	double_quotes;
 	t_list	*env;
 }	t_prog;
 

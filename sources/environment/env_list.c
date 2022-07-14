@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 09:22:12 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/10 10:42:10 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/14 09:38:53 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	add_env(char *str, bool silent)
 	while (lst)
 	{
 		new = lst->content;
-		if (new->var && !ft_strncmp(new->var, str, split))
+		if (new->var && !ft_strncmp(new->var, str, split) && !new->var[split])
 		{
 			free_env(&lst);
 			edit_env(&lst, str, split, silent);

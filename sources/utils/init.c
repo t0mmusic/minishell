@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 19:42:57 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/11 10:28:54 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/14 09:29:25 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,5 @@ void	init_global(void)
 	g_program.commands = NULL;
 	g_program.user_inputs = NULL;
 	g_program.exit_status = 0;
+	g_program.double_quotes = false;
 }

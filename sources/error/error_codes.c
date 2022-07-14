@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 13:28:07 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/13 21:07:37 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/14 09:45:42 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,5 @@ void	free_exit(int code)
 	free_array(g_program.user_inputs);
 	free(g_program.prompt);
 	free_array(g_program.paths);
-	check_leaks();
 	exit(code);
 }

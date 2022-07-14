@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 12:46:25 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/13 20:39:49 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/14 09:51:22 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ extern t_prog	g_program;
  * and the output is the originally specified output file (by default standard
  * output). Once all the commands have been executed, the final command will be
  * output appropriately.
- * ! needs to perform in the same way as bash on cat | cat | ls
 **/
 
 void	pipe_split(void)
@@ -108,6 +107,13 @@ void	execute_commands(void)
 	free(g_program.commands);
 }
 
+/**
+ * @brief	If no pipes have been used, g_program.pid will equal zero and the
+ * 			command will execute normally. Otherwise, the command will be
+ * 			executed in a sub-process, and the main process will wait for the
+ * 			first and last commands to execute before returning to the prompt.
+**/
+
 void	last_command(void)
 {
 	int	pid;
@@ -118,6 +124,7 @@ void	last_command(void)
 	if (!pid)
 		out_process();
 	waitpid(g_program.pid, &g_program.exit_status, 0);
+	waitpid(pid, &g_program.exit_status, 0);
 	normalise_exit();
 	free_exit(g_program.exit_status);
 }
