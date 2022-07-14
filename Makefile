@@ -6,7 +6,7 @@
 #    By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 16:30:35 by Nathanael         #+#    #+#              #
-#    Updated: 2022/07/14 11:37:27 by Nathanael        ###   ########.fr        #
+#    Updated: 2022/07/14 15:46:21 by Nathanael        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ IMPHDR	:=	$(shell find $(LIBDIR)/** -name '*.h')
 LIB		:=	$(shell find $(LIBDIR) -depth 1 -type d)
 OBJECTS	:=	$(SOURCES:$(SRCDIR)/%.c=$(BUILDIR)/%.o)
 
-CLNDIR	:=	$(IDRDIR)
+CLNDIR	:=	$(IDRDIR) $(NAME)
 FCLN	:=	$(BUILDIR)
 
 ################################################################################
