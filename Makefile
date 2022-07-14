@@ -6,7 +6,7 @@
 #    By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 16:30:35 by Nathanael         #+#    #+#              #
-#    Updated: 2022/07/14 11:37:27 by Nathanael        ###   ########.fr        #
+#    Updated: 2022/07/14 16:00:57 by Nathanael        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ IMPHDR	:=	$(shell find $(LIBDIR)/** -name '*.h')
 LIB		:=	$(shell find $(LIBDIR) -depth 1 -type d)
 OBJECTS	:=	$(SOURCES:$(SRCDIR)/%.c=$(BUILDIR)/%.o)
 
-CLNDIR	:=	$(IDRDIR)
+CLNDIR	:=	$(IDRDIR) $(NAME)
 FCLN	:=	$(BUILDIR)
 
 ################################################################################
@@ -70,30 +70,25 @@ all: dirs libs $(NAME)
 
 dirs:
 	@$(MKDIR) $(TEMPDIR)
-	@clear
 	@printf "Made directories: %s\n" $(TEMPDIR)
 
 libs:
 	@$(CP) $(IMPHDR) $(IDRDIR)
 	@$(MAKE) -C $(L42DIR)
-	@clear
 	@printf "Imported header: %s\n" $(IMPHDR)
 	@printf "Libraries made: %s\n" $(LIB)
 
 $(NAME): $(OBJECTS)
 	@$(CC) $(OBJECTS) $(LFLAGS) $(RLFLAGS) $(RLLIB) -o $@ $(ALLLIB)
-	@clear
 	@printf "Built program %s successfully\n" $@
 
 $(BUILDIR)/%.o : $(SRCDIR)/%.c
 	@$(MKDIR) '$(@D)'
 	@$(CC) $(CFLAGS) $(RLFLAGS) -c $< -o $@
-	@clear
 	@printf "Linked source: %s into object: %s\n" $< $@
 
 clean:
 	@$(RM) $(CLNDIR)
-	@clear
 	@printf "Cleaned: %s\n" $(CLNDIR)
 
 fclean: clean
@@ -101,7 +96,6 @@ fclean: clean
 	@printf "Cleaned: %s\n" $(FCLN)
 
 re: fclean all
-	@clear
 	@printf "Cleaned and remade all files!\n"
 
 jordan: #Pushes to Jordan's Github repo
