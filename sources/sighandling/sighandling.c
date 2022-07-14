@@ -3,16 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   sighandling.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+        */
+/*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:34:01 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/09 15:55:49 by Nathanael        ###   ########.fr       */
+/*   Updated: 2022/07/14 15:23:20 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 extern t_prog	g_program;
+
+void	backslash_handler(int sig)
+{
+	if (sig == SIGQUIT)
+		g_program.exit_status = 131;
+	ft_printf_fd("minishell: quit %s\n", 2, g_program.user_inputs[0]);
+	free_exit(131);
+}
 
 /**
  * @brief	cathes the SIGINT signal sent by ctrl-c. If there is a subprocess
@@ -22,10 +30,9 @@ extern t_prog	g_program;
 
 void	ctrl_handler(int sig)
 {
-	if (sig != SIGINT)
-		printf("Invalid Signal Caught!\n");
-	g_program.exit_status = 130;
-	if (!g_program.pid)
+	if (sig == SIGINT)
+		g_program.exit_status = 130;
+	if (!g_program.pid && sig == SIGINT)
 	{
 		ioctl(STDIN_FILENO, TIOCSTI, "\n");
 		rl_replace_line("", 0);

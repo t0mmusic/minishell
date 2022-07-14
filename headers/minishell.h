@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:22:21 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/14 14:06:05 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/14 15:15:40 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ void	error_redir(char *type);
 
 /*	Signal Handling	*/
 void	ctrl_handler(int sig);
+void	backslash_handler(int sig);
 void	heredoc_handler(int sig);
 int		*heredoc_signal_get(void);
 

@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 13:28:07 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/14 09:45:42 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/14 15:26:57 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ char	*error_code(void)
 		return (ft_strdup("127"));
 	if (g_program.exit_status == 512)
 		return (ft_strdup("2"));
+	if (g_program.exit_status == 2)
+		return (ft_strdup("130"));
+	if (g_program.exit_status == 3)
+		return (ft_strdup("131"));
 	return (ft_itoa(g_program.exit_status));
 }
 

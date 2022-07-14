@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 15:17:29 by Nathanael         #+#    #+#             */
-/*   Updated: 2022/07/14 10:04:03 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/14 15:49:54 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,14 @@ bool	valid_inputs(void)
 	i = 0;
 	while (g_program.user_inputs[i])
 		i++;
+	if (!ft_strcmp(g_program.user_inputs[0], "|")
+		|| !ft_strcmp(g_program.user_inputs[0], "&&")
+		|| !ft_strcmp(g_program.user_inputs[0], "||"))
+	{
+		ft_printf_fd("minishell: unexpected token: %s\n",
+			2, g_program.user_inputs[0]);
+		return (false);
+	}
 	if (!ft_strcmp(g_program.user_inputs[i - 1], "|")
 		|| !ft_strcmp(g_program.user_inputs[i - 1], "&&")
 		|| !ft_strcmp(g_program.user_inputs[i - 1], "||"))
