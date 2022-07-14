@@ -6,7 +6,7 @@
 #    By: Nathanael <nervin@student.42adel.org.au    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 16:30:35 by Nathanael         #+#    #+#              #
-#    Updated: 2022/07/12 20:08:28 by Nathanael        ###   ########.fr        #
+#    Updated: 2022/07/14 11:37:27 by Nathanael        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,17 +31,17 @@ IMPHDR	:=	$(shell find $(LIBDIR)/** -name '*.h')
 LIB		:=	$(shell find $(LIBDIR) -depth 1 -type d)
 OBJECTS	:=	$(SOURCES:$(SRCDIR)/%.c=$(BUILDIR)/%.o)
 
-CLNDIR	:=	$(IDRDIR) $(BUILDIR)
+CLNDIR	:=	$(IDRDIR)
 FCLN	:=	$(BUILDIR)
 
 ################################################################################
 #								COMPILER/FLAGS								   #
 ################################################################################
-CC		=	clang
+CC		=	gcc
 COMFLAG	=	-Wall -Wextra -Werror -std=c99 -D_POSIX_C_SOURCE -I $(HDRDIR)
 
-CFLAGS	=	-fsanitize=address $(COMFLAG) -g
-LFLAGS	=	-fsanitize=address $(COMFLAG)
+CFLAGS	=	$(COMFLAG) -g
+LFLAGS	=	$(COMFLAG)
 RLFLAGS =	-I/usr/local/opt/readline/include
 RLLIB	=	-L/usr/local/opt/readline/lib
 
