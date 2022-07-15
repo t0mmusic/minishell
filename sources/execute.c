@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:40:21 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/14 15:32:35 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/15 10:12:42 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ void	out_process(void)
 {
 	char	*path;
 
-	signal(SIGQUIT, backslash_handler);
 	if (inbuilt_subprocess())
 		free_exit(0);
 	free_array(g_program.paths);

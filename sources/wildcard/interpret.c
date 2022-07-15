@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 12:02:26 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/14 15:23:38 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/15 10:40:09 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	next_command(void)
 	g_program.user_inputs = realloc_back(g_program.user_inputs,
 			g_program.user_inputs[1]);
 	split_agrs(*g_program.user_inputs);
+	wild_token();
 	command();
 }
 
@@ -99,6 +100,7 @@ void	command(void)
 		{
 			check_pipes();
 		}
+		signal(SIGQUIT, backslash_handler);
 		waitpid(g_program.pid, &g_program.exit_status, 0);
 	}
 	while (g_program.user_inputs)

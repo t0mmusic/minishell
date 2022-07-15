@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:34:01 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/14 15:23:20 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/15 10:18:49 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ extern t_prog	g_program;
 
 void	backslash_handler(int sig)
 {
+	kill(g_program.pid, SIGKILL);
 	if (sig == SIGQUIT)
 		g_program.exit_status = 131;
 	ft_printf_fd("minishell: quit %s\n", 2, g_program.user_inputs[0]);
-	free_exit(131);
 }
 
 /**

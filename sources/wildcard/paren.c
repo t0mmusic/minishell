@@ -6,7 +6,7 @@
 /*   By: jbrown <jbrown@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 17:27:09 by jbrown            #+#    #+#             */
-/*   Updated: 2022/07/12 20:00:32 by jbrown           ###   ########.fr       */
+/*   Updated: 2022/07/15 10:40:31 by jbrown           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ static void	parent_paren(void)
 	if (str)
 	{
 		split_agrs(str);
+		wild_token();
 	}
 	else
 		g_program.user_inputs = NULL;
@@ -85,6 +86,7 @@ void	parentheses(void)
 		str = ft_strdup(g_program.user_inputs[1]);
 		free_array(g_program.user_inputs);
 		split_agrs(str);
+		wild_token();
 		g_program.user_inputs = realloc_front(g_program.user_inputs, ")");
 		if (g_program.user_inputs)
 			command();
